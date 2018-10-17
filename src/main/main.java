@@ -6,6 +6,7 @@
 package main;
 
 import hibernate.Hibernator;
+import view.gui.login.MainMenu;
 
 /**
  *
@@ -21,6 +22,8 @@ public class main {
         catch(org.hibernate.exception.JDBCConnectionException ex){
             ex.printStackTrace();
         }
+     
+        new MainMenu().setVisible(true);
         
     }
     

@@ -26,11 +26,11 @@ public class Hibernator {
         config=new AnnotationConfiguration();
         
         config.addAnnotatedClass(Contribuyente.class);
-        config.configure("hibernate/hibernate.cfg.xml");
-        
+        config.configure("hibernate/hibernate.cfg.xml");        
         
         sesFactory=config.buildSessionFactory();
         sesion=sesFactory.openSession(); 
+        
         new SchemaExport(config).create(true, true);// -> Exporta en el schema nuevas tablas en base a las anotaciones en las clases
         
     };

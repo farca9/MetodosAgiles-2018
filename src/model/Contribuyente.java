@@ -16,8 +16,11 @@ import javax.persistence.*;
 public class Contribuyente {
     
     @Id
-    private long dni;
+    @GeneratedValue
+    private int id;
     
+    private String codigoDocumento;
+
     private TipoDocumentoEnum tipoDocumento;
     
     private String nombre;
@@ -26,8 +29,8 @@ public class Contribuyente {
     
     private String domicilio;
 
-    public Contribuyente(long dni, TipoDocumentoEnum tipoDocumento, String nombre, String apellido, String domicilio) {
-        this.dni = dni;
+    public Contribuyente(String codigoDocumento, TipoDocumentoEnum tipoDocumento, String nombre, String apellido, String domicilio) {
+        this.codigoDocumento = codigoDocumento;
         this.tipoDocumento = tipoDocumento;
         this.nombre = nombre;
         this.apellido = apellido;
