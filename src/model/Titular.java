@@ -6,6 +6,7 @@
 package model;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,16 +41,19 @@ public class Titular {
     
     private boolean donanteOrganos;
     
+    private Date fechaNac;
+    
     private Set<String> clasesSolicitadas;    
     
     //Constructores
     public Titular() {}
     
-    public Titular(int id, String codigoDocumento, TipoDocumentoEnum tipoDocumento, String nombre, String apellido, String domicilio, GrupoSanguineoEnum grupoSanguineo, boolean factor, boolean donanteOrganos, Set clasesSolicitadas) {
+    public Titular(int id, String codigoDocumento, TipoDocumentoEnum tipoDocumento, String nombre, Date fechaNac, String apellido, String domicilio, GrupoSanguineoEnum grupoSanguineo, boolean factor, boolean donanteOrganos, Set clasesSolicitadas) {
         this.id = id;
         this.codigoDocumento = codigoDocumento;
         this.tipoDocumento = tipoDocumento;
         this.nombre = nombre;
+        this.fechaNac = fechaNac;
         this.apellido = apellido;
         this.domicilio = domicilio;
         this.grupoSanguineo = grupoSanguineo;
@@ -86,6 +90,11 @@ public class Titular {
     public String getNombre() {
         return nombre;
     }
+
+    public Date getFechaNac() {
+        return fechaNac;
+    }
+    
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
