@@ -7,6 +7,7 @@
 package view.gui.menus;
 
 import java.awt.Color;
+import view.gui.abm.UserAddTitular;
 import view.gui.login.MainMenu;
 
 /**
@@ -183,6 +184,8 @@ public class UserMenu extends javax.swing.JFrame {
 
     private void btnAddUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUser1ActionPerformed
         // TODO add your handling code here:
+        new UserAddTitular().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAddUser1ActionPerformed
 
     private void btnAddUser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUser2ActionPerformed
