@@ -14,6 +14,7 @@ import javax.swing.text.PlainDocument;
  * @author Facundo
  */
 public class LengthRestrictedDocument extends PlainDocument{
+    
     private final int limit;
 
   public LengthRestrictedDocument(int limit) {
