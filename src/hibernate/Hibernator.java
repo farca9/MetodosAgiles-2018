@@ -5,7 +5,7 @@
  */
 package hibernate;
 
-import controller.dao.LicenciaDAO;
+import dao.LicenciaDAO;
 import model.*;
 import org.hibernate.*;
 import org.hibernate.cfg.*;
