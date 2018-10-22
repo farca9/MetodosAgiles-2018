@@ -90,10 +90,10 @@ public class Calcular_vigencia_Test {
         Date date4 = format.parse(string4);
         
         //Init titulares
-        t1 = new Titular(1, "38898095", TipoDocumentoEnum.DU, "Santiago", date1, "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, set1);
-        t2 = new Titular(1, "38898095", TipoDocumentoEnum.DU, "Santiago", date2, "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, set2);
-        t3 = new Titular(1, "38898095", TipoDocumentoEnum.DU, "Santiago", date3, "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, set3);
-        t4 = new Titular(1, "38898095", TipoDocumentoEnum.DU, "Santiago", date4, "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, set4);
+        t1 = new Titular("38898095", TipoDocumentoEnum.DU, "Santiago", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, date1);
+        t2 = new Titular("38898095", TipoDocumentoEnum.DU, "Santiago", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, date2);
+        t3 = new Titular("38898095", TipoDocumentoEnum.DU, "Santiago", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, date3);
+        t4 = new Titular("38898095", TipoDocumentoEnum.DU, "Santiago", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, date4);
         
         
         l1 = new Licencia();

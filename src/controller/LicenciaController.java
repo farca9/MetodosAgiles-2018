@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,7 +24,7 @@ public class LicenciaController {
         Date actual = new Date();
         DateFormat formatter = new SimpleDateFormat("yyyyMMdd");        
         
-        int d1 = Integer.parseInt(formatter.format(t1.getFechaNac()));                            
+        int d1 = Integer.parseInt(formatter.format(t1.getFechaNacimiento()));                            
         int d2 = Integer.parseInt(formatter.format(actual));  
         
         int edad = (d2 - d1) / 10000;      
