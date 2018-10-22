@@ -5,6 +5,7 @@
  */
 package view.gui.abm;
 
+import controller.TitularController;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import model.GrupoSanguineoEnum;
 import model.TipoDocumentoEnum;
 import model.Titular;
+import util.FiltroTitularesEnum;
 import util.LengthRestrictedDocument;
 
 /**
@@ -33,6 +35,8 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null);
+        
+        btnAplicarFiltro.setEnabled(false);
         
         txtFiltro.setDocument(new LengthRestrictedDocument(60));
         txtFiltro.setEnabled(false);
@@ -553,19 +557,13 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         
         String filtro = txtFiltro.getText();
         
-        if(!txtFiltro.isEnabled()){
-            titulares=new ArrayList();
-            //Busca todos los titulares
-        } else if (btnFiltroNombre.isEnabled()){
-            titulares=new ArrayList();
-            //Busca filtrando por nombre
+        if (btnFiltroNombre.isEnabled()){
+            titulares = TitularController.getInstance().buscarTitulares(filtro, FiltroTitularesEnum.NOMBRE);
         } else if (btnFiltroApellido.isEnabled()){
-            titulares=new ArrayList();
-            //Busca filtrando por apellido
+            titulares = TitularController.getInstance().buscarTitulares(filtro, FiltroTitularesEnum.APELLIDO);
         } else if (btnFiltroDocumento.isEnabled()){
-            titulares=new ArrayList();
-            //Busca filtrando por documento
-        } else titulares=new ArrayList();
+            titulares = TitularController.getInstance().buscarTitulares(filtro, FiltroTitularesEnum.DOCUMENTO);
+        } else titulares = TitularController.getInstance().buscarTitulares(filtro, FiltroTitularesEnum.TODOS);
         
         DefaultTableModel model = (DefaultTableModel)tableTitulares.getModel();
         model.setRowCount(0);
