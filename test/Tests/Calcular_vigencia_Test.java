@@ -5,6 +5,7 @@
  */
 package Tests;
 
+import controller.LicenciaController;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -77,7 +78,7 @@ public class Calcular_vigencia_Test {
         //Init fechas nac
         DateFormat format = new SimpleDateFormat("dd/mm/yyyy", Locale.ENGLISH);
         
-        String string1 = "01/11/1998";
+        String string1 = "01/12/1995";
         Date date1 = format.parse(string1);
         
         String string2 = "01/11/1995";
@@ -96,7 +97,7 @@ public class Calcular_vigencia_Test {
         t4 = new Titular("38898095", TipoDocumentoEnum.DU, "Santiago", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, date4);
         
         
-        l1 = new Licencia();
+        LicenciaController l1 = new LicenciaController();
     }
     
     @After
@@ -105,9 +106,13 @@ public class Calcular_vigencia_Test {
 
     @Test
     public void TestVigencia1() {
-        int resultado = calcularVigencia(t1, ClaseLicenciaEnum.C);
-        int esperado = 0; //Menor de 21 años no puede solicitar licencia clase C
-        assertEquals(esperado, resultado);
+        Date resultado = l1.calcularVigencia(t1, ClaseLicenciaEnum.C);
+        
+        DateFormat format = new SimpleDateFormat("dd/mm/yyyy", Locale.ENGLISH);
+        String string1 = "01/11/1998";
+        Date date1 = format.parse(string1);
+       
+        assertEquals(date1, resultado);
     }
     
     @Test
