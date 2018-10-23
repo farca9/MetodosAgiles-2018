@@ -12,6 +12,7 @@ import javax.persistence.*;
  *
  * @author Facundo
  */
+@Entity
 public class Licencia {
 
     @Id
@@ -20,6 +21,8 @@ public class Licencia {
     
     private ClaseLicenciaEnum claseLicenciaEnum;
     
+    @ManyToOne
+    @JoinColumn(name="idTitularFK")
     private Titular titular;
     
     private Date fechaEmision;
@@ -28,7 +31,9 @@ public class Licencia {
     
     private String observacion;
     
-    private Usuario usuario;
+    /*@OneToOne(cascade=CascadeType.ALL)  
+    @JoinColumn(name="idUsuarioFK")
+    private Usuario usuario;*/
     
     private boolean activa;
 
@@ -80,13 +85,13 @@ public class Licencia {
         this.observacion = observacion;
     }
 
-    public Usuario getUsuario() {
+/*    public Usuario getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
+    }*/
 
     public boolean isActiva() {
         return activa;

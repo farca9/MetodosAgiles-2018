@@ -6,12 +6,15 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -42,7 +45,8 @@ public class Titular {
     
     private boolean donanteOrganos;
     
-    private List<Licencia> licencias;  
+    @OneToMany(targetEntity = Licencia.class, mappedBy="titular", cascade = CascadeType.PERSIST)
+    private Collection<Licencia> licencias;  
     
     private Date fechaNacimiento;
 
@@ -143,7 +147,7 @@ public class Titular {
         this.donanteOrganos = donanteOrganos;
     }
 
-    public List<Licencia> getLicencias() {
+    public Collection<Licencia> getLicencias() {
         return licencias;
     }
 

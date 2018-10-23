@@ -7,7 +7,7 @@
 package view.gui.menus;
 
 import java.awt.Color;
-import view.gui.abm.UserAddTitular;
+import view.gui.abm.*;
 import view.gui.login.MainMenu;
 
 /**
@@ -117,7 +117,7 @@ public class UserMenu extends javax.swing.JFrame {
 
         btnAddUser5.setFont(btnAddUser5.getFont().deriveFont(btnAddUser5.getFont().getSize()+3f));
         btnAddUser5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/new_licencia.png"))); // NOI18N
-        btnAddUser5.setText("Emitir Licencias");
+        btnAddUser5.setText("Emitir Licencia");
         btnAddUser5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAddUser5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnAddUser5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -201,7 +201,8 @@ public class UserMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddUser4ActionPerformed
 
     private void btnAddUser5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUser5ActionPerformed
-        // TODO add your handling code here:
+        new UserEmitirLicencia().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAddUser5ActionPerformed
 
     /**

@@ -47,11 +47,7 @@ public class LicenciaDAO{
             
             if(licencia.getTitular()!=null){
                 conj.add(Restrictions.eq("titular", licencia.getTitular()));
-            }
-            
-            if(licencia.getUsuario()!=null){
-                conj.add(Restrictions.eq("usuario", licencia.getUsuario()));
-            }
+            } 
             
             crit.add(conj);
             

@@ -5,7 +5,12 @@
  */
 package view.gui.abm;
 
+import controller.TitularController;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,9 +18,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import model.ClaseLicenciaEnum;
 import model.GrupoSanguineoEnum;
+import model.Licencia;
 import model.TipoDocumentoEnum;
 import model.Titular;
+import util.FiltroTitularesEnum;
 import util.LengthRestrictedDocument;
 
 /**
@@ -25,6 +33,7 @@ import util.LengthRestrictedDocument;
 public class UserEmitirLicencia extends javax.swing.JFrame {
 
     private List<Titular> titulares;
+    private SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
     
     /**
      * Creates new form UserEmitirLicencia
@@ -33,6 +42,10 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null);
+        
+        txtAreaClaseLicencia.setBackground(Color.LIGHT_GRAY);
+        
+        btnAplicarFiltro.setEnabled(false);
         
         txtFiltro.setDocument(new LengthRestrictedDocument(60));
         txtFiltro.setEnabled(false);
@@ -64,6 +77,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
             
             if(tableTitulares.getSelectedRow() == -1) return;
             
+            btnEmitirLicencia.setEnabled(false);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
             
             radioA.setEnabled(true);
@@ -73,6 +87,9 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
             radioE.setEnabled(true);
             radioF.setEnabled(true);
             radioG.setEnabled(true);
+            
+            radioGroup.clearSelection();
+            txtAreaClaseLicencia.setText("");
             
             Titular t = titulares.get(tableTitulares.getSelectedRow());
             labelNombre.setText("Nombre: "+t.getNombre());
@@ -298,8 +315,18 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         });
 
         radioB.setText("B");
+        radioB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBActionPerformed(evt);
+            }
+        });
 
         radioC.setText("C");
+        radioC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioCActionPerformed(evt);
+            }
+        });
 
         radioD.setText("D");
         radioD.addActionListener(new java.awt.event.ActionListener() {
@@ -309,10 +336,25 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         });
 
         radioE.setText("E");
+        radioE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioEActionPerformed(evt);
+            }
+        });
 
         radioF.setText("F");
+        radioF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioFActionPerformed(evt);
+            }
+        });
 
         radioG.setText("G");
+        radioG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioGActionPerformed(evt);
+            }
+        });
 
         txtAreaClaseLicencia.setEditable(false);
         txtAreaClaseLicencia.setColumns(20);
@@ -331,16 +373,13 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
                     .addComponent(radioC))
                 .addGap(74, 74, 74)
                 .addGroup(pnlClaseLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlClaseLicenciaLayout.createSequentialGroup()
-                        .addGroup(pnlClaseLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(radioF)
-                            .addComponent(radioE))
-                        .addContainerGap(193, Short.MAX_VALUE))
+                    .addComponent(radioF)
+                    .addComponent(radioE)
                     .addGroup(pnlClaseLicenciaLayout.createSequentialGroup()
                         .addComponent(radioD)
                         .addGap(74, 74, 74)
-                        .addComponent(radioG)
-                        .addGap(69, 69, 69))))
+                        .addComponent(radioG)))
+                .addContainerGap(78, Short.MAX_VALUE))
             .addGroup(pnlClaseLicenciaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3)
@@ -495,8 +534,6 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
                 .addGap(10, 10, 10))
         );
 
-        pnlTitulares.getAccessibleContext().setAccessibleName("Seleccione el titular");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -535,37 +572,126 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLimpiarFiltroActionPerformed
 
+    private int calcularEdad(Date fechaNacimiento){
+        return Period.between(fechaNacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now()).getYears();
+    }
     
+    private boolean tieneBValida(Titular titular){
+        boolean tieneBValida=false;
+        
+        for(Licencia licencia : titular.getLicencias()){
+            
+            if(licencia.getClaseLicenciaEnum()==ClaseLicenciaEnum.B && this.calcularEdad(licencia.getFechaEmision())>=1){
+                tieneBValida=true;
+                break;
+            }
+            
+        }
+        
+        return tieneBValida;
+    }
+    
+    private boolean yaEmitida(Titular titular, ClaseLicenciaEnum target){
+        boolean yaEmitida=false;
+        
+        for(Licencia licencia : titular.getLicencias()){
+            if(licencia.getClaseLicenciaEnum()==target){
+                yaEmitida=true;
+                break;
+            }
+        }
+        
+        return yaEmitida;
+    }
     
     private void btnEmitirLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirLicenciaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEmitirLicenciaActionPerformed
 
     private void radioAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAActionPerformed
-        // TODO add your handling code here:
+        Titular titular = titulares.get(tableTitulares.getSelectedRow());
+        
+        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        Date fechaVencimiento = new Date();//TBD
+        fechaVencimiento.setYear(2025); //TBD
+        Double costo;//TBD
+        costo=50.0;//TBD
+        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.A);
+        
+        String mensaje="";
+        
+        if(yaEmitida){
+            mensaje+="La licencia ya fue emitida. Debe renovar.\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else if (edad<17) {
+            mensaje+="La edad mínima es de 17 años\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else{
+            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            btnEmitirLicencia.setEnabled(true);
+            txtAreaClaseLicencia.setForeground(new Color(0,153,0));
+        }
+        
+        txtAreaClaseLicencia.setText(mensaje);        
+        
     }//GEN-LAST:event_radioAActionPerformed
 
     private void radioDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioDActionPerformed
-        // TODO add your handling code here:
+        Titular titular = titulares.get(tableTitulares.getSelectedRow());
+        
+        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        Date fechaVencimiento = new Date();//TBD
+        fechaVencimiento.setYear(50); //TBD
+        Double costo;//TBD
+        costo=50.0;//TBD
+        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.D);
+        boolean tieneBValida = this.tieneBValida(titular);
+        
+        String mensaje="";
+        
+        if(yaEmitida){
+            mensaje+="La licencia ya fue emitida. Debe renovar.\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else if (edad<21) {
+            mensaje+="La edad mínima es de 21 años\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        } else if (edad>65){
+            mensaje+="No puede emitirse por primera vez a mayores de 65 años\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        } else if (!tieneBValida){
+            mensaje+="Debe tener licencia Clase B por al menos un año\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else{
+            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            btnEmitirLicencia.setEnabled(true);
+            txtAreaClaseLicencia.setForeground(new Color(0,153,0));
+        }
+        
+        txtAreaClaseLicencia.setText(mensaje);        
+        
     }//GEN-LAST:event_radioDActionPerformed
 
     private void btnAplicarFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarFiltroActionPerformed
         
         String filtro = txtFiltro.getText();
         
-        if(!txtFiltro.isEnabled()){
-            titulares=new ArrayList();
-            //Busca todos los titulares
-        } else if (btnFiltroNombre.isEnabled()){
-            titulares=new ArrayList();
-            //Busca filtrando por nombre
+        if (btnFiltroNombre.isEnabled()){
+            titulares = TitularController.getInstance().buscarTitulares(filtro, FiltroTitularesEnum.NOMBRE);
         } else if (btnFiltroApellido.isEnabled()){
-            titulares=new ArrayList();
-            //Busca filtrando por apellido
+            titulares = TitularController.getInstance().buscarTitulares(filtro, FiltroTitularesEnum.APELLIDO);
         } else if (btnFiltroDocumento.isEnabled()){
-            titulares=new ArrayList();
-            //Busca filtrando por documento
-        } else titulares=new ArrayList();
+            titulares = TitularController.getInstance().buscarTitulares(filtro, FiltroTitularesEnum.DOCUMENTO);
+        } else titulares = TitularController.getInstance().buscarTitulares(filtro, FiltroTitularesEnum.TODOS);
         
         DefaultTableModel model = (DefaultTableModel)tableTitulares.getModel();
         model.setRowCount(0);
@@ -577,6 +703,187 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnAplicarFiltroActionPerformed
+
+    private void radioBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBActionPerformed
+        Titular titular = titulares.get(tableTitulares.getSelectedRow());
+        
+        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        Date fechaVencimiento = new Date();//TBD
+        fechaVencimiento.setYear(2025); //TBD
+        Double costo;//TBD
+        costo=50.0;//TBD
+        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.B);
+        
+        String mensaje="";
+        
+        if(yaEmitida){
+            mensaje+="La licencia ya fue emitida. Debe renovar.\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else if (edad<17) {
+            mensaje+="La edad mínima es de 17 años\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else{
+            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            btnEmitirLicencia.setEnabled(true);
+            txtAreaClaseLicencia.setForeground(new Color(0,153,0));
+        }
+        
+        txtAreaClaseLicencia.setText(mensaje);        
+        
+    }//GEN-LAST:event_radioBActionPerformed
+
+    private void radioFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFActionPerformed
+        // TODO add your handling code here:
+        Titular titular = titulares.get(tableTitulares.getSelectedRow());
+        
+        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        Date fechaVencimiento = new Date();//TBD
+        fechaVencimiento.setYear(2025); //TBD
+        Double costo;//TBD
+        costo=50.0;//TBD
+        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.F);
+        
+        String mensaje="";
+        
+        if(yaEmitida){
+            mensaje+="La licencia ya fue emitida. Debe renovar.\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else if (edad<17) {
+            mensaje+="La edad mínima es de 17 años\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else{
+            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            btnEmitirLicencia.setEnabled(true);
+            txtAreaClaseLicencia.setForeground(new Color(0,153,0));
+        }
+        
+        txtAreaClaseLicencia.setText(mensaje);        
+        
+    }//GEN-LAST:event_radioFActionPerformed
+
+    private void radioGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioGActionPerformed
+        Titular titular = titulares.get(tableTitulares.getSelectedRow());
+        
+        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        Date fechaVencimiento = new Date();//TBD
+        fechaVencimiento.setYear(2025); //TBD
+        Double costo;//TBD
+        costo=50.0;//TBD
+        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.G);
+        
+        String mensaje="";
+        
+        if(yaEmitida){
+            mensaje+="La licencia ya fue emitida. Debe renovar.\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else if (edad<17) {
+            mensaje+="La edad mínima es de 17 años\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else{
+            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            btnEmitirLicencia.setEnabled(true);
+            txtAreaClaseLicencia.setForeground(new Color(0,153,0));
+        }
+        
+        txtAreaClaseLicencia.setText(mensaje);        
+        
+    }//GEN-LAST:event_radioGActionPerformed
+
+    private void radioCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioCActionPerformed
+        // TODO add your handling code here:
+        Titular titular = titulares.get(tableTitulares.getSelectedRow());
+        
+        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        Date fechaVencimiento = new Date();//TBD
+        fechaVencimiento.setYear(50); //TBD
+        Double costo;//TBD
+        costo=50.0;//TBD
+        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.C);
+        boolean tieneBValida = this.tieneBValida(titular);
+        
+        String mensaje="";
+        
+        if(yaEmitida){
+            mensaje+="La licencia ya fue emitida. Debe renovar.\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else if (edad<21) {
+            mensaje+="La edad mínima es de 21 años\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        } else if (edad>65){
+            mensaje+="No puede emitirse por primera vez a mayores de 65 años\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        } else if (!tieneBValida){
+            mensaje+="Debe tener licencia Clase B por al menos un año\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else{
+            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            btnEmitirLicencia.setEnabled(true);
+            txtAreaClaseLicencia.setForeground(new Color(0,153,0));
+        }
+        
+        txtAreaClaseLicencia.setText(mensaje);        
+        
+    }//GEN-LAST:event_radioCActionPerformed
+
+    private void radioEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioEActionPerformed
+        // TODO add your handling code here:
+        Titular titular = titulares.get(tableTitulares.getSelectedRow());
+        
+        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        Date fechaVencimiento = new Date();//TBD
+        fechaVencimiento.setYear(50); //TBD
+        Double costo;//TBD
+        costo=50.0;//TBD
+        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.E);
+        boolean tieneBValida = this.tieneBValida(titular);
+        
+        String mensaje="";
+        
+        if(yaEmitida){
+            mensaje+="La licencia ya fue emitida. Debe renovar.\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else if (edad<21) {
+            mensaje+="La edad mínima es de 21 años\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        } else if (edad>65){
+            mensaje+="No puede emitirse por primera vez a mayores de 65 años\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        } else if (!tieneBValida){
+            mensaje+="Debe tener licencia Clase B por al menos un año\n";
+            btnEmitirLicencia.setEnabled(false);
+            txtAreaClaseLicencia.setForeground(new Color(153,0,0));
+        }
+        else{
+            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            btnEmitirLicencia.setEnabled(true);
+            txtAreaClaseLicencia.setForeground(new Color(0,153,0));
+        }
+        
+        txtAreaClaseLicencia.setText(mensaje);        
+        
+    }//GEN-LAST:event_radioEActionPerformed
 
     /**
      * @param args the command line arguments
