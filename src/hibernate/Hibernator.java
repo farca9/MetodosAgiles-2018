@@ -37,7 +37,7 @@ public class Hibernator {
         sesFactory=config.buildSessionFactory();
         sesion=sesFactory.openSession(); 
 
-        //new SchemaExport(config).create(true, true);// -> Exporta en el schema nuevas tablas en base a las anotaciones en las clases
+        new SchemaExport(config).create(true, true);// -> Exporta en el schema nuevas tablas en base a las anotaciones en las clases
         
     };
     
