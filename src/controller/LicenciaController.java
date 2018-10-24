@@ -25,7 +25,7 @@ public class LicenciaController {
     
     private static LicenciaController instance = null;
     
-    private LicenciaController(){};
+    public LicenciaController(){};
     
     public static LicenciaController getInstance(){
         if (instance == null) instance = new LicenciaController();
@@ -34,6 +34,8 @@ public class LicenciaController {
     
     public Date calcularVigencia(Titular t1, ClaseLicenciaEnum c1){
         DateFormat formatter = new SimpleDateFormat("yyyyMMdd");  
+        
+        System.out.println("HOLANDAAAAAAAAAAAAAAAAAAAAAAAAAA");
         
         
         Date vencimiento = new Date();
@@ -48,7 +50,8 @@ public class LicenciaController {
         int string_nacimiento = Integer.parseInt(formatter.format(t1.getFechaNacimiento()));                            
         int string_actual = Integer.parseInt(formatter.format(actual));  
         
-        int edad = (string_actual - string_nacimiento) / 10000;      
+        int edad = (string_actual - string_nacimiento) / 10000;   
+        System.out.println(edad);
         
         
         if(edad<17){
@@ -104,13 +107,17 @@ public class LicenciaController {
                         c.add(Calendar.YEAR, 5);
                         c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
                         vencimiento = c.getTime(); 
+                        System.out.println(vencimiento);
                         return vencimiento;
+                        
                     }else{
                         //cumpleaños ya paso
                         //vencimiento = actual - diferencia + vigencia
                         c.add(Calendar.YEAR, 6);
                         c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
                         vencimiento = c.getTime(); 
+                        System.out.println("despues");
+                        System.out.println(vencimiento);
                         return vencimiento;
                     }
                 }

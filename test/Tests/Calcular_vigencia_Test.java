@@ -35,7 +35,7 @@ import static org.junit.Assert.*;
 public class Calcular_vigencia_Test {
     
     
-    LicenciaController l1;
+    public LicenciaController l1;
     Titular t1;
     Titular t2;
     Titular t3;
@@ -80,7 +80,8 @@ public class Calcular_vigencia_Test {
         t4 = new Titular("38898095", TipoDocumentoEnum.DU, "Jorge", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, true, true, date4);
         
         
-        LicenciaController l1 = LicenciaController.getInstance();
+        l1 = LicenciaController.getInstance();
+        
     }
     
     @After
