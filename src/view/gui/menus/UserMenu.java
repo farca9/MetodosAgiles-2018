@@ -7,6 +7,8 @@
 package view.gui.menus;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import view.gui.abm.*;
 import view.gui.login.MainMenu;
 
@@ -18,7 +20,12 @@ public class UserMenu extends javax.swing.JFrame {
 
     /** Creates new form userMenu */
     public UserMenu() {
+        //Inicializacion de la ventana
         initComponents();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth()/2;
+        double height = screenSize.getHeight()/2;
+        this.setLocation((int)width-this.getWidth()/2,(int)height-this.getHeight()/2);
         btnLogout.setBackground(Color.red);
     }
 

@@ -5,6 +5,8 @@
  */
 package view.gui.abm;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +19,13 @@ public class UserAddTitular extends javax.swing.JFrame {
      * Creates new form userAddTitular
      */
     public UserAddTitular() {
+        //Inicializacion de la ventana
         initComponents();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth()/2;
+        double height = screenSize.getHeight()/2;
+        this.setLocation((int)width-this.getWidth()/2,(int)height-this.getHeight()/2);
+        
         txtFiltro.setEnabled(false);
         btnAplicarFiltro.setEnabled(false);
         btnLimpiarFiltro.setEnabled(false);
@@ -167,7 +175,7 @@ public class UserAddTitular extends javax.swing.JFrame {
                     .addComponent(btnFiltroApellido)
                     .addComponent(btnFiltroDocumento))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAplicarFiltro)
                     .addComponent(btnLimpiarFiltro))

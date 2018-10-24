@@ -6,6 +6,8 @@
 package view.gui.login;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -22,6 +24,10 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth()/2;
+        double height = screenSize.getHeight()/2;
+        this.setLocation((int)width-this.getWidth()/2,(int)height-this.getHeight()/2);
     }
 
     /**
