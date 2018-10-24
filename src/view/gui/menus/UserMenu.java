@@ -49,7 +49,7 @@ public class UserMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestión de Licencias de Conducir");
-        setType(java.awt.Window.Type.UTILITY);
+        setResizable(false);
 
         lblSantaFe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/drawable/logo-santafe.png"))); // NOI18N
         lblSantaFe.setText("jLabel1");

@@ -80,7 +80,7 @@ public class Calcular_vigencia_Test {
         t4 = new Titular("38898095", TipoDocumentoEnum.DU, "Jorge", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, true, true, date4);
         
         
-        LicenciaController l1 = new LicenciaController();
+        LicenciaController l1 = LicenciaController.getInstance();
     }
     
     @After

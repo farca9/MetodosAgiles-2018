@@ -5,12 +5,16 @@
  */
 package controller;
 
+import dao.LicenciaDAO;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import model.ClaseLicenciaEnum;
+import model.Licencia;
 import model.Titular;
 
 /**
@@ -18,6 +22,15 @@ import model.Titular;
  * @author Santo
  */
 public class LicenciaController {
+    
+    private static LicenciaController instance = null;
+    
+    private LicenciaController(){};
+    
+    public static LicenciaController getInstance(){
+        if (instance == null) instance = new LicenciaController();
+        return instance;
+    }
     
     public Date calcularVigencia(Titular t1, ClaseLicenciaEnum c1){
         DateFormat formatter = new SimpleDateFormat("yyyyMMdd");  
@@ -163,8 +176,54 @@ public class LicenciaController {
            return vencimiento;
     }
 
-    public LicenciaController() {
+    public boolean crearLicencia(Titular titular, ClaseLicenciaEnum claseLicenciaEnum, String observaciones){
+        
+        Licencia licencia = new Licencia();
+        licencia.setTitular(titular);
+        licencia.setActiva(true);
+        licencia.setClaseLicenciaEnum(claseLicenciaEnum);
+        licencia.setFechaEmision(new Date());
+        Date fakeVencimiento = new Date();
+        fakeVencimiento.setYear(125);
+        licencia.setFechaVencimiento(fakeVencimiento); //TBD - this.calcularVigencia;
+        licencia.setObservacion(observaciones);
+        titular.getLicencias().add(licencia);
+        
+        return LicenciaDAO.getInstance().insert(licencia);
+        
+        
     }
     
+    public int calcularEdad(Date fechaNacimiento){
+        return Period.between(fechaNacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now()).getYears();
+    }
+    
+    public boolean tieneBValida(Titular titular){
+        boolean tieneBValida=false;
+        
+        for(Licencia licencia : titular.getLicencias()){
+            
+            if(licencia.getClaseLicenciaEnum()==ClaseLicenciaEnum.B && this.calcularEdad(licencia.getFechaEmision())>=1){
+                tieneBValida=true;
+                break;
+            }
+            
+        }
+        
+        return tieneBValida;
+    }
+    
+    public boolean yaEmitida(Titular titular, ClaseLicenciaEnum target){
+        boolean yaEmitida=false;
+        
+        for(Licencia licencia : titular.getLicencias()){
+            if(licencia.getClaseLicenciaEnum()==target){
+                yaEmitida=true;
+                break;
+            }
+        }
+        
+        return yaEmitida;
+    }
     
 }

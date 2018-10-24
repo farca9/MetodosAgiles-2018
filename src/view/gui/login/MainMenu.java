@@ -51,7 +51,6 @@ public class MainMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestión de Licencias de Conducir - SFC");
         setResizable(false);
-        setType(java.awt.Window.Type.UTILITY);
 
         lblSantaFe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/drawable/logo-santafe.png"))); // NOI18N
         lblSantaFe.setName(""); // NOI18N

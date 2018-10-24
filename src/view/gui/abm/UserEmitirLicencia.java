@@ -5,7 +5,9 @@
  */
 package view.gui.abm;
 
+import controller.LicenciaController;
 import controller.TitularController;
+import dao.TitularDAO;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -16,6 +18,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -27,6 +30,7 @@ import model.TipoDocumentoEnum;
 import model.Titular;
 import util.FiltroTitularesEnum;
 import util.LengthRestrictedDocument;
+import view.gui.menus.UserMenu;
 
 /**
  *
@@ -34,6 +38,7 @@ import util.LengthRestrictedDocument;
  */
 public class UserEmitirLicencia extends javax.swing.JFrame {
 
+    private ClaseLicenciaEnum claseSeleccionada;
     private List<Titular> titulares;
     private SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
     
@@ -71,7 +76,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         radioE.setEnabled(false);
         radioF.setEnabled(false);
         radioG.setEnabled(false);
-        
+                
         btnEmitirLicencia.setEnabled(false);
         
         tableTitulares.setRowSelectionAllowed(true);
@@ -578,51 +583,36 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLimpiarFiltroActionPerformed
 
-    private int calcularEdad(Date fechaNacimiento){
-        return Period.between(fechaNacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now()).getYears();
-    }
     
-    private boolean tieneBValida(Titular titular){
-        boolean tieneBValida=false;
-        
-        for(Licencia licencia : titular.getLicencias()){
-            
-            if(licencia.getClaseLicenciaEnum()==ClaseLicenciaEnum.B && this.calcularEdad(licencia.getFechaEmision())>=1){
-                tieneBValida=true;
-                break;
-            }
-            
-        }
-        
-        return tieneBValida;
-    }
-    
-    private boolean yaEmitida(Titular titular, ClaseLicenciaEnum target){
-        boolean yaEmitida=false;
-        
-        for(Licencia licencia : titular.getLicencias()){
-            if(licencia.getClaseLicenciaEnum()==target){
-                yaEmitida=true;
-                break;
-            }
-        }
-        
-        return yaEmitida;
-    }
     
     private void btnEmitirLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirLicenciaActionPerformed
-        // TODO add your handling code here:
+        
+        if(LicenciaController.getInstance().crearLicencia(titulares.get(tableTitulares.getSelectedRow()), claseSeleccionada , txtAreaObservaciones.getText())){
+            
+            JOptionPane.showMessageDialog(null, "Se ha emitido la licencia con éxito", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+            
+        }else{
+            
+            JOptionPane.showMessageDialog(null, "No se pudo emitir la licencia", "Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
+        new UserMenu().setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_btnEmitirLicenciaActionPerformed
 
     private void radioAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAActionPerformed
+        claseSeleccionada=ClaseLicenciaEnum.A;
+        
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
-        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = new Date();//TBD
         fechaVencimiento.setYear(2025); //TBD
         Double costo;//TBD
         costo=50.0;//TBD
-        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.A);
+        boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.A);
         
         String mensaje="";
         
@@ -647,15 +637,17 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_radioAActionPerformed
 
     private void radioDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioDActionPerformed
+        claseSeleccionada=ClaseLicenciaEnum.D;
+        
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
-        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = new Date();//TBD
         fechaVencimiento.setYear(50); //TBD
         Double costo;//TBD
         costo=50.0;//TBD
-        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.D);
-        boolean tieneBValida = this.tieneBValida(titular);
+        boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.D);
+        boolean tieneBValida = LicenciaController.getInstance().tieneBValida(titular);
         
         String mensaje="";
         
@@ -713,12 +705,14 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     private void radioBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBActionPerformed
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
-        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        claseSeleccionada=ClaseLicenciaEnum.B;
+        
+        int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = new Date();//TBD
         fechaVencimiento.setYear(2025); //TBD
         Double costo;//TBD
         costo=50.0;//TBD
-        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.B);
+        boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.B);
         
         String mensaje="";
         
@@ -746,12 +740,14 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         // TODO add your handling code here:
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
-        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        claseSeleccionada=ClaseLicenciaEnum.F;
+        
+        int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = new Date();//TBD
         fechaVencimiento.setYear(2025); //TBD
         Double costo;//TBD
         costo=50.0;//TBD
-        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.F);
+        boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.F);
         
         String mensaje="";
         
@@ -778,12 +774,14 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     private void radioGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioGActionPerformed
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
-        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        claseSeleccionada=ClaseLicenciaEnum.G;
+        
+        int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = new Date();//TBD
         fechaVencimiento.setYear(2025); //TBD
         Double costo;//TBD
         costo=50.0;//TBD
-        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.G);
+        boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.G);
         
         String mensaje="";
         
@@ -811,13 +809,15 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         // TODO add your handling code here:
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
-        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        claseSeleccionada=ClaseLicenciaEnum.C;
+        
+        int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = new Date();//TBD
         fechaVencimiento.setYear(50); //TBD
         Double costo;//TBD
         costo=50.0;//TBD
-        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.C);
-        boolean tieneBValida = this.tieneBValida(titular);
+        boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.C);
+        boolean tieneBValida = LicenciaController.getInstance().tieneBValida(titular);
         
         String mensaje="";
         
@@ -853,13 +853,15 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         // TODO add your handling code here:
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
-        int edad = this.calcularEdad(titular.getFechaNacimiento());
+        claseSeleccionada=ClaseLicenciaEnum.E;
+        
+        int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = new Date();//TBD
         fechaVencimiento.setYear(50); //TBD
         Double costo;//TBD
         costo=50.0;//TBD
-        boolean yaEmitida = this.yaEmitida(titular, ClaseLicenciaEnum.E);
-        boolean tieneBValida = this.tieneBValida(titular);
+        boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.E);
+        boolean tieneBValida = LicenciaController.getInstance().tieneBValida(titular);
         
         String mensaje="";
         

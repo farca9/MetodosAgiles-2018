@@ -46,7 +46,7 @@ public class AdminMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestión de Licencias de Conducir");
-        setType(java.awt.Window.Type.UTILITY);
+        setResizable(false);
 
         btnAddUser.setFont(btnAddUser.getFont().deriveFont(btnAddUser.getFont().getSize()+3f));
         btnAddUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/add_user.png"))); // NOI18N
