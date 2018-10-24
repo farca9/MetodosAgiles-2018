@@ -35,7 +35,7 @@ import static org.junit.Assert.*;
 public class Calcular_vigencia_Test {
     
     
-    Licencia l1;
+    LicenciaController l1;
     Titular t1;
     Titular t2;
     Titular t3;
@@ -58,23 +58,6 @@ public class Calcular_vigencia_Test {
     
     @Before
     public void setUp() throws ParseException {
-        //Init Licencias
-        Set set1 = new HashSet();
-        String element = "A";
-        set1.add(element);
-        
-        Set set2 = new HashSet();
-        String element2 = "B";
-        set2.add(element2);
-        
-        Set set3 = new HashSet();
-        String element3 = "A";
-        set3.add(element3);
-        
-        Set set4 = new HashSet();
-        String element4 = "A";
-        set4.add(element4);
-        
         //Init fechas nac
         DateFormat format = new SimpleDateFormat("dd/mm/yyyy", Locale.ENGLISH);
         
@@ -92,9 +75,9 @@ public class Calcular_vigencia_Test {
         
         //Init titulares
         t1 = new Titular("38898095", TipoDocumentoEnum.DU, "Santiago", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, date1);
-        t2 = new Titular("38898095", TipoDocumentoEnum.DU, "Santiago", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, date2);
-        t3 = new Titular("38898095", TipoDocumentoEnum.DU, "Santiago", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, date3);
-        t4 = new Titular("38898095", TipoDocumentoEnum.DU, "Santiago", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, date4);
+        t2 = new Titular("38898095", TipoDocumentoEnum.DU, "Lucas", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, true, date2);
+        t3 = new Titular("38898095", TipoDocumentoEnum.DU, "Martin", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, true, false, date3);
+        t4 = new Titular("38898095", TipoDocumentoEnum.DU, "Jorge", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, true, true, date4);
         
         
         LicenciaController l1 = new LicenciaController();
@@ -105,22 +88,22 @@ public class Calcular_vigencia_Test {
     }
 
     @Test
-    public void TestVigencia1() {
+    public void TestVigencia1() throws ParseException {
         Date resultado = l1.calcularVigencia(t1, ClaseLicenciaEnum.C);
         
         DateFormat format = new SimpleDateFormat("dd/mm/yyyy", Locale.ENGLISH);
-        String string1 = "01/11/1998";
+        String string1 = "01/12/2023";
         Date date1 = format.parse(string1);
        
         assertEquals(date1, resultado);
     }
     
-    @Test
+    /*@Test
     public void TestVigencia2() {
         int resultado = calcularVigencia(t2, ClaseLicenciaEnum.A);
         int esperado = 3; //23 años y licencia de clase A da vigencia de 3 años
         assertEquals(esperado, resultado);
-    }
+    }*/
     
     @Test
     public void TestVigencia3() {
