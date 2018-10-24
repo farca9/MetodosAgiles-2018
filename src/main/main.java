@@ -6,6 +6,7 @@
 package main;
 
 import hibernate.Hibernator;
+import util.ContribuyentePopulator;
 import view.gui.login.MainMenu;
 
 /**
@@ -23,6 +24,8 @@ public class main {
             ex.printStackTrace();
         }
      
+        //ContribuyentePopulator.populate(500);// -> Puebla la tabla de contribuyentes con datos aleatorios
+        
         new MainMenu().setVisible(true);
         
     }
