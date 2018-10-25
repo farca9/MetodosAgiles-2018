@@ -40,7 +40,7 @@ public class Titular {
     private String domicilio;
     
     private GrupoSanguineoEnum grupoSanguineo;
-    
+   
     private boolean factor; //1 si es '+' -- 0 si es '-'
     
     private boolean donanteOrganos;
@@ -130,7 +130,7 @@ public class Titular {
     public void setGrupoSanguineo(GrupoSanguineoEnum grupoSanguineo) {
         this.grupoSanguineo = grupoSanguineo;
     }
-
+   
     public boolean isFactor() {
         return factor;
     }

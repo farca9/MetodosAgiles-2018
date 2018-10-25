@@ -5,9 +5,22 @@
  */
 package view.gui.abm;
 
+import controller.ContribuyenteController;
+import controller.TitularController;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import model.Contribuyente;
+import model.GrupoSanguineoEnum;
+import util.FiltroTitularesEnum;
+import view.gui.menus.UserMenu;
 
 /**
  *
@@ -15,6 +28,9 @@ import javax.swing.JOptionPane;
  */
 public class UserAddTitular extends javax.swing.JFrame {
 
+    private List<Contribuyente> contribuyentes;
+    private SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
+    
     /**
      * Creates new form userAddTitular
      */
@@ -29,6 +45,25 @@ public class UserAddTitular extends javax.swing.JFrame {
         txtFiltro.setEnabled(false);
         btnAplicarFiltro.setEnabled(false);
         btnLimpiarFiltro.setEnabled(false);
+        btnGuardar.setEnabled(false);
+        btnCancelar.setEnabled(false);
+        
+        tableContribuyentes.setRowSelectionAllowed(true);
+        tableContribuyentes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableContribuyentes.getTableHeader().setReorderingAllowed(false);
+        
+        tableContribuyentes.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            public void valueChanged(ListSelectionEvent event) {
+            
+                if(tableContribuyentes.getSelectedRow() == -1) return;
+                btnGuardar.setEnabled(true);
+                btnCancelar.setEnabled(true);
+                cmbDonante.setEnabled(true);
+                cmbFactor.setEnabled(true);
+                cmbGrupoSanguineo.setEnabled(true);
+                Contribuyente c = contribuyentes.get(tableContribuyentes.getSelectedRow());            
+            }
+        });
     }
 
     /**
@@ -43,13 +78,14 @@ public class UserAddTitular extends javax.swing.JFrame {
         lblSantaFe = new javax.swing.JLabel();
         pnlDatosPersonales = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        grdContribuyentes = new javax.swing.JTable();
+        tableContribuyentes = new javax.swing.JTable();
         txtFiltro = new javax.swing.JTextField();
         btnFiltroNombre = new javax.swing.JButton();
         btnFiltroApellido = new javax.swing.JButton();
         btnFiltroDocumento = new javax.swing.JButton();
         btnAplicarFiltro = new javax.swing.JButton();
         btnLimpiarFiltro = new javax.swing.JButton();
+        lblBuscar = new javax.swing.JLabel();
         pnlDatosMedicos = new javax.swing.JPanel();
         lblGrupoSanguineo = new javax.swing.JLabel();
         lblFactor = new javax.swing.JLabel();
@@ -65,7 +101,7 @@ public class UserAddTitular extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestión de Licencias de Conducir - SFC");
-        setType(java.awt.Window.Type.UTILITY);
+        setResizable(false);
 
         lblSantaFe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSantaFe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/drawable/logo-santafe.png"))); // NOI18N
@@ -73,22 +109,19 @@ public class UserAddTitular extends javax.swing.JFrame {
 
         pnlDatosPersonales.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Personales del Contribuyente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
 
-        grdContribuyentes.setModel(new javax.swing.table.DefaultTableModel(
+        tableContribuyentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Nombre", "Apellido", "Tipo y N° de Documento"
+                "Nombre", "Apellido", "Tipo Documento", "N° Documento"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -99,7 +132,7 @@ public class UserAddTitular extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(grdContribuyentes);
+        jScrollPane1.setViewportView(tableContribuyentes);
 
         txtFiltro.setFont(txtFiltro.getFont().deriveFont(txtFiltro.getFont().getSize()+4f));
 
@@ -131,6 +164,11 @@ public class UserAddTitular extends javax.swing.JFrame {
         });
 
         btnAplicarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/search_mini.png"))); // NOI18N
+        btnAplicarFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAplicarFiltroActionPerformed(evt);
+            }
+        });
 
         btnLimpiarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/cancel_mini.png"))); // NOI18N
         btnLimpiarFiltro.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +177,8 @@ public class UserAddTitular extends javax.swing.JFrame {
             }
         });
 
+        lblBuscar.setText("Buscar por...");
+
         javax.swing.GroupLayout pnlDatosPersonalesLayout = new javax.swing.GroupLayout(pnlDatosPersonales);
         pnlDatosPersonales.setLayout(pnlDatosPersonalesLayout);
         pnlDatosPersonalesLayout.setHorizontalGroup(
@@ -146,29 +186,28 @@ public class UserAddTitular extends javax.swing.JFrame {
             .addGroup(pnlDatosPersonalesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(pnlDatosPersonalesLayout.createSequentialGroup()
-                        .addGroup(pnlDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnlDatosPersonalesLayout.createSequentialGroup()
-                                .addComponent(btnFiltroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFiltroApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFiltroDocumento))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(0, 1, Short.MAX_VALUE))
+                        .addComponent(btnFiltroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFiltroApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addComponent(btnFiltroDocumento))
                     .addGroup(pnlDatosPersonalesLayout.createSequentialGroup()
                         .addComponent(txtFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAplicarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlDatosPersonalesLayout.createSequentialGroup()
+                        .addComponent(lblBuscar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlDatosPersonalesLayout.setVerticalGroup(
             pnlDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosPersonalesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFiltroNombre)
@@ -179,7 +218,9 @@ public class UserAddTitular extends javax.swing.JFrame {
                     .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAplicarFiltro)
                     .addComponent(btnLimpiarFiltro))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pnlDatosMedicos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Médicos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
@@ -188,13 +229,16 @@ public class UserAddTitular extends javax.swing.JFrame {
 
         lblFactor.setText("Factor");
 
-        cmbGrupoSanguineo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "A", "B", "AB", "0" }));
+        cmbGrupoSanguineo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "A", "B", "AB", "O" }));
+        cmbGrupoSanguineo.setEnabled(false);
 
         cmbFactor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "+", "-" }));
+        cmbFactor.setEnabled(false);
 
         lblDonante.setText("Donante de Órganos");
 
         cmbDonante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Si", "No" }));
+        cmbDonante.setEnabled(false);
 
         javax.swing.GroupLayout pnlDatosMedicosLayout = new javax.swing.GroupLayout(pnlDatosMedicos);
         pnlDatosMedicos.setLayout(pnlDatosMedicosLayout);
@@ -236,7 +280,7 @@ public class UserAddTitular extends javax.swing.JFrame {
         );
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/save.png"))); // NOI18N
-        btnGuardar.setText("Guardar");
+        btnGuardar.setText("Guardar Titular");
         btnGuardar.setToolTipText("Guarde los datos del titular.");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,9 +298,12 @@ public class UserAddTitular extends javax.swing.JFrame {
         });
 
         lblNuevoTitular.setFont(lblNuevoTitular.getFont().deriveFont(lblNuevoTitular.getFont().getSize()+6f));
+        lblNuevoTitular.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNuevoTitular.setText("NUEVO TITULAR");
 
+        lblAContinuacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAContinuacion.setText("A continuación, ingrese los datos del nuevo titular.");
+        lblAContinuacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -277,12 +324,14 @@ public class UserAddTitular extends javax.swing.JFrame {
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(lblSantaFe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lblAContinuacion)
-                    .addComponent(lblNuevoTitular))
-                .addGap(47, 47, 47))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblAContinuacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblNuevoTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,7 +374,6 @@ public class UserAddTitular extends javax.swing.JFrame {
         btnAplicarFiltro.setEnabled(false);
         btnLimpiarFiltro.setEnabled(false);
         
-        
     }//GEN-LAST:event_btnLimpiarFiltroActionPerformed
 
     private void btnFiltroApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroApellidoActionPerformed
@@ -345,21 +393,84 @@ public class UserAddTitular extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFiltroDocumentoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        boolean factor = false;
+        boolean donante = false;
+        GrupoSanguineoEnum grupo = null;
+        if(cmbFactor.getSelectedItem() == "+") factor = true;
+        if(cmbDonante.getSelectedItem() == "Si") donante = true;
+        if(cmbGrupoSanguineo.getSelectedItem() == "A") grupo = GrupoSanguineoEnum.A;
+        if(cmbGrupoSanguineo.getSelectedItem() == "B") grupo = GrupoSanguineoEnum.B;
+        if(cmbGrupoSanguineo.getSelectedItem() == "O") grupo = GrupoSanguineoEnum.O;
+        if(cmbGrupoSanguineo.getSelectedItem() == "AB") grupo = GrupoSanguineoEnum.AB;
+        
+        
         if(cmbDonante.getSelectedItem() == "" ||
            cmbFactor.getSelectedItem() == ""  ||
            cmbGrupoSanguineo.getSelectedItem() == "" ){
             JOptionPane.showMessageDialog(this, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else{ 
+            
+            if(TitularController.getInstance().crearTitular(contribuyentes.get(tableContribuyentes.getSelectedRow()), grupo, factor, donante)){
+                JOptionPane.showMessageDialog(null, "Se ha cargado el titular exitosamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                // TODO VER QUE SE PUEDEN GUARDAR DATOS DEL MISMO CONTRIBUYENTE
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se ha podido cargar el titular", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        new UserMenu().setVisible(true);
+        this.dispose();
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         Integer respuesta = JOptionPane.showConfirmDialog(null, "Está seguro de que desea cancelar el registro? Se perderán los datos no guardados", "Cancelar",  JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
+            cmbDonante.setEnabled(false);
+            cmbFactor.setEnabled(false);
+            cmbGrupoSanguineo.setEnabled(false);
             cmbDonante.setSelectedItem("");
             cmbFactor.setSelectedItem("");
             cmbGrupoSanguineo.setSelectedItem("");
+            
+            btnFiltroNombre.setEnabled(true);
+            btnFiltroApellido.setEnabled(true);
+            btnFiltroDocumento.setEnabled(true);
+            
+            txtFiltro.setText("");
+            txtFiltro.setEnabled(false);
+            btnAplicarFiltro.setEnabled(false);
+            btnLimpiarFiltro.setEnabled(false);
+            
+            DefaultTableModel model = (DefaultTableModel)tableContribuyentes.getModel();
+            model.setRowCount(0);
+            
+            btnGuardar.setEnabled(false);
+            btnCancelar.setEnabled(false);
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnAplicarFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarFiltroActionPerformed
+        String filtro = txtFiltro.getText();
+        
+        if (btnFiltroNombre.isEnabled()){
+            contribuyentes = ContribuyenteController.getInstance().buscarContribuyentes(filtro, FiltroTitularesEnum.NOMBRE);
+        } else if (btnFiltroApellido.isEnabled()){
+            contribuyentes = ContribuyenteController.getInstance().buscarContribuyentes(filtro, FiltroTitularesEnum.APELLIDO);
+        } else if (btnFiltroDocumento.isEnabled()){
+            contribuyentes = ContribuyenteController.getInstance().buscarContribuyentes(filtro, FiltroTitularesEnum.DOCUMENTO);
+        } else contribuyentes = ContribuyenteController.getInstance().buscarContribuyentes(filtro, FiltroTitularesEnum.TODOS);
+        
+        DefaultTableModel model = (DefaultTableModel)tableContribuyentes.getModel();
+        model.setRowCount(0);
+        
+        for(int i=0 ; i<contribuyentes.size() ; i++){
+            Contribuyente contribuyente = contribuyentes.get(i);
+            Object[] fila = {contribuyente.getNombre(),contribuyente.getApellido(),contribuyente.getTipoDocumento().toString(),contribuyente.getCodigoDocumento()};
+            model.addRow(fila);
+        }
+    }//GEN-LAST:event_btnAplicarFiltroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -408,9 +519,9 @@ public class UserAddTitular extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbDonante;
     private javax.swing.JComboBox<String> cmbFactor;
     private javax.swing.JComboBox<String> cmbGrupoSanguineo;
-    private javax.swing.JTable grdContribuyentes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAContinuacion;
+    private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblDonante;
     private javax.swing.JLabel lblFactor;
     private javax.swing.JLabel lblGrupoSanguineo;
@@ -419,6 +530,7 @@ public class UserAddTitular extends javax.swing.JFrame {
     private javax.swing.JLabel lblSantaFe;
     private javax.swing.JPanel pnlDatosMedicos;
     private javax.swing.JPanel pnlDatosPersonales;
+    private javax.swing.JTable tableContribuyentes;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }

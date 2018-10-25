@@ -251,11 +251,11 @@ public class LicenciaController {
     }
     
     public boolean yaEmitida(Titular titular, ClaseLicenciaEnum target){
-        boolean yaEmitida=false;
+        boolean yaEmitida = false;
         
         for(Licencia licencia : titular.getLicencias()){
             if(licencia.getClaseLicenciaEnum()==target){
-                yaEmitida=true;
+                yaEmitida = true;
                 break;
             }
         }

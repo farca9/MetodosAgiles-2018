@@ -205,7 +205,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlTitulares.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione el titular", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
+        pnlTitulares.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione el titular", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), null)); // NOI18N
 
         tableTitulares.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -316,7 +316,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlClaseLicencia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione la clase de licencia", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
+        pnlClaseLicencia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione la clase de licencia", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), null)); // NOI18N
 
         radioA.setText("A");
         radioA.addActionListener(new java.awt.event.ActionListener() {
@@ -424,7 +424,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
             }
         });
 
-        pnlDatosTitular.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del titular", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
+        pnlDatosTitular.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del titular", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), null)); // NOI18N
 
         labelNombre.setText(" ");
 
@@ -475,7 +475,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlObservaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Observaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
+        pnlObservaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Observaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), null)); // NOI18N
 
         txtAreaObservaciones.setColumns(20);
         txtAreaObservaciones.setRows(5);

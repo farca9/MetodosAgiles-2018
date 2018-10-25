@@ -8,6 +8,8 @@ package controller;
 import dao.TitularDAO;
 import java.util.ArrayList;
 import java.util.List;
+import model.Contribuyente;
+import model.GrupoSanguineoEnum;
 import model.Titular;
 import util.FiltroTitularesEnum;
 
@@ -35,6 +37,24 @@ public class TitularController {
         else if (filtro.equals(FiltroTitularesEnum.NOMBRE)) titular.setNombre(texto);
         
         return (TitularDAO.getInstance().find(titular));
+    }
+    
+    public boolean crearTitular(Contribuyente contribuyente, GrupoSanguineoEnum grupoSanguineo, boolean factor, boolean donante){
+        
+        Titular titular = new Titular();
+        titular.setNombre(contribuyente.getNombre());
+        titular.setApellido(contribuyente.getApellido());
+        titular.setTipoDocumento(contribuyente.getTipoDocumento());
+        titular.setCodigoDocumento(contribuyente.getCodigoDocumento());
+        titular.setDomicilio(contribuyente.getDomicilio());
+        titular.setFechaNacimiento(contribuyente.getFechaNacimiento());
+        titular.setGrupoSanguineo(grupoSanguineo);
+        titular.setFactor(factor);
+        titular.setDonanteOrganos(donante);
+        titular.setLicencias(null);
+        
+        return TitularDAO.getInstance().insert(titular);
+        
     }
     
 }

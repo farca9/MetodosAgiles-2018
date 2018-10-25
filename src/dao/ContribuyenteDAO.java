@@ -8,6 +8,7 @@ package dao;
 import hibernate.Hibernator;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import model.Contribuyente;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -30,7 +31,7 @@ public class ContribuyenteDAO {
         return instance;
     }
     
-    public Collection<Contribuyente> find(Contribuyente contribuyente){
+    public List<Contribuyente> find(Contribuyente contribuyente){
         
         ArrayList<Contribuyente> results;
         
@@ -42,10 +43,6 @@ public class ContribuyenteDAO {
             
             Conjunction conj = Restrictions.conjunction();
             
-            //if(contribuyente.getId() != null){    // TODO Ver si es necesario el IF, ya que id es autogenerado
-                conj.add(Restrictions.eq("id", contribuyente.getId()));
-            //}
-            
             if(contribuyente.getNombre() != null){
                 conj.add(Restrictions.ilike("nombre", contribuyente.getNombre(), MatchMode.ANYWHERE));
             }
@@ -55,14 +52,16 @@ public class ContribuyenteDAO {
             }
             
             if(contribuyente.getCodigoDocumento() != null){
-                conj.add(Restrictions.eq("documento", contribuyente.getCodigoDocumento()));
+                conj.add(Restrictions.eq("codigodocumento", contribuyente.getCodigoDocumento()));
             }
             
             if(contribuyente.getDomicilio() != null){
                 conj.add(Restrictions.ilike("domicilio", contribuyente.getDomicilio(), MatchMode.ANYWHERE));
             }
             
-            //TODO Ver si es necesario buscar por Tipo de Documento
+            if(contribuyente.getTipoDocumento() != null){
+                conj.add(Restrictions.eq("tipodocumento", contribuyente.getTipoDocumento()));
+            }
             
             crit.add(conj);
             

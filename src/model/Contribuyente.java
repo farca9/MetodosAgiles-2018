@@ -35,7 +35,7 @@ public class Contribuyente {
 
     public Date getFechaNacimiento() {
         return fechaNacimiento;
-    }
+    } 
 
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
