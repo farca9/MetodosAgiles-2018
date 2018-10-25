@@ -9,6 +9,7 @@ import controller.LicenciaController;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
@@ -59,9 +60,9 @@ public class Calcular_vigencia_Test {
     @Before
     public void setUp() throws ParseException {
         //Init fechas nac
-        DateFormat format = new SimpleDateFormat("dd/mm/yyyy", Locale.ENGLISH);
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         
-        String string1 = "01/12/1995";
+        String string1 = "23/10/1996";
         Date date1 = format.parse(string1);
         
         String string2 = "01/11/1995";
@@ -92,11 +93,16 @@ public class Calcular_vigencia_Test {
     public void TestVigencia1() throws ParseException {
         Date resultado = l1.calcularVigencia(t1, ClaseLicenciaEnum.C);
         
-        DateFormat format = new SimpleDateFormat("dd/mm/yyyy", Locale.ENGLISH);
-        String string1 = "01/12/2023";
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String string1 = "23/10/2023";
         Date date1 = format.parse(string1);
-       
-        assertEquals(date1, resultado);
+        
+        date1.setHours(0);
+        date1.setMinutes(0);
+        date1.setSeconds(0);
+        
+        
+        assertEquals(format.format(date1),format.format(resultado));
     }
     
     /*@Test

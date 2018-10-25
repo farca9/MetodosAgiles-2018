@@ -40,11 +40,19 @@ public class LicenciaController {
         
         Date vencimiento = new Date();
         Date actual = new Date();
+        actual.setHours(0);
+        actual.setMinutes(0);
+        actual.setSeconds(0);
+        
+        System.out.println(actual);
+        
         Date nacimiento = t1.getFechaNacimiento();
+        System.out.println(nacimiento);
         
         Calendar c = Calendar.getInstance();
         Calendar c2 = Calendar.getInstance();
         c.setTime(actual);
+        
         c2.setTime(nacimiento); 
         
         int string_nacimiento = Integer.parseInt(formatter.format(t1.getFechaNacimiento()));                            
@@ -55,123 +63,145 @@ public class LicenciaController {
         
         
         if(edad<17){
+            System.out.println("1");
             return actual;
             //menores de 17 no pueden solicitar ninguna licencia
         }else{
-            if( c1==ClaseLicenciaEnum.C || c1==ClaseLicenciaEnum.D || c1==ClaseLicenciaEnum.E && edad<21){
-                return actual;
+            if( (c1==ClaseLicenciaEnum.C || c1==ClaseLicenciaEnum.D || c1==ClaseLicenciaEnum.E) && edad<21){
+                
+                System.out.println("2");return actual;
                 //menores de 21 no pueden solicitar tipo c,d o e
             }
             else{
+                System.out.println("alo");
                 if(edad==18){
+                    System.out.println("3");
                     if(nacimiento.before(actual)){
                         //Cumpleaños todavia no paso
                         //Vigencia 1 año
                         
                         c.add(Calendar.YEAR, 1);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
+                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
                         vencimiento = c.getTime();  
+                        
                         
                         return vencimiento;
                     }else{
                         //cumpleaños ya paso
                         //vencimiento = actual - diferencia + vigencia
                         c.add(Calendar.YEAR, 2);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
+                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
                         vencimiento = c.getTime();  
+                        
                         return vencimiento;
                     }
                 }
                 if (edad>18 && edad<21){
+                    System.out.println("4");
                     if(nacimiento.before(actual)){
                         //Cumpleaños todavia no paso
                         //Vigencia 3 años
                         c.add(Calendar.YEAR, 3);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
+                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
                         vencimiento = c.getTime(); 
+                        
                         return vencimiento;
                         //vencimiento = actual + vigencia + diferencia
                     }else{
                         //cumpleaños ya paso
                         //vencimiento = actual - diferencia + vigencia
                         c.add(Calendar.YEAR, 4);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
+                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
                         vencimiento = c.getTime(); 
+                        
                         return vencimiento;
                     }
                 }
                 if (edad>21 && edad<46){
+                    System.out.println("5");
                     if(nacimiento.before(actual)){
+                        System.out.println("a");
                         //Cumpleaños todavia no paso
                         //Vigencia 5 años
                         c.add(Calendar.YEAR, 5);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
+                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
                         vencimiento = c.getTime(); 
+                        
                         System.out.println(vencimiento);
                         return vencimiento;
                         
                     }else{
+                        System.out.println("b");
                         //cumpleaños ya paso
                         //vencimiento = actual - diferencia + vigencia
                         c.add(Calendar.YEAR, 6);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
+                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
                         vencimiento = c.getTime(); 
-                        System.out.println("despues");
+                      
                         System.out.println(vencimiento);
                         return vencimiento;
                     }
                 }
                 if(edad>45 && edad<60){
+                    System.out.println("6");
                     if(nacimiento.before(actual)){
                         //Cumpleaños todavia no paso
                         //Vigencia 4 años
                         c.add(Calendar.YEAR, 4);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
+                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
                         vencimiento = c.getTime(); 
+                        
                         return vencimiento;
                         //vencimiento = actual + vigencia + diferencia
                     }else{
                         //cumpleaños ya paso
                         //vencimiento = actual - diferencia + vigencia
                         c.add(Calendar.YEAR, 5);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
+                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
                         vencimiento = c.getTime(); 
+                        
                         return vencimiento;
                     }
                 }
                 if(edad>59 && edad<=70){
                     if(nacimiento.before(actual)){
+                        System.out.println("7");
                         //Cumpleaños todavia no paso
                         //Vigencia 3 años
                         c.add(Calendar.YEAR, 3);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
-                        vencimiento = c.getTime(); 
+                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+                        vencimiento = c.getTime();
+                        ;
                         return vencimiento;
                         //vencimiento = actual + vigencia + diferencia
                     }else{
                         //cumpleaños ya paso
                         //vencimiento = actual - diferencia + vigencia
                         c.add(Calendar.YEAR, 4);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
+                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
                         vencimiento = c.getTime(); 
+                        
                         return vencimiento;
                     }
                 }
                 if(edad>70){
+                    System.out.println("8");
                     if(nacimiento.before(actual)){
                         //Cumpleaños todavia no paso
                         //Vigencia 1 año
                         c.add(Calendar.YEAR, 1);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
+                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
                         vencimiento = c.getTime(); 
+                        
                         return vencimiento;
                         //vencimiento = actual + vigencia + diferencia
                     }else{
                         //cumpleaños ya paso
                         //vencimiento = actual - diferencia + vigencia
                         c.add(Calendar.YEAR, 2);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH));
+                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
                         vencimiento = c.getTime(); 
+                        
                         return vencimiento;
                     }
                 }
