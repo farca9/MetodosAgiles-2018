@@ -62,7 +62,7 @@ public class Calcular_vigencia_Test {
         //Init fechas nac
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         
-        String string1 = "23/10/1996";
+        String string1 = "27/10/1968";
         Date date1 = format.parse(string1);
         
         String string2 = "01/11/1995";
@@ -94,7 +94,7 @@ public class Calcular_vigencia_Test {
         Date resultado = l1.calcularVigencia(t1, ClaseLicenciaEnum.C);
         
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        String string1 = "23/10/2023";
+        String string1 = "27/10/2023";
         Date date1 = format.parse(string1);
         
         date1.setHours(0);

@@ -44,14 +44,24 @@ public class LicenciaController {
         actual.setMinutes(0);
         actual.setSeconds(0);
         
-        System.out.println(actual);
+        System.out.println("Actual: " +actual);
+        
+        
         
         Date nacimiento = t1.getFechaNacimiento();
         System.out.println(nacimiento);
         
+        //Date cumpleanios = new Date();
+        //cumpleanios = nacimiento;
+        //cumpleanios.setYear(actual.getYear());
+        
         Calendar c = Calendar.getInstance();
         Calendar c2 = Calendar.getInstance();
         c.setTime(actual);
+        
+        Calendar c3 = Calendar.getInstance();
+        c3.setTime(nacimiento);
+        c3.set(c.get(Calendar.YEAR), c3.get(Calendar.MONTH), c3.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
         
         c2.setTime(nacimiento); 
         
@@ -60,23 +70,26 @@ public class LicenciaController {
         
         int edad = (string_actual - string_nacimiento) / 10000;   
         System.out.println(edad);
+        //c3.add(Calendar.YEAR, edad);
+        System.out.println("c3: "+ c3.getTime());
         
         
         if(edad<17){
-            System.out.println("1");
+            
             return actual;
             //menores de 17 no pueden solicitar ninguna licencia
         }else{
             if( (c1==ClaseLicenciaEnum.C || c1==ClaseLicenciaEnum.D || c1==ClaseLicenciaEnum.E) && edad<21){
                 
-                System.out.println("2");return actual;
+                System.out.println("2");
+                return actual;
                 //menores de 21 no pueden solicitar tipo c,d o e
             }
             else{
-                System.out.println("alo");
+                
                 if(edad==18){
-                    System.out.println("3");
-                    if(nacimiento.before(actual)){
+                    
+                    if(c3.getTime().before(actual)){
                         //Cumpleaños todavia no paso
                         //Vigencia 1 año
                         
@@ -98,7 +111,7 @@ public class LicenciaController {
                 }
                 if (edad>18 && edad<21){
                     System.out.println("4");
-                    if(nacimiento.before(actual)){
+                    if(c3.getTime().before(actual)){
                         //Cumpleaños todavia no paso
                         //Vigencia 3 años
                         c.add(Calendar.YEAR, 3);
@@ -117,9 +130,9 @@ public class LicenciaController {
                         return vencimiento;
                     }
                 }
-                if (edad>21 && edad<46){
+                if (edad>=21 && edad<=46){
                     System.out.println("5");
-                    if(nacimiento.before(actual)){
+                    if(c3.getTime().before(actual)){
                         System.out.println("a");
                         //Cumpleaños todavia no paso
                         //Vigencia 5 años
@@ -142,9 +155,9 @@ public class LicenciaController {
                         return vencimiento;
                     }
                 }
-                if(edad>45 && edad<60){
+                if(edad>46 && edad<=60){
                     System.out.println("6");
-                    if(nacimiento.before(actual)){
+                    if(c3.getTime().before(actual)){
                         //Cumpleaños todavia no paso
                         //Vigencia 4 años
                         c.add(Calendar.YEAR, 4);
@@ -163,8 +176,8 @@ public class LicenciaController {
                         return vencimiento;
                     }
                 }
-                if(edad>59 && edad<=70){
-                    if(nacimiento.before(actual)){
+                if(edad>60 && edad<=70){
+                    if(c3.getTime().before(actual)){
                         System.out.println("7");
                         //Cumpleaños todavia no paso
                         //Vigencia 3 años
@@ -186,7 +199,7 @@ public class LicenciaController {
                 }
                 if(edad>70){
                     System.out.println("8");
-                    if(nacimiento.before(actual)){
+                    if(c3.getTime().before(actual)){
                         //Cumpleaños todavia no paso
                         //Vigencia 1 año
                         c.add(Calendar.YEAR, 1);
