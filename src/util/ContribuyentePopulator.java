@@ -18,36 +18,37 @@ import org.hibernate.Session;
  */
 public class ContribuyentePopulator {
     
-    private static Integer primerDocumento=10000000;
     private static String[] apellidos={"Gonzalez", "Rodriguez", "Lopez", "Gomez", "Huertas", "Diaz", "Martinez", "Perez", "Garcia", "Sanchez", "Romero", "Sosa", "Alvarez", "Torres", "Ruiz", "Ramirez", "Flores", "Acosta", "Benitez", "Medina"};
     private static String[] nombres={"Juan","Matias","Carlos","Ezequiel","Dario","Pedro","Daniel","Marcos","Hector","Rodrigo","Ana","Susana","Erica","Daniela","Marta","Valeria","Patricia","Veronica","Alicia","Irma"};
-    private static Integer nombreCounter=0;
-    private static Integer apellidoCounter=0;
+
     
     public static void populate(Integer cantidad){
-       
             
         try{
             Session sesion = Hibernator.getInstance().getSession();
             sesion.beginTransaction();
             
+            Random r1 = new Random();
+            Random r2 = new Random();
+            Random r3 = new Random();
              
         for(int i=0;i<cantidad;i++){
             
             Contribuyente contribuyente = new Contribuyente();
 
-            apellidoCounter++;
-            contribuyente.setApellido(apellidos[apellidoCounter%apellidos.length]);
+            int i1=r1.nextInt(apellidos.length);
+            contribuyente.setApellido(apellidos[i1]);
             
-            nombreCounter+=3;
-            contribuyente.setNombre(nombres[nombreCounter%nombres.length]);
+            int i2=r2.nextInt(nombres.length);
+            contribuyente.setNombre(nombres[i2]);
             
-            primerDocumento++;
-            contribuyente.setCodigoDocumento(primerDocumento.toString());
+            long l1=r3.nextInt(35000000)+5000000;
+            contribuyente.setCodigoDocumento(Long.toString(l1));
             
-            contribuyente.setDomicilio("Calle Siempreviva "+ 1000+(apellidoCounter%9000));
+            contribuyente.setDomicilio("Calle Siempreviva "+r3.nextInt(10000));
             
-            contribuyente.setTipoDocumento(TipoDocumentoEnum.values()[apellidoCounter%TipoDocumentoEnum.values().length]);     
+            int i3=(r1.nextInt(TipoDocumentoEnum.values().length));
+            contribuyente.setTipoDocumento(TipoDocumentoEnum.values()[i3]);     
             
             sesion.save(contribuyente);
         }
