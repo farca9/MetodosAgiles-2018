@@ -7,6 +7,7 @@ package util;
 
 import dao.ContribuyenteDAO;
 import hibernate.Hibernator;
+import java.util.Date;
 import java.util.Random;
 import model.Contribuyente;
 import model.TipoDocumentoEnum;
@@ -49,6 +50,10 @@ public class ContribuyentePopulator {
             
             int i3=(r1.nextInt(TipoDocumentoEnum.values().length));
             contribuyente.setTipoDocumento(TipoDocumentoEnum.values()[i3]);     
+            
+            Date randomDate = new Date(20+(Math.abs(r1.nextInt())%85),i2%12,i3%31);
+            
+            contribuyente.setFechaNacimiento(randomDate);
             
             sesion.save(contribuyente);
         }

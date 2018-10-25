@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.Date;
 import javax.persistence.*;
 
 /**
@@ -29,6 +30,16 @@ public class Contribuyente {
     private String apellido;
     
     private String domicilio;
+    
+    private Date fechaNacimiento;
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
     
     //Constructores
     public Contribuyente() {}

@@ -608,8 +608,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
-        Date fechaVencimiento = new Date();//TBD
-        fechaVencimiento.setYear(2025); //TBD
+        Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
         costo=50.0;//TBD
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.A);
@@ -642,8 +641,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
-        Date fechaVencimiento = new Date();//TBD
-        fechaVencimiento.setYear(50); //TBD
+        Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
         costo=50.0;//TBD
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.D);
@@ -708,8 +706,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         claseSeleccionada=ClaseLicenciaEnum.B;
         
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
-        Date fechaVencimiento = new Date();//TBD
-        fechaVencimiento.setYear(2025); //TBD
+        Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
         costo=50.0;//TBD
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.B);
@@ -743,8 +740,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         claseSeleccionada=ClaseLicenciaEnum.F;
         
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
-        Date fechaVencimiento = new Date();//TBD
-        fechaVencimiento.setYear(2025); //TBD
+        Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
         costo=50.0;//TBD
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.F);
@@ -777,8 +773,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         claseSeleccionada=ClaseLicenciaEnum.G;
         
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
-        Date fechaVencimiento = new Date();//TBD
-        fechaVencimiento.setYear(2025); //TBD
+        Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
         costo=50.0;//TBD
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.G);
@@ -812,8 +807,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         claseSeleccionada=ClaseLicenciaEnum.C;
         
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
-        Date fechaVencimiento = new Date();//TBD
-        fechaVencimiento.setYear(50); //TBD
+        Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
         costo=50.0;//TBD
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.C);
@@ -856,8 +850,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         claseSeleccionada=ClaseLicenciaEnum.E;
         
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
-        Date fechaVencimiento = new Date();//TBD
-        fechaVencimiento.setYear(50); //TBD
+        Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
         costo=50.0;//TBD
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.E);
