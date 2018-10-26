@@ -60,30 +60,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         txtAreaClaseLicencia.setBackground(Color.LIGHT_GRAY);
-        
-        btnAplicarFiltro.setEnabled(false);
-        
-        txtFiltro.setDocument(new LengthRestrictedDocument(60));
-        txtFiltro.setEnabled(false);
-        
-        radioGroup.add(radioA);
-        radioGroup.add(radioB);
-        radioGroup.add(radioC);
-        radioGroup.add(radioD);
-        radioGroup.add(radioE);
-        radioGroup.add(radioF);
-        radioGroup.add(radioG);
-        
-        radioA.setEnabled(false);
-        radioB.setEnabled(false);
-        radioC.setEnabled(false);
-        radioD.setEnabled(false);
-        radioE.setEnabled(false);
-        radioF.setEnabled(false);
-        radioG.setEnabled(false);
-                
-        btnEmitirLicencia.setEnabled(false);
-        
+                               
         tableTitulares.setRowSelectionAllowed(true);
         tableTitulares.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableTitulares.getTableHeader().setReorderingAllowed(false);
@@ -93,8 +70,13 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
             
             if(tableTitulares.getSelectedRow() == -1) return;
             
-            btnEmitirLicencia.setEnabled(false);
+            //btnEmitirLicencia.setEnabled(false);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            
+            txtFiltro.setText("");
+            txtFiltro.setEnabled(false);
+            btnAplicarFiltro.setEnabled(false);
+            btnLimpiarFiltro.setEnabled(true);
             
             radioA.setEnabled(true);
             radioB.setEnabled(true);
@@ -138,8 +120,8 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
 
         radioGroup = new javax.swing.ButtonGroup();
         lblSantaFe = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        pnlTitulo = new javax.swing.JPanel();
+        lblSubtitulo = new javax.swing.JLabel();
         lblEmitirLicencia = new javax.swing.JLabel();
         pnlTitulares = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -150,16 +132,19 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         btnFiltroDocumento = new javax.swing.JButton();
         btnAplicarFiltro = new javax.swing.JButton();
         btnLimpiarFiltro = new javax.swing.JButton();
+        lblBuscarPor = new javax.swing.JLabel();
         pnlClaseLicencia = new javax.swing.JPanel();
-        radioA = new javax.swing.JRadioButton();
-        radioB = new javax.swing.JRadioButton();
-        radioC = new javax.swing.JRadioButton();
-        radioD = new javax.swing.JRadioButton();
-        radioE = new javax.swing.JRadioButton();
-        radioF = new javax.swing.JRadioButton();
-        radioG = new javax.swing.JRadioButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtAreaClaseLicencia = new javax.swing.JTextArea();
+        pnlClases = new javax.swing.JPanel();
+        radioE = new javax.swing.JRadioButton();
+        radioG = new javax.swing.JRadioButton();
+        radioB = new javax.swing.JRadioButton();
+        radioF = new javax.swing.JRadioButton();
+        radioA = new javax.swing.JRadioButton();
+        radioC = new javax.swing.JRadioButton();
+        radioD = new javax.swing.JRadioButton();
+        lblDescripcionClase = new javax.swing.JLabel();
         btnEmitirLicencia = new javax.swing.JButton();
         pnlDatosTitular = new javax.swing.JPanel();
         labelNombre = new javax.swing.JLabel();
@@ -182,37 +167,35 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         lblSantaFe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/drawable/banner-santafe.png"))); // NOI18N
         lblSantaFe.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel1.setText("Seleccione el titular y el tipo de licencia a emitir");
+        lblSubtitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSubtitulo.setText("A continuación, seleccione el titular y el tipo de licencia que desea emitir.");
 
-        lblEmitirLicencia.setFont(lblEmitirLicencia.getFont().deriveFont(lblEmitirLicencia.getFont().getSize()+6f));
+        lblEmitirLicencia.setFont(lblEmitirLicencia.getFont().deriveFont(lblEmitirLicencia.getFont().getSize()+13f));
         lblEmitirLicencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEmitirLicencia.setText("EMITIR UNA LICENCIA");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(328, 328, 328)
-                        .addComponent(lblEmitirLicencia))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(296, 296, 296)
-                        .addComponent(jLabel1)))
-                .addGap(344, 344, 344))
+        javax.swing.GroupLayout pnlTituloLayout = new javax.swing.GroupLayout(pnlTitulo);
+        pnlTitulo.setLayout(pnlTituloLayout);
+        pnlTituloLayout.setHorizontalGroup(
+            pnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSubtitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEmitirLicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        pnlTituloLayout.setVerticalGroup(
+            pnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTituloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblEmitirLicencia)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(lblSubtitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlTitulares.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione el titular", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
+        pnlTitulares.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione el Titular", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
 
         tableTitulares.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -240,6 +223,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableTitulares);
 
         txtFiltro.setFont(txtFiltro.getFont().deriveFont(txtFiltro.getFont().getSize()+4f));
+        txtFiltro.setEnabled(false);
 
         btnFiltroNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/filter_mini.png"))); // NOI18N
         btnFiltroNombre.setText("Nombre");
@@ -269,6 +253,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         });
 
         btnAplicarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/search_mini.png"))); // NOI18N
+        btnAplicarFiltro.setEnabled(false);
         btnAplicarFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAplicarFiltroActionPerformed(evt);
@@ -276,175 +261,231 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         });
 
         btnLimpiarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/cancel_mini.png"))); // NOI18N
+        btnLimpiarFiltro.setEnabled(false);
         btnLimpiarFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarFiltroActionPerformed(evt);
             }
         });
 
+        lblBuscarPor.setForeground(java.awt.Color.gray);
+        lblBuscarPor.setText("Buscar por...");
+
         javax.swing.GroupLayout pnlTitularesLayout = new javax.swing.GroupLayout(pnlTitulares);
         pnlTitulares.setLayout(pnlTitularesLayout);
         pnlTitularesLayout.setHorizontalGroup(
             pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTitularesLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTitularesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(pnlTitularesLayout.createSequentialGroup()
-                        .addComponent(btnFiltroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFiltroApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFiltroDocumento)
-                        .addGap(0, 48, Short.MAX_VALUE))
-                    .addGroup(pnlTitularesLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlTitularesLayout.createSequentialGroup()
                         .addComponent(txtFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAplicarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlTitularesLayout.createSequentialGroup()
+                        .addComponent(btnFiltroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFiltroApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFiltroDocumento))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlTitularesLayout.createSequentialGroup()
+                        .addComponent(lblBuscarPor)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlTitularesLayout.setVerticalGroup(
             pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTitularesLayout.createSequentialGroup()
+                .addComponent(lblBuscarPor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFiltroDocumento)
                     .addComponent(btnFiltroNombre)
-                    .addComponent(btnFiltroApellido)
-                    .addComponent(btnFiltroDocumento))
+                    .addComponent(btnFiltroApellido))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAplicarFiltro)
                     .addComponent(btnLimpiarFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        pnlClaseLicencia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione la clase de licencia", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
+        pnlClaseLicencia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione la Clase", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
 
-        radioA.setText("A");
-        radioA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioAActionPerformed(evt);
-            }
-        });
+        txtAreaClaseLicencia.setEditable(false);
+        txtAreaClaseLicencia.setColumns(20);
+        txtAreaClaseLicencia.setFont(txtAreaClaseLicencia.getFont().deriveFont(txtAreaClaseLicencia.getFont().getStyle() | java.awt.Font.BOLD, txtAreaClaseLicencia.getFont().getSize()+2));
+        txtAreaClaseLicencia.setRows(3);
+        jScrollPane3.setViewportView(txtAreaClaseLicencia);
 
-        radioB.setText("B");
-        radioB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioBActionPerformed(evt);
-            }
-        });
-
-        radioC.setText("C");
-        radioC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioCActionPerformed(evt);
-            }
-        });
-
-        radioD.setText("D");
-        radioD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioDActionPerformed(evt);
-            }
-        });
-
+        radioE.setFont(radioE.getFont().deriveFont(radioE.getFont().getSize()+8f));
+        radioE.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.darcula.selection.color2"));
         radioE.setText("E");
+        radioE.setEnabled(false);
         radioE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioEActionPerformed(evt);
             }
         });
 
-        radioF.setText("F");
-        radioF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioFActionPerformed(evt);
-            }
-        });
-
+        radioG.setFont(radioG.getFont().deriveFont(radioG.getFont().getSize()+8f));
+        radioG.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.darcula.selection.color2"));
         radioG.setText("G");
+        radioG.setEnabled(false);
         radioG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioGActionPerformed(evt);
             }
         });
 
-        txtAreaClaseLicencia.setEditable(false);
-        txtAreaClaseLicencia.setColumns(20);
-        txtAreaClaseLicencia.setRows(5);
-        jScrollPane3.setViewportView(txtAreaClaseLicencia);
+        radioB.setFont(radioB.getFont().deriveFont(radioB.getFont().getSize()+8f));
+        radioB.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.darcula.selection.color2"));
+        radioB.setText("B");
+        radioB.setEnabled(false);
+        radioB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBActionPerformed(evt);
+            }
+        });
+
+        radioF.setFont(radioF.getFont().deriveFont(radioF.getFont().getSize()+8f));
+        radioF.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.darcula.selection.color2"));
+        radioF.setText("F");
+        radioF.setEnabled(false);
+        radioF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioFActionPerformed(evt);
+            }
+        });
+
+        radioA.setFont(radioA.getFont().deriveFont(radioA.getFont().getSize()+8f));
+        radioA.setForeground(new java.awt.Color(35, 48, 69));
+        radioA.setText("A");
+        radioA.setEnabled(false);
+        radioA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioAActionPerformed(evt);
+            }
+        });
+
+        radioC.setFont(radioC.getFont().deriveFont(radioC.getFont().getSize()+8f));
+        radioC.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.darcula.selection.color2"));
+        radioC.setText("C");
+        radioC.setEnabled(false);
+        radioC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioCActionPerformed(evt);
+            }
+        });
+
+        radioD.setFont(radioD.getFont().deriveFont(radioD.getFont().getSize()+8f));
+        radioD.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.darcula.selection.color2"));
+        radioD.setText("D");
+        radioD.setEnabled(false);
+        radioD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioDActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlClasesLayout = new javax.swing.GroupLayout(pnlClases);
+        pnlClases.setLayout(pnlClasesLayout);
+        pnlClasesLayout.setHorizontalGroup(
+            pnlClasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlClasesLayout.createSequentialGroup()
+                .addComponent(radioA)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radioB, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radioC, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radioD, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radioE, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radioF, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radioG)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        pnlClasesLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {radioA, radioB, radioC, radioD, radioE, radioF, radioG});
+
+        pnlClasesLayout.setVerticalGroup(
+            pnlClasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlClasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(radioA)
+                .addComponent(radioB)
+                .addComponent(radioC)
+                .addComponent(radioD)
+                .addComponent(radioE)
+                .addComponent(radioF)
+                .addComponent(radioG))
+        );
+
+        lblDescripcionClase.setFont(lblDescripcionClase.getFont().deriveFont(lblDescripcionClase.getFont().getStyle() & ~java.awt.Font.BOLD, lblDescripcionClase.getFont().getSize()-1));
+        lblDescripcionClase.setForeground(java.awt.Color.gray);
+        lblDescripcionClase.setPreferredSize(new java.awt.Dimension(63, 16));
 
         javax.swing.GroupLayout pnlClaseLicenciaLayout = new javax.swing.GroupLayout(pnlClaseLicencia);
         pnlClaseLicencia.setLayout(pnlClaseLicenciaLayout);
         pnlClaseLicenciaLayout.setHorizontalGroup(
             pnlClaseLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlClaseLicenciaLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(pnlClaseLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(radioB)
-                    .addComponent(radioA)
-                    .addComponent(radioC))
-                .addGap(74, 74, 74)
-                .addGroup(pnlClaseLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(radioF)
-                    .addComponent(radioE)
-                    .addGroup(pnlClaseLicenciaLayout.createSequentialGroup()
-                        .addComponent(radioD)
-                        .addGap(74, 74, 74)
-                        .addComponent(radioG)))
-                .addContainerGap(78, Short.MAX_VALUE))
-            .addGroup(pnlClaseLicenciaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3)
+                .addGroup(pnlClaseLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDescripcionClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
+                    .addComponent(pnlClases, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlClaseLicenciaLayout.setVerticalGroup(
             pnlClaseLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlClaseLicenciaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlClaseLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioA)
-                    .addComponent(radioD)
-                    .addComponent(radioG))
+                .addComponent(pnlClases, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlClaseLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioB)
-                    .addComponent(radioE))
+                .addComponent(lblDescripcionClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlClaseLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioC)
-                    .addComponent(radioF))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
+        btnEmitirLicencia.setFont(btnEmitirLicencia.getFont().deriveFont(btnEmitirLicencia.getFont().getSize()+2f));
         btnEmitirLicencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/save.png"))); // NOI18N
         btnEmitirLicencia.setText("Emitir Licencia");
+        btnEmitirLicencia.setEnabled(false);
         btnEmitirLicencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEmitirLicenciaActionPerformed(evt);
             }
         });
 
-        pnlDatosTitular.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del titular", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
+        pnlDatosTitular.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Titular", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
 
+        labelNombre.setFont(labelNombre.getFont().deriveFont(labelNombre.getFont().getStyle() & ~java.awt.Font.BOLD, labelNombre.getFont().getSize()+2));
         labelNombre.setText(" ");
 
+        labelApellido.setFont(labelApellido.getFont().deriveFont(labelApellido.getFont().getStyle() & ~java.awt.Font.BOLD, labelApellido.getFont().getSize()+2));
         labelApellido.setText(" ");
 
+        labelTipoNroDocumento.setFont(labelTipoNroDocumento.getFont().deriveFont(labelTipoNroDocumento.getFont().getStyle() & ~java.awt.Font.BOLD, labelTipoNroDocumento.getFont().getSize()+2));
         labelTipoNroDocumento.setText(" ");
 
+        labelDomicilio.setFont(labelDomicilio.getFont().deriveFont(labelDomicilio.getFont().getStyle() & ~java.awt.Font.BOLD, labelDomicilio.getFont().getSize()+2));
         labelDomicilio.setText(" ");
 
+        labelFechaNacimiento.setFont(labelFechaNacimiento.getFont().deriveFont(labelFechaNacimiento.getFont().getStyle() & ~java.awt.Font.BOLD, labelFechaNacimiento.getFont().getSize()+2));
         labelFechaNacimiento.setText(" ");
 
+        labelGrupoFactorSanguineo.setFont(labelGrupoFactorSanguineo.getFont().deriveFont(labelGrupoFactorSanguineo.getFont().getStyle() & ~java.awt.Font.BOLD, labelGrupoFactorSanguineo.getFont().getSize()+2));
         labelGrupoFactorSanguineo.setText(" ");
 
+        labelDonanteOrganos.setFont(labelDonanteOrganos.getFont().deriveFont(labelDonanteOrganos.getFont().getStyle() & ~java.awt.Font.BOLD, labelDonanteOrganos.getFont().getSize()+2));
         labelDonanteOrganos.setText(" ");
 
         javax.swing.GroupLayout pnlDatosTitularLayout = new javax.swing.GroupLayout(pnlDatosTitular);
@@ -460,7 +501,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
                     .addComponent(labelDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labelFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labelGrupoFactorSanguineo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelDonanteOrganos, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE))
+                    .addComponent(labelDonanteOrganos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlDatosTitularLayout.setVerticalGroup(
@@ -479,7 +520,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
                 .addComponent(labelGrupoFactorSanguineo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelDonanteOrganos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pnlObservaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Observaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
@@ -494,16 +535,18 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
             pnlObservacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlObservacionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlObservacionesLayout.setVerticalGroup(
             pnlObservacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlObservacionesLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane2)
                 .addContainerGap())
         );
 
+        btnCancelar.setFont(btnCancelar.getFont().deriveFont(btnCancelar.getFont().getSize()+2f));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/cancel.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -517,52 +560,50 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnlDatosTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlObservaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnEmitirLicencia)
-                        .addGap(210, 210, 210)
-                        .addComponent(btnCancelar))
+                    .addComponent(lblSantaFe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(pnlTitulares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(pnlClaseLicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(pnlTitulares, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pnlClaseLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(pnlDatosTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(pnlObservaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(127, 127, 127)
-                                .addComponent(lblSantaFe))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 871, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(btnEmitirLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 6, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblSantaFe, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlTitulares, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlDatosTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlObservaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlClaseLicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelar)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblSantaFe, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pnlClaseLicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnlTitulares, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pnlDatosTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnlObservaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEmitirLicencia)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnEmitirLicencia)
+                        .addContainerGap())))
         );
 
         pack();
@@ -593,14 +634,48 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFiltroDocumentoActionPerformed
 
     private void btnLimpiarFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarFiltroActionPerformed
-        btnFiltroNombre.setEnabled(true);
-        btnFiltroApellido.setEnabled(true);
-        btnFiltroDocumento.setEnabled(true);
-        txtFiltro.setText("");
-        txtFiltro.setEnabled(false);
-        btnAplicarFiltro.setEnabled(false);
-        btnLimpiarFiltro.setEnabled(false);
-
+            btnFiltroNombre.setEnabled(true);
+            btnFiltroApellido.setEnabled(true);
+            btnFiltroDocumento.setEnabled(true);
+            
+            txtFiltro.setText("");
+            txtFiltro.setEnabled(false);
+            btnAplicarFiltro.setEnabled(false);
+            btnLimpiarFiltro.setEnabled(false);
+            
+            DefaultTableModel model = (DefaultTableModel)tableTitulares.getModel();
+            model.setRowCount(0);
+            
+            btnEmitirLicencia.setEnabled(false);
+            
+            labelNombre.setText("");
+            labelApellido.setText("");
+            labelTipoNroDocumento.setText("");
+            labelDomicilio.setText("");
+            labelFechaNacimiento.setText("");
+            labelGrupoFactorSanguineo.setText("");
+            labelDonanteOrganos.setText("");
+            
+            txtAreaClaseLicencia.setText("");
+            txtAreaObservaciones.setText("");
+            
+            radioA.setEnabled(false);
+            radioB.setEnabled(false);
+            radioC.setEnabled(false);
+            radioD.setEnabled(false);
+            radioE.setEnabled(false);
+            radioF.setEnabled(false);
+            radioG.setEnabled(false);
+            radioA.setSelected(false);
+            radioB.setSelected(false);
+            radioC.setSelected(false);
+            radioD.setSelected(false);
+            radioE.setSelected(false);
+            radioF.setSelected(false);
+            radioG.setSelected(false);
+            
+            lblDescripcionClase.setText("");
+            
     }//GEN-LAST:event_btnLimpiarFiltroActionPerformed
 
     
@@ -609,11 +684,11 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         
         if(LicenciaController.getInstance().crearLicencia(titulares.get(tableTitulares.getSelectedRow()), claseSeleccionada , txtAreaObservaciones.getText())){
             
-            JOptionPane.showMessageDialog(null, "Se ha emitido la licencia con éxito", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "La licencia ha sido emitida con éxito.", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
             
         }else{
             
-            JOptionPane.showMessageDialog(null, "No se pudo emitir la licencia", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se ha podido emitir la licencia.", "Error", JOptionPane.ERROR_MESSAGE);
             
         }
         
@@ -625,8 +700,15 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     private void radioAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAActionPerformed
         claseSeleccionada=ClaseLicenciaEnum.A;
         
-        Titular titular = titulares.get(tableTitulares.getSelectedRow());
+        radioB.setSelected(false);
+        radioC.setSelected(false);
+        radioD.setSelected(false);
+        radioE.setSelected(false);
+        radioF.setSelected(false);
+        radioG.setSelected(false);
         
+        Titular titular = titulares.get(tableTitulares.getSelectedRow());
+        lblDescripcionClase.setText("Ciclomotores, motocicletas y triciclos motorizados.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
@@ -641,12 +723,12 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else if (edad<17) {
-            mensaje+="La edad mínima es de 17 años\n";
+            mensaje+="La edad mínima es de 17 años.\n";
             btnEmitirLicencia.setEnabled(false);
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else{
-            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            mensaje+="La licencia puede ser emitida.\nCosto: $"+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
             btnEmitirLicencia.setEnabled(true);
             txtAreaClaseLicencia.setForeground(new Color(0,153,0));
         }
@@ -658,8 +740,15 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     private void radioDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioDActionPerformed
         claseSeleccionada=ClaseLicenciaEnum.D;
         
-        Titular titular = titulares.get(tableTitulares.getSelectedRow());
+        radioB.setSelected(false);
+        radioC.setSelected(false);
+        radioA.setSelected(false);
+        radioE.setSelected(false);
+        radioF.setSelected(false);
+        radioG.setSelected(false);
         
+        Titular titular = titulares.get(tableTitulares.getSelectedRow());
+        lblDescripcionClase.setText("Servicio de transporte de pasajeros, emergencias, o seguridad, más clases B o C.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
@@ -675,20 +764,20 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else if (edad<21) {
-            mensaje+="La edad mínima es de 21 años\n";
+            mensaje+="La edad mínima es de 21 años.\n";
             btnEmitirLicencia.setEnabled(false);
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         } else if (edad>65){
-            mensaje+="No puede emitirse por primera vez a mayores de 65 años\n";
+            mensaje+="No puede emitirse por primera vez a mayores de 65 años.\n";
             btnEmitirLicencia.setEnabled(false);
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         } else if (!tieneBValida){
-            mensaje+="Debe tener licencia Clase B por al menos un año\n";
+            mensaje+="Debe tener licencia Clase B por al menos un año.\n";
             btnEmitirLicencia.setEnabled(false);
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else{
-            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            mensaje+="La licencia puede ser emitida.\nCosto: $"+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
             btnEmitirLicencia.setEnabled(true);
             txtAreaClaseLicencia.setForeground(new Color(0,153,0));
         }
@@ -723,8 +812,15 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     private void radioBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBActionPerformed
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
-        claseSeleccionada=ClaseLicenciaEnum.B;
+        radioA.setSelected(false);
+        radioC.setSelected(false);
+        radioD.setSelected(false);
+        radioE.setSelected(false);
+        radioF.setSelected(false);
+        radioG.setSelected(false);
         
+        claseSeleccionada=ClaseLicenciaEnum.B;
+        lblDescripcionClase.setText("Automóviles y camionetas con acoplado.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
@@ -739,12 +835,12 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else if (edad<17) {
-            mensaje+="La edad mínima es de 17 años\n";
+            mensaje+="La edad mínima es de 17 años.\n";
             btnEmitirLicencia.setEnabled(false);
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else{
-            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            mensaje+="La licencia puede ser emitida.\nCosto: $"+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
             btnEmitirLicencia.setEnabled(true);
             txtAreaClaseLicencia.setForeground(new Color(0,153,0));
         }
@@ -754,11 +850,17 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_radioBActionPerformed
 
     private void radioFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFActionPerformed
-        // TODO add your handling code here:
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
-        claseSeleccionada=ClaseLicenciaEnum.F;
+        radioB.setSelected(false);
+        radioC.setSelected(false);
+        radioD.setSelected(false);
+        radioE.setSelected(false);
+        radioA.setSelected(false);
+        radioG.setSelected(false);
         
+        claseSeleccionada=ClaseLicenciaEnum.F;
+        lblDescripcionClase.setText("Automotores adaptados especialmente para discapacitados.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
@@ -773,12 +875,12 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else if (edad<17) {
-            mensaje+="La edad mínima es de 17 años\n";
+            mensaje+="La edad mínima es de 17 años.\n";
             btnEmitirLicencia.setEnabled(false);
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else{
-            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            mensaje+="La licencia puede ser emitida.\nCosto: $"+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
             btnEmitirLicencia.setEnabled(true);
             txtAreaClaseLicencia.setForeground(new Color(0,153,0));
         }
@@ -790,8 +892,15 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     private void radioGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioGActionPerformed
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
-        claseSeleccionada=ClaseLicenciaEnum.G;
+        radioB.setSelected(false);
+        radioC.setSelected(false);
+        radioD.setSelected(false);
+        radioE.setSelected(false);
+        radioF.setSelected(false);
+        radioA.setSelected(false);
         
+        claseSeleccionada=ClaseLicenciaEnum.G;
+        lblDescripcionClase.setText("Tractores agrícolas y maquinaria especial agrícola.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
@@ -806,12 +915,12 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else if (edad<17) {
-            mensaje+="La edad mínima es de 17 años\n";
+            mensaje+="La edad mínima es de 17 años.\n";
             btnEmitirLicencia.setEnabled(false);
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else{
-            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            mensaje+="La licencia puede ser emitida.\nCosto: $"+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
             btnEmitirLicencia.setEnabled(true);
             txtAreaClaseLicencia.setForeground(new Color(0,153,0));
         }
@@ -821,11 +930,17 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_radioGActionPerformed
 
     private void radioCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioCActionPerformed
-        // TODO add your handling code here:
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
-        claseSeleccionada=ClaseLicenciaEnum.C;
+        radioB.setSelected(false);
+        radioA.setSelected(false);
+        radioD.setSelected(false);
+        radioE.setSelected(false);
+        radioF.setSelected(false);
+        radioG.setSelected(false);
         
+        claseSeleccionada=ClaseLicenciaEnum.C;
+        lblDescripcionClase.setText("Camiones sin acoplado y los comprendidos en clase B.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
@@ -841,20 +956,20 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else if (edad<21) {
-            mensaje+="La edad mínima es de 21 años\n";
+            mensaje+="La edad mínima es de 21 años.\n";
             btnEmitirLicencia.setEnabled(false);
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         } else if (edad>65){
-            mensaje+="No puede emitirse por primera vez a mayores de 65 años\n";
+            mensaje+="No puede emitirse por primera vez a mayores de 65 años.\n";
             btnEmitirLicencia.setEnabled(false);
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         } else if (!tieneBValida){
-            mensaje+="Debe tener licencia Clase B por al menos un año\n";
+            mensaje+="Debe tener licencia Clase B por al menos un año.\n";
             btnEmitirLicencia.setEnabled(false);
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else{
-            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            mensaje+="La licencia puede ser emitida.\nCosto: $"+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
             btnEmitirLicencia.setEnabled(true);
             txtAreaClaseLicencia.setForeground(new Color(0,153,0));
         }
@@ -864,11 +979,17 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_radioCActionPerformed
 
     private void radioEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioEActionPerformed
-        // TODO add your handling code here:
         Titular titular = titulares.get(tableTitulares.getSelectedRow());
         
-        claseSeleccionada=ClaseLicenciaEnum.E;
+        radioB.setSelected(false);
+        radioC.setSelected(false);
+        radioD.setSelected(false);
+        radioA.setSelected(false);
+        radioF.setSelected(false);
+        radioG.setSelected(false);
         
+        claseSeleccionada=ClaseLicenciaEnum.E;
+        lblDescripcionClase.setText("Camiones articulados o con acoplado, maquinaria especial no agrícola y clases B y C.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
         Double costo;//TBD
@@ -884,20 +1005,20 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else if (edad<21) {
-            mensaje+="La edad mínima es de 21 años\n";
+            mensaje+="La edad mínima es de 21 años.\n";
             btnEmitirLicencia.setEnabled(false);
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         } else if (edad>65){
-            mensaje+="No puede emitirse por primera vez a mayores de 65 años\n";
+            mensaje+="No puede emitirse por primera vez a mayores de 65 años.\n";
             btnEmitirLicencia.setEnabled(false);
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         } else if (!tieneBValida){
-            mensaje+="Debe tener licencia Clase B por al menos un año\n";
+            mensaje+="Debe tener licencia Clase B por al menos un año.\n";
             btnEmitirLicencia.setEnabled(false);
             txtAreaClaseLicencia.setForeground(new Color(153,0,0));
         }
         else{
-            mensaje+="La licencia puede emitirse\nCosto: "+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
+            mensaje+="La licencia puede ser emitida.\nCosto: $"+costo.toString()+"\nFecha de Vencimiento: "+sdf.format(fechaVencimiento);
             btnEmitirLicencia.setEnabled(true);
             txtAreaClaseLicencia.setForeground(new Color(0,153,0));
         }
@@ -907,8 +1028,11 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_radioEActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        new UserMenu().setVisible(true);
-        this.dispose();
+        Integer respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea cancelar el registro? Se perderán los datos no guardados y volverá al Menu.", "Cancelar",  JOptionPane.YES_NO_OPTION);
+        if (respuesta == JOptionPane.YES_OPTION) {
+                new UserMenu().setVisible(true);
+                this.dispose();
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
@@ -954,8 +1078,6 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     private javax.swing.JButton btnFiltroDocumento;
     private javax.swing.JButton btnFiltroNombre;
     private javax.swing.JButton btnLimpiarFiltro;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -966,12 +1088,17 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
     private javax.swing.JLabel labelGrupoFactorSanguineo;
     private javax.swing.JLabel labelNombre;
     private javax.swing.JLabel labelTipoNroDocumento;
+    private javax.swing.JLabel lblBuscarPor;
+    private javax.swing.JLabel lblDescripcionClase;
     private javax.swing.JLabel lblEmitirLicencia;
     private javax.swing.JLabel lblSantaFe;
+    private javax.swing.JLabel lblSubtitulo;
     private javax.swing.JPanel pnlClaseLicencia;
+    private javax.swing.JPanel pnlClases;
     private javax.swing.JPanel pnlDatosTitular;
     private javax.swing.JPanel pnlObservaciones;
     private javax.swing.JPanel pnlTitulares;
+    private javax.swing.JPanel pnlTitulo;
     private javax.swing.JRadioButton radioA;
     private javax.swing.JRadioButton radioB;
     private javax.swing.JRadioButton radioC;

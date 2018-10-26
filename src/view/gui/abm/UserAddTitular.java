@@ -288,6 +288,7 @@ public class UserAddTitular extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnGuardar.setFont(btnGuardar.getFont().deriveFont(btnGuardar.getFont().getSize()+2f));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/save.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setToolTipText("Guarde los datos del titular actual");
@@ -298,10 +299,10 @@ public class UserAddTitular extends javax.swing.JFrame {
             }
         });
 
+        btnCancelar.setFont(btnCancelar.getFont().deriveFont(btnCancelar.getFont().getSize()+2f));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/cancel.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setToolTipText("Cancele los datos actuales");
-        btnCancelar.setEnabled(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -395,7 +396,6 @@ public class UserAddTitular extends javax.swing.JFrame {
             model.setRowCount(0);
             
             btnGuardar.setEnabled(false);
-            btnCancelar.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarFiltroActionPerformed
 
     private void btnFiltroApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroApellidoActionPerformed
