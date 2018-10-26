@@ -10,5 +10,8 @@ package model;
  * @author Facundo
  */
 public enum TipoDocumentoEnum {
-    
+    DU, /*Documento Unico*/
+    LC, /*Libreta Civica*/
+    LE, /*Libreta de Enrolamiento*/
+    PP; /*Pasaporte*/
 }
