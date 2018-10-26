@@ -6,6 +6,8 @@
 package main;
 
 import hibernate.Hibernator;
+import java.awt.Font;
+import javax.swing.UIManager;
 import util.ContribuyentePopulator;
 import view.gui.login.MainMenu;
 
@@ -26,8 +28,19 @@ public class main {
      
         ContribuyentePopulator.populate(500);// -> Puebla la tabla de contribuyentes con datos aleatorios
         
+        setUIFont(new javax.swing.plaf.FontUIResource("Segoe UI",Font.PLAIN,15));
         new MainMenu().setVisible(true);
         
     }
+    
+    private static void setUIFont (javax.swing.plaf.FontUIResource f){
+    java.util.Enumeration keys = UIManager.getDefaults().keys();
+    while (keys.hasMoreElements()) {
+      Object key = keys.nextElement();
+      Object value = UIManager.get (key);
+      if (value instanceof javax.swing.plaf.FontUIResource)
+        UIManager.put (key, f);
+      }
+    } 
     
 }
