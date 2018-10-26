@@ -154,5 +154,19 @@ public class Titular {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+    
+    public boolean haveLicencia(ClaseLicenciaEnum clase){
+        
+        Boolean result = false;
+        
+        
+        for(Licencia l : licencias){
+            if (l.getClaseLicenciaEnum() == clase){
+                result = true;
+            }
+        }        
+        
+        return result;
+    }
 
 }
