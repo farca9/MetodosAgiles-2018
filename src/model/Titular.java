@@ -53,7 +53,7 @@ public class Titular {
     //Constructores
     public Titular() {}
     
-    public Titular(String codigoDocumento, TipoDocumentoEnum tipoDocumento, String nombre, String apellido, String domicilio, GrupoSanguineoEnum grupoSanguineo, boolean factor, boolean donanteOrganos, Date fechaNacimiento, boolean contribuyente) {
+    public Titular(String codigoDocumento, TipoDocumentoEnum tipoDocumento, String nombre, String apellido, String domicilio, GrupoSanguineoEnum grupoSanguineo, boolean factor, boolean donanteOrganos, Date fechaNacimient) {
         this.codigoDocumento = codigoDocumento;
         this.tipoDocumento = tipoDocumento;
         this.nombre = nombre;

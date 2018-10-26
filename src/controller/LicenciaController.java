@@ -251,6 +251,7 @@ public class LicenciaController {
     public boolean tieneBValida(Titular titular){
         boolean tieneBValida=false;
         
+        if(titular.getLicencias().isEmpty()) return false;
         for(Licencia licencia : titular.getLicencias()){
             
             if(licencia.getClaseLicenciaEnum()==ClaseLicenciaEnum.B && this.calcularEdad(licencia.getFechaEmision())>=1){
@@ -266,6 +267,7 @@ public class LicenciaController {
     public boolean yaEmitida(Titular titular, ClaseLicenciaEnum target){
         boolean yaEmitida = false;
         
+        if(titular.getLicencias().isEmpty()) return false;
         for(Licencia licencia : titular.getLicencias()){
             if(licencia.getClaseLicenciaEnum()==target){
                 yaEmitida = true;

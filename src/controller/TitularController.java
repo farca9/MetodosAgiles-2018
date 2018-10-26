@@ -51,7 +51,7 @@ public class TitularController {
         titular.setGrupoSanguineo(grupoSanguineo);
         titular.setFactor(factor);
         titular.setDonanteOrganos(donante);
-        titular.setLicencias(null);
+        titular.setLicencias(new ArrayList());
         
         return TitularDAO.getInstance().insert(titular);
     }
