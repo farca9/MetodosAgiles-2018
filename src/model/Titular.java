@@ -63,7 +63,7 @@ public class Titular {
         this.factor = factor;
         this.donanteOrganos = donanteOrganos;
         this.licencias = new ArrayList();
-        this.fechaNacimiento = fechaNacimiento;
+        this.fechaNacimiento = fechaNacimient;
     }
 
     //Metodos    
