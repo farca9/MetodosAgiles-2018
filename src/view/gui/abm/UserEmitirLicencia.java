@@ -10,6 +10,7 @@ import controller.TitularController;
 import dao.TitularDAO;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -46,12 +48,15 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
      * Creates new form UserEmitirLicencia
      */
     public UserEmitirLicencia() {
+        //Inicializacion de la ventana
+        ImageIcon logo = new ImageIcon("src/res/drawable/sfc_logo.jpg");
+        Image icon = logo.getImage();
+        this.setIconImage(icon);
         initComponents();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth()/2;
         double height = screenSize.getHeight()/2;
         this.setLocation((int)width-this.getWidth()/2,(int)height-this.getHeight()/2);
-        
         this.setLocationRelativeTo(null);
         
         txtAreaClaseLicencia.setBackground(Color.LIGHT_GRAY);
@@ -169,6 +174,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         txtAreaObservaciones = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("GLC - SFC");
         setResizable(false);
 
         lblSantaFe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

@@ -8,10 +8,10 @@ package view.gui.abm;
 import controller.ContribuyenteController;
 import controller.TitularController;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -29,39 +29,44 @@ import view.gui.menus.UserMenu;
 public class UserAddTitular extends javax.swing.JFrame {
 
     private List<Contribuyente> contribuyentes;
-    private SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
     
     /**
      * Creates new form userAddTitular
      */
     public UserAddTitular() {
         //Inicializacion de la ventana
+        ImageIcon logo = new ImageIcon("src/res/drawable/sfc_logo.jpg");
+        Image icon = logo.getImage();
+        this.setIconImage(icon);
         initComponents();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth()/2;
         double height = screenSize.getHeight()/2;
         this.setLocation((int)width-this.getWidth()/2,(int)height-this.getHeight()/2);
         
-        txtFiltro.setEnabled(false);
-        btnAplicarFiltro.setEnabled(false);
-        btnLimpiarFiltro.setEnabled(false);
-        btnGuardar.setEnabled(false);
-        btnCancelar.setEnabled(false);
-        
+        //Configuracion de la tabla de Contribuyentes
         tableContribuyentes.setRowSelectionAllowed(true);
         tableContribuyentes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableContribuyentes.getTableHeader().setReorderingAllowed(false);
         
         tableContribuyentes.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
             public void valueChanged(ListSelectionEvent event) {
             
                 if(tableContribuyentes.getSelectedRow() == -1) return;
+                
                 btnGuardar.setEnabled(true);
                 btnCancelar.setEnabled(true);
                 cmbDonante.setEnabled(true);
                 cmbFactor.setEnabled(true);
                 cmbGrupoSanguineo.setEnabled(true);
-                Contribuyente c = contribuyentes.get(tableContribuyentes.getSelectedRow());            
+                btnFiltroNombre.setEnabled(false);
+                btnFiltroApellido.setEnabled(false);
+                btnFiltroDocumento.setEnabled(false);
+                btnAplicarFiltro.setEnabled(false);
+                txtFiltro.setEnabled(false);
+                
+                contribuyentes.get(tableContribuyentes.getSelectedRow());            
             }
         });
     }
@@ -100,14 +105,14 @@ public class UserAddTitular extends javax.swing.JFrame {
         lblAContinuacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gestión de Licencias de Conducir - SFC");
+        setTitle("GLC - SFC");
         setResizable(false);
 
         lblSantaFe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSantaFe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/drawable/logo-santafe.png"))); // NOI18N
         lblSantaFe.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        pnlDatosPersonales.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Personales del Contribuyente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
+        pnlDatosPersonales.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Personales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
 
         tableContribuyentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,6 +140,7 @@ public class UserAddTitular extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableContribuyentes);
 
         txtFiltro.setFont(txtFiltro.getFont().deriveFont(txtFiltro.getFont().getSize()+4f));
+        txtFiltro.setEnabled(false);
 
         btnFiltroNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/filter_mini.png"))); // NOI18N
         btnFiltroNombre.setText("Nombre");
@@ -164,6 +170,7 @@ public class UserAddTitular extends javax.swing.JFrame {
         });
 
         btnAplicarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/search_mini.png"))); // NOI18N
+        btnAplicarFiltro.setEnabled(false);
         btnAplicarFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAplicarFiltroActionPerformed(evt);
@@ -171,12 +178,14 @@ public class UserAddTitular extends javax.swing.JFrame {
         });
 
         btnLimpiarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/cancel_mini.png"))); // NOI18N
+        btnLimpiarFiltro.setEnabled(false);
         btnLimpiarFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarFiltroActionPerformed(evt);
             }
         });
 
+        lblBuscar.setForeground(java.awt.Color.gray);
         lblBuscar.setText("Buscar por...");
 
         javax.swing.GroupLayout pnlDatosPersonalesLayout = new javax.swing.GroupLayout(pnlDatosPersonales);
@@ -191,7 +200,7 @@ public class UserAddTitular extends javax.swing.JFrame {
                         .addComponent(btnFiltroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFiltroApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnFiltroDocumento))
                     .addGroup(pnlDatosPersonalesLayout.createSequentialGroup()
                         .addComponent(txtFiltro)
@@ -280,8 +289,9 @@ public class UserAddTitular extends javax.swing.JFrame {
         );
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/save.png"))); // NOI18N
-        btnGuardar.setText("Guardar Titular");
-        btnGuardar.setToolTipText("Guarde los datos del titular.");
+        btnGuardar.setText("Guardar");
+        btnGuardar.setToolTipText("Guarde los datos del titular actual");
+        btnGuardar.setEnabled(false);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -290,48 +300,48 @@ public class UserAddTitular extends javax.swing.JFrame {
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/cancel.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
-        btnCancelar.setToolTipText("Cancele los datos ingresados.");
+        btnCancelar.setToolTipText("Cancele los datos actuales");
+        btnCancelar.setEnabled(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
 
-        lblNuevoTitular.setFont(lblNuevoTitular.getFont().deriveFont(lblNuevoTitular.getFont().getSize()+6f));
+        lblNuevoTitular.setFont(lblNuevoTitular.getFont().deriveFont(lblNuevoTitular.getFont().getSize()+13f));
         lblNuevoTitular.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNuevoTitular.setText("NUEVO TITULAR");
 
         lblAContinuacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAContinuacion.setText("A continuación, ingrese los datos del nuevo titular.");
+        lblAContinuacion.setText("A continuación, seleccione un contribuyente e ingrese sus datos.");
         lblAContinuacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(lblMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(6, 6, 6))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlDatosPersonales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlDatosMedicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(lblSantaFe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblAContinuacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblNuevoTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlDatosPersonales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlDatosMedicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(285, 285, 285)
+                        .addComponent(lblMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(6, 6, 6))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblNuevoTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAContinuacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,8 +360,7 @@ public class UserAddTitular extends javax.swing.JFrame {
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(lblMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -366,14 +375,27 @@ public class UserAddTitular extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFiltroNombreActionPerformed
 
     private void btnLimpiarFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarFiltroActionPerformed
-        btnFiltroNombre.setEnabled(true);
-        btnFiltroApellido.setEnabled(true);
-        btnFiltroDocumento.setEnabled(true);
-        txtFiltro.setText("");
-        txtFiltro.setEnabled(false);
-        btnAplicarFiltro.setEnabled(false);
-        btnLimpiarFiltro.setEnabled(false);
-        
+            cmbDonante.setEnabled(false);
+            cmbFactor.setEnabled(false);
+            cmbGrupoSanguineo.setEnabled(false);
+            cmbDonante.setSelectedItem("");
+            cmbFactor.setSelectedItem("");
+            cmbGrupoSanguineo.setSelectedItem("");
+            
+            btnFiltroNombre.setEnabled(true);
+            btnFiltroApellido.setEnabled(true);
+            btnFiltroDocumento.setEnabled(true);
+            
+            txtFiltro.setText("");
+            txtFiltro.setEnabled(false);
+            btnAplicarFiltro.setEnabled(false);
+            btnLimpiarFiltro.setEnabled(false);
+            
+            DefaultTableModel model = (DefaultTableModel)tableContribuyentes.getModel();
+            model.setRowCount(0);
+            
+            btnGuardar.setEnabled(false);
+            btnCancelar.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarFiltroActionPerformed
 
     private void btnFiltroApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroApellidoActionPerformed
@@ -396,6 +418,8 @@ public class UserAddTitular extends javax.swing.JFrame {
         boolean factor = false;
         boolean donante = false;
         GrupoSanguineoEnum grupo = null;
+        Contribuyente contribuyente = contribuyentes.get(tableContribuyentes.getSelectedRow());
+        
         if(cmbFactor.getSelectedItem() == "+") factor = true;
         if(cmbDonante.getSelectedItem() == "Si") donante = true;
         if(cmbGrupoSanguineo.getSelectedItem() == "A") grupo = GrupoSanguineoEnum.A;
@@ -407,47 +431,36 @@ public class UserAddTitular extends javax.swing.JFrame {
         if(cmbDonante.getSelectedItem() == "" ||
            cmbFactor.getSelectedItem() == ""  ||
            cmbGrupoSanguineo.getSelectedItem() == "" ){
-            JOptionPane.showMessageDialog(this, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe completar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         else{ 
             
-            if(TitularController.getInstance().crearTitular(contribuyentes.get(tableContribuyentes.getSelectedRow()), grupo, factor, donante)){
-                JOptionPane.showMessageDialog(null, "Se ha cargado el titular exitosamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
-                // TODO VER QUE SE PUEDEN GUARDAR DATOS DEL MISMO CONTRIBUYENTE
+            if(TitularController.getInstance().titularRegistrado(contribuyente) &&
+               TitularController.getInstance().crearTitular(contribuyente, grupo, factor, donante)
+               ){
+                JOptionPane.showMessageDialog(null, "Se ha cargado el titular exitosamente.", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                new UserMenu().setVisible(true);
+                this.dispose();
             }
             else{
-                JOptionPane.showMessageDialog(null, "No se ha podido cargar el titular", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        new UserMenu().setVisible(true);
-        this.dispose();
+                JOptionPane.showMessageDialog(null, "El contribuyente seleccionado ya ha sido cargado como titular. Por favor, seleccione otro de la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+                cmbDonante.setEnabled(false);
+                cmbFactor.setEnabled(false);
+                cmbGrupoSanguineo.setEnabled(false);
+                cmbDonante.setSelectedItem("");
+                cmbFactor.setSelectedItem("");
+                cmbGrupoSanguineo.setSelectedItem("");
+                btnGuardar.setEnabled(false);
+                btnCancelar.setEnabled(false);
+            }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        Integer respuesta = JOptionPane.showConfirmDialog(null, "Está seguro de que desea cancelar el registro? Se perderán los datos no guardados", "Cancelar",  JOptionPane.YES_NO_OPTION);
+        Integer respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea cancelar el registro? Se perderán los datos no guardados y volverá al Menu.", "Cancelar",  JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
-            cmbDonante.setEnabled(false);
-            cmbFactor.setEnabled(false);
-            cmbGrupoSanguineo.setEnabled(false);
-            cmbDonante.setSelectedItem("");
-            cmbFactor.setSelectedItem("");
-            cmbGrupoSanguineo.setSelectedItem("");
-            
-            btnFiltroNombre.setEnabled(true);
-            btnFiltroApellido.setEnabled(true);
-            btnFiltroDocumento.setEnabled(true);
-            
-            txtFiltro.setText("");
-            txtFiltro.setEnabled(false);
-            btnAplicarFiltro.setEnabled(false);
-            btnLimpiarFiltro.setEnabled(false);
-            
-            DefaultTableModel model = (DefaultTableModel)tableContribuyentes.getModel();
-            model.setRowCount(0);
-            
-            btnGuardar.setEnabled(false);
-            btnCancelar.setEnabled(false);
+                new UserMenu().setVisible(true);
+                this.dispose();
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -502,6 +515,7 @@ public class UserAddTitular extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new UserAddTitular().setVisible(true);
             }

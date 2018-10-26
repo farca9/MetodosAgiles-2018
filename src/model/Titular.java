@@ -49,19 +49,11 @@ public class Titular {
     private Collection<Licencia> licencias;  
     
     private Date fechaNacimiento;
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-    
+   
     //Constructores
     public Titular() {}
     
-    public Titular(String codigoDocumento, TipoDocumentoEnum tipoDocumento, String nombre, String apellido, String domicilio, GrupoSanguineoEnum grupoSanguineo, boolean factor, boolean donanteOrganos, Date fechaNacimiento) {
+    public Titular(String codigoDocumento, TipoDocumentoEnum tipoDocumento, String nombre, String apellido, String domicilio, GrupoSanguineoEnum grupoSanguineo, boolean factor, boolean donanteOrganos, Date fechaNacimiento, boolean contribuyente) {
         this.codigoDocumento = codigoDocumento;
         this.tipoDocumento = tipoDocumento;
         this.nombre = nombre;
@@ -155,5 +147,12 @@ public class Titular {
         this.licencias=licencias;
     }
     
-    
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
 }

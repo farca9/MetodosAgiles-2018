@@ -7,7 +7,9 @@ package view.gui.menus;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import view.gui.login.MainMenu;
 
 /**
@@ -20,6 +22,10 @@ public class AdminMenu extends javax.swing.JFrame {
      * Creates new form adminMenu
      */
     public AdminMenu() {
+        //Inicializacion de la ventana
+        ImageIcon logo = new ImageIcon("src/res/drawable/sfc_logo.jpg");
+        Image icon = logo.getImage();
+        this.setIconImage(icon);
         initComponents();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth()/2;
@@ -45,7 +51,7 @@ public class AdminMenu extends javax.swing.JFrame {
         lblAdministrador = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gestión de Licencias de Conducir");
+        setTitle("GLC - SFC");
         setResizable(false);
 
         btnAddUser.setFont(btnAddUser.getFont().deriveFont(btnAddUser.getFont().getSize()+3f));

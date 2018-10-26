@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Gesti&#xf3;n de Licencias de Conducir"/>
+    <Property name="title" type="java.lang.String" value="GLC - SFC"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -38,12 +38,12 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnAddUser5" max="32767" attributes="0"/>
-                  <Component id="btnAddUser2" alignment="1" max="32767" attributes="0"/>
-                  <Component id="btnAddUser" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnAddUser3" alignment="1" max="32767" attributes="0"/>
-                  <Component id="btnAddUser4" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnAddUser1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnEmitirLicencia" max="32767" attributes="0"/>
+                  <Component id="btnRenovarLicencias" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnLicenciasVencidas" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnCambiarLicencias" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnLicenciasVigentes" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnAgregarTitular" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -54,17 +54,17 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="lblSantaFe" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnAddUser1" min="-2" max="-2" attributes="0"/>
+              <Component id="btnAgregarTitular" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnAddUser5" min="-2" max="-2" attributes="0"/>
+              <Component id="btnEmitirLicencia" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-              <Component id="btnAddUser2" min="-2" max="-2" attributes="0"/>
+              <Component id="btnRenovarLicencias" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnAddUser3" min="-2" max="-2" attributes="0"/>
+              <Component id="btnCambiarLicencias" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnAddUser4" min="-2" max="-2" attributes="0"/>
+              <Component id="btnLicenciasVigentes" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnAddUser" min="-2" max="-2" attributes="0"/>
+              <Component id="btnLicenciasVencidas" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -92,11 +92,11 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogoutActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAddUser">
+    <Component class="javax.swing.JButton" name="btnLicenciasVencidas">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
           <FontInfo relative="true">
-            <Font component="btnAddUser" property="font" relativeSize="true" size="3"/>
+            <Font component="btnLicenciasVencidas" property="font" relativeSize="true" size="3"/>
           </FontInfo>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -108,14 +108,14 @@
         <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddUserActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLicenciasVencidasActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAddUser1">
+    <Component class="javax.swing.JButton" name="btnAgregarTitular">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
           <FontInfo relative="true">
-            <Font component="btnAddUser1" property="font" relativeSize="true" size="3"/>
+            <Font component="btnAgregarTitular" property="font" relativeSize="true" size="3"/>
           </FontInfo>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -127,14 +127,14 @@
         <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddUser1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarTitularActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAddUser2">
+    <Component class="javax.swing.JButton" name="btnRenovarLicencias">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
           <FontInfo relative="true">
-            <Font component="btnAddUser2" property="font" relativeSize="true" size="3"/>
+            <Font component="btnRenovarLicencias" property="font" relativeSize="true" size="3"/>
           </FontInfo>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -146,14 +146,14 @@
         <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddUser2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRenovarLicenciasActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAddUser3">
+    <Component class="javax.swing.JButton" name="btnCambiarLicencias">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
           <FontInfo relative="true">
-            <Font component="btnAddUser3" property="font" relativeSize="true" size="3"/>
+            <Font component="btnCambiarLicencias" property="font" relativeSize="true" size="3"/>
           </FontInfo>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -165,14 +165,14 @@
         <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddUser3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCambiarLicenciasActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAddUser4">
+    <Component class="javax.swing.JButton" name="btnLicenciasVigentes">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
           <FontInfo relative="true">
-            <Font component="btnAddUser4" property="font" relativeSize="true" size="3"/>
+            <Font component="btnLicenciasVigentes" property="font" relativeSize="true" size="3"/>
           </FontInfo>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -184,14 +184,14 @@
         <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddUser4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLicenciasVigentesActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAddUser5">
+    <Component class="javax.swing.JButton" name="btnEmitirLicencia">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
           <FontInfo relative="true">
-            <Font component="btnAddUser5" property="font" relativeSize="true" size="3"/>
+            <Font component="btnEmitirLicencia" property="font" relativeSize="true" size="3"/>
           </FontInfo>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -203,7 +203,7 @@
         <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddUser5ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmitirLicenciaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

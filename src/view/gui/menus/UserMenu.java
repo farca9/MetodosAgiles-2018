@@ -8,7 +8,10 @@ package view.gui.menus;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import view.gui.abm.*;
 import view.gui.login.MainMenu;
 
@@ -21,6 +24,9 @@ public class UserMenu extends javax.swing.JFrame {
     /** Creates new form userMenu */
     public UserMenu() {
         //Inicializacion de la ventana
+        ImageIcon logo = new ImageIcon("src/res/drawable/sfc_logo.jpg");
+        Image icon = logo.getImage();
+        this.setIconImage(icon);
         initComponents();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth()/2;
@@ -40,15 +46,15 @@ public class UserMenu extends javax.swing.JFrame {
 
         lblSantaFe = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
-        btnAddUser = new javax.swing.JButton();
-        btnAddUser1 = new javax.swing.JButton();
-        btnAddUser2 = new javax.swing.JButton();
-        btnAddUser3 = new javax.swing.JButton();
-        btnAddUser4 = new javax.swing.JButton();
-        btnAddUser5 = new javax.swing.JButton();
+        btnLicenciasVencidas = new javax.swing.JButton();
+        btnAgregarTitular = new javax.swing.JButton();
+        btnRenovarLicencias = new javax.swing.JButton();
+        btnCambiarLicencias = new javax.swing.JButton();
+        btnLicenciasVigentes = new javax.swing.JButton();
+        btnEmitirLicencia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gestión de Licencias de Conducir");
+        setTitle("GLC - SFC");
         setResizable(false);
 
         lblSantaFe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/drawable/logo-santafe.png"))); // NOI18N
@@ -62,75 +68,75 @@ public class UserMenu extends javax.swing.JFrame {
             }
         });
 
-        btnAddUser.setFont(btnAddUser.getFont().deriveFont(btnAddUser.getFont().getSize()+3f));
-        btnAddUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/list_vencidas.png"))); // NOI18N
-        btnAddUser.setText("Listado de Licencias Vencidas");
-        btnAddUser.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAddUser.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        btnAddUser.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnAddUser.addActionListener(new java.awt.event.ActionListener() {
+        btnLicenciasVencidas.setFont(btnLicenciasVencidas.getFont().deriveFont(btnLicenciasVencidas.getFont().getSize()+3f));
+        btnLicenciasVencidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/list_vencidas.png"))); // NOI18N
+        btnLicenciasVencidas.setText("Listado de Licencias Vencidas");
+        btnLicenciasVencidas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLicenciasVencidas.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnLicenciasVencidas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLicenciasVencidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddUserActionPerformed(evt);
+                btnLicenciasVencidasActionPerformed(evt);
             }
         });
 
-        btnAddUser1.setFont(btnAddUser1.getFont().deriveFont(btnAddUser1.getFont().getSize()+3f));
-        btnAddUser1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/add_titular.png"))); // NOI18N
-        btnAddUser1.setText("Agregar Titulares");
-        btnAddUser1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAddUser1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        btnAddUser1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnAddUser1.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarTitular.setFont(btnAgregarTitular.getFont().deriveFont(btnAgregarTitular.getFont().getSize()+3f));
+        btnAgregarTitular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/add_titular.png"))); // NOI18N
+        btnAgregarTitular.setText("Agregar Titulares");
+        btnAgregarTitular.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAgregarTitular.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnAgregarTitular.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAgregarTitular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddUser1ActionPerformed(evt);
+                btnAgregarTitularActionPerformed(evt);
             }
         });
 
-        btnAddUser2.setFont(btnAddUser2.getFont().deriveFont(btnAddUser2.getFont().getSize()+3f));
-        btnAddUser2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/renew_licencia.png"))); // NOI18N
-        btnAddUser2.setText("Renovar Licencias");
-        btnAddUser2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAddUser2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        btnAddUser2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnAddUser2.addActionListener(new java.awt.event.ActionListener() {
+        btnRenovarLicencias.setFont(btnRenovarLicencias.getFont().deriveFont(btnRenovarLicencias.getFont().getSize()+3f));
+        btnRenovarLicencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/renew_licencia.png"))); // NOI18N
+        btnRenovarLicencias.setText("Renovar Licencias");
+        btnRenovarLicencias.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRenovarLicencias.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnRenovarLicencias.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRenovarLicencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddUser2ActionPerformed(evt);
+                btnRenovarLicenciasActionPerformed(evt);
             }
         });
 
-        btnAddUser3.setFont(btnAddUser3.getFont().deriveFont(btnAddUser3.getFont().getSize()+3f));
-        btnAddUser3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/duplicate_licencia.png"))); // NOI18N
-        btnAddUser3.setText("Copiar Licencias");
-        btnAddUser3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAddUser3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        btnAddUser3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnAddUser3.addActionListener(new java.awt.event.ActionListener() {
+        btnCambiarLicencias.setFont(btnCambiarLicencias.getFont().deriveFont(btnCambiarLicencias.getFont().getSize()+3f));
+        btnCambiarLicencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/duplicate_licencia.png"))); // NOI18N
+        btnCambiarLicencias.setText("Copiar Licencias");
+        btnCambiarLicencias.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCambiarLicencias.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnCambiarLicencias.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCambiarLicencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddUser3ActionPerformed(evt);
+                btnCambiarLicenciasActionPerformed(evt);
             }
         });
 
-        btnAddUser4.setFont(btnAddUser4.getFont().deriveFont(btnAddUser4.getFont().getSize()+3f));
-        btnAddUser4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/list_ok.png"))); // NOI18N
-        btnAddUser4.setText("Listado de Licencias Vigentes");
-        btnAddUser4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAddUser4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        btnAddUser4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnAddUser4.addActionListener(new java.awt.event.ActionListener() {
+        btnLicenciasVigentes.setFont(btnLicenciasVigentes.getFont().deriveFont(btnLicenciasVigentes.getFont().getSize()+3f));
+        btnLicenciasVigentes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/list_ok.png"))); // NOI18N
+        btnLicenciasVigentes.setText("Listado de Licencias Vigentes");
+        btnLicenciasVigentes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLicenciasVigentes.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnLicenciasVigentes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLicenciasVigentes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddUser4ActionPerformed(evt);
+                btnLicenciasVigentesActionPerformed(evt);
             }
         });
 
-        btnAddUser5.setFont(btnAddUser5.getFont().deriveFont(btnAddUser5.getFont().getSize()+3f));
-        btnAddUser5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/new_licencia.png"))); // NOI18N
-        btnAddUser5.setText("Emitir Licencia");
-        btnAddUser5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAddUser5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        btnAddUser5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnAddUser5.addActionListener(new java.awt.event.ActionListener() {
+        btnEmitirLicencia.setFont(btnEmitirLicencia.getFont().deriveFont(btnEmitirLicencia.getFont().getSize()+3f));
+        btnEmitirLicencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/new_licencia.png"))); // NOI18N
+        btnEmitirLicencia.setText("Emitir Licencia");
+        btnEmitirLicencia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEmitirLicencia.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnEmitirLicencia.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEmitirLicencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddUser5ActionPerformed(evt);
+                btnEmitirLicenciaActionPerformed(evt);
             }
         });
 
@@ -148,12 +154,12 @@ public class UserMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAddUser5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAddUser2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAddUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAddUser3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAddUser4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAddUser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEmitirLicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRenovarLicencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLicenciasVencidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCambiarLicencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLicenciasVigentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAgregarTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -161,17 +167,17 @@ public class UserMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblSantaFe)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAddUser1)
+                .addComponent(btnAgregarTitular)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAddUser5)
+                .addComponent(btnEmitirLicencia)
                 .addGap(5, 5, 5)
-                .addComponent(btnAddUser2)
+                .addComponent(btnRenovarLicencias)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAddUser3)
+                .addComponent(btnCambiarLicencias)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAddUser4)
+                .addComponent(btnLicenciasVigentes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAddUser)
+                .addComponent(btnLicenciasVencidas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLogout)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -185,32 +191,31 @@ public class UserMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
-    private void btnAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddUserActionPerformed
+    private void btnLicenciasVencidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasVencidasActionPerformed
+       JOptionPane.showMessageDialog(null, "Funcionalidad en desarrollo.", "Atencion", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnLicenciasVencidasActionPerformed
 
-    private void btnAddUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUser1ActionPerformed
-        // TODO add your handling code here:
+    private void btnAgregarTitularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTitularActionPerformed
         new UserAddTitular().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnAddUser1ActionPerformed
+    }//GEN-LAST:event_btnAgregarTitularActionPerformed
 
-    private void btnAddUser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUser2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddUser2ActionPerformed
+    private void btnRenovarLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenovarLicenciasActionPerformed
+        JOptionPane.showMessageDialog(null, "Funcionalidad en desarrollo.", "Atencion", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnRenovarLicenciasActionPerformed
 
-    private void btnAddUser3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUser3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddUser3ActionPerformed
+    private void btnCambiarLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarLicenciasActionPerformed
+        JOptionPane.showMessageDialog(null, "Funcionalidad en desarrollo.", "Atencion", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnCambiarLicenciasActionPerformed
 
-    private void btnAddUser4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUser4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddUser4ActionPerformed
+    private void btnLicenciasVigentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasVigentesActionPerformed
+        JOptionPane.showMessageDialog(null, "Funcionalidad en desarrollo.", "Atencion", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnLicenciasVigentesActionPerformed
 
-    private void btnAddUser5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUser5ActionPerformed
+    private void btnEmitirLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirLicenciaActionPerformed
         new UserEmitirLicencia().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnAddUser5ActionPerformed
+    }//GEN-LAST:event_btnEmitirLicenciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,13 +254,13 @@ public class UserMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddUser;
-    private javax.swing.JButton btnAddUser1;
-    private javax.swing.JButton btnAddUser2;
-    private javax.swing.JButton btnAddUser3;
-    private javax.swing.JButton btnAddUser4;
-    private javax.swing.JButton btnAddUser5;
+    private javax.swing.JButton btnAgregarTitular;
+    private javax.swing.JButton btnCambiarLicencias;
+    private javax.swing.JButton btnEmitirLicencia;
+    private javax.swing.JButton btnLicenciasVencidas;
+    private javax.swing.JButton btnLicenciasVigentes;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnRenovarLicencias;
     private javax.swing.JLabel lblSantaFe;
     // End of variables declaration//GEN-END:variables
 

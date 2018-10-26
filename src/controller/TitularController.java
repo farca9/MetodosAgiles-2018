@@ -54,7 +54,22 @@ public class TitularController {
         titular.setLicencias(null);
         
         return TitularDAO.getInstance().insert(titular);
+    }
+
+    public boolean titularRegistrado(Contribuyente contribuyente) {
         
+        Titular titular = new Titular();
+        titular.setApellido(contribuyente.getApellido());
+        titular.setNombre(contribuyente.getNombre());
+        titular.setCodigoDocumento(contribuyente.getCodigoDocumento());
+        
+        Integer tam = TitularDAO.getInstance().find(titular).size();
+
+        if(tam > 0){
+            return false;
+        }else{
+            return true;
+        }
     }
     
 }

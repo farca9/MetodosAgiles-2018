@@ -65,7 +65,7 @@ public class ContribuyenteDAO {
             
             crit.add(conj);
             
-            results = (ArrayList<Contribuyente>)crit.list();
+            results = (ArrayList<Contribuyente>)crit.list(); // TODO Ver por qué se rompe aca con los DNI
             
             sesion.getTransaction().commit();          
             
