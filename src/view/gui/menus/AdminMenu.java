@@ -82,6 +82,7 @@ public class AdminMenu extends javax.swing.JFrame {
 
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/logout2.png"))); // NOI18N
         btnLogout.setToolTipText("Cerrar Sesión");
+        btnLogout.setBorderPainted(false);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogoutActionPerformed(evt);

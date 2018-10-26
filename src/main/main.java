@@ -5,6 +5,8 @@
  */
 package main;
 
+import com.alee.laf.WebLookAndFeel;
+import com.bulenkov.darcula.DarculaLaf;
 import hibernate.Hibernator;
 import java.awt.Font;
 import javax.swing.UIManager;
@@ -28,6 +30,12 @@ public class main {
      
         ContribuyentePopulator.populate(500);// -> Puebla la tabla de contribuyentes con datos aleatorios
         
+        
+        try{
+            UIManager.setLookAndFeel(new WebLookAndFeel()/*new DarculaLaf()*/);
+        }catch (Exception e){
+            
+        }
         setUIFont(new javax.swing.plaf.FontUIResource("Segoe UI",Font.PLAIN,15));
         new MainMenu().setVisible(true);
         
