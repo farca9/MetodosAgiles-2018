@@ -13,6 +13,7 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import view.gui.abm.*;
+import view.gui.list.UserLicenciasVencidas;
 import view.gui.login.MainMenu;
 
 /**
@@ -192,7 +193,8 @@ public class UserMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnLicenciasVencidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasVencidasActionPerformed
-       JOptionPane.showMessageDialog(null, "Funcionalidad en desarrollo.", "Atencion", JOptionPane.INFORMATION_MESSAGE);
+       new UserLicenciasVencidas().setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_btnLicenciasVencidasActionPerformed
 
     private void btnAgregarTitularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTitularActionPerformed

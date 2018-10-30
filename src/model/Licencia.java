@@ -19,6 +19,7 @@ public class Licencia {
     @GeneratedValue
     private Integer id;
     
+    @Enumerated(EnumType.ORDINAL)
     private ClaseLicenciaEnum claseLicenciaEnum;
     
     @ManyToOne

@@ -11,8 +11,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import model.ClaseLicenciaEnum;
 import model.Licencia;
 import model.Titular;
@@ -30,6 +32,18 @@ public class LicenciaController {
     public static LicenciaController getInstance(){
         if (instance == null) instance = new LicenciaController();
         return instance;
+    }
+    
+    public List<Licencia> licenciasVencidas (Date fechaInicio, Date fechaFin, ClaseLicenciaEnum claseLicenciaEnum, Titular titular){
+        
+        ArrayList<Licencia> resultado = new ArrayList();
+        
+        Licencia licencia = new Licencia();
+        licencia.setClaseLicenciaEnum(claseLicenciaEnum);
+        licencia.setTitular(titular);
+        resultado = (ArrayList)LicenciaDAO.getInstance().find(licencia, fechaInicio, fechaFin);
+        
+        return resultado;
     }
     
     public Date calcularVigencia(Titular t1, ClaseLicenciaEnum c1){
@@ -57,8 +71,8 @@ public class LicenciaController {
         int string_nacimiento = Integer.parseInt(formatter.format(t1.getFechaNacimiento()));                            
         int string_actual = Integer.parseInt(formatter.format(actual));  
         
-        int edad = (string_actual - string_nacimiento) / 10000;   
-        
+        int edad = (string_actual - string_nacimiento) / 10000;
+
         
         
         if(edad<17){
@@ -176,7 +190,7 @@ public class LicenciaController {
                         c.add(Calendar.YEAR, 3);
                         c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
                         vencimiento = c.getTime();
-                        ;
+                        
                         return vencimiento;
                         //vencimiento = actual + vigencia + diferencia
                     }else{
@@ -225,9 +239,7 @@ public class LicenciaController {
         licencia.setActiva(true);
         licencia.setClaseLicenciaEnum(claseLicenciaEnum);
         licencia.setFechaEmision(new Date());
-        Date fakeVencimiento = new Date();
-        fakeVencimiento.setYear(125);
-        licencia.setFechaVencimiento(fakeVencimiento); //TBD - this.calcularVigencia;
+        licencia.setFechaVencimiento(this.calcularVigencia(titular, claseLicenciaEnum));
         licencia.setObservacion(observaciones);
         titular.getLicencias().add(licencia);
         

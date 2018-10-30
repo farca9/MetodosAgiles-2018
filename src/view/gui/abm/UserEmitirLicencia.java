@@ -686,8 +686,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
             
     }//GEN-LAST:event_btnLimpiarFiltroActionPerformed
 
-    
-    
+        
     private void btnEmitirLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirLicenciaActionPerformed
         
         if(LicenciaController.getInstance().crearLicencia(titulares.get(tableTitulares.getSelectedRow()), claseSeleccionada , txtAreaObservaciones.getText())){

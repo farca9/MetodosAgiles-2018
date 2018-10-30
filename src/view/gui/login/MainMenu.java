@@ -5,14 +5,20 @@
  */
 package view.gui.login;
 
+import controller.LicenciaController;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import model.ClaseLicenciaEnum;
+import model.Licencia;
+import model.Titular;
 import view.gui.menus.*;
 
 /**
@@ -33,7 +39,7 @@ public class MainMenu extends javax.swing.JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth()/2;
         double height = screenSize.getHeight()/2;
-        this.setLocation((int)width-this.getWidth()/2,(int)height-this.getHeight()/2); 
+        this.setLocation((int)width-this.getWidth()/2,(int)height-this.getHeight()/2);
         
     }
 
