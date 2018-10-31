@@ -10,6 +10,12 @@ import javax.swing.table.DefaultTableModel;
 import model.Titular;
 import util.FiltroTitularesEnum;
 import controller.*;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import util.TitularReceiver;
 
 /**
  *
@@ -18,14 +24,57 @@ import controller.*;
 public class UserSeleccionarTitularPopUp extends javax.swing.JFrame {
 
     private List<Titular> titulares;
+    private TitularReceiver invoker;
+    private JFrame self;
     
     /**
      * Creates new form UserSeleccionarTitularPopUp
      */
-    public UserSeleccionarTitularPopUp() {
+    private UserSeleccionarTitularPopUp() {
         initComponents();
     }
 
+    public UserSeleccionarTitularPopUp(JFrame invoker) {
+        ImageIcon logo = new ImageIcon("src/res/drawable/sfc_logo.jpg");
+        Image icon = logo.getImage();
+        this.setIconImage(icon);
+        
+        initComponents();
+        this.invoker=(TitularReceiver)invoker;
+        invoker.setEnabled(false);
+        this.setLocationRelativeTo(null);
+        
+        self=this;
+        
+        btnGuardar.setEnabled(false);
+        
+        tableTitulares.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+        public void valueChanged(ListSelectionEvent event) {
+            
+            if(tableTitulares.getSelectedRow() == -1){
+                btnGuardar.setEnabled(false);
+                return;
+            }
+            
+            txtFiltro.setText("");
+            txtFiltro.setEnabled(false);
+            btnAplicarFiltro.setEnabled(false);
+            btnLimpiarFiltro.setEnabled(true);            
+            
+            Titular t = titulares.get(tableTitulares.getSelectedRow());
+            btnGuardar.setEnabled(true);
+        }
+        });
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                ((JFrame) invoker).setEnabled(true);
+                self.dispose();
+            }    
+        });
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,13 +93,13 @@ public class UserSeleccionarTitularPopUp extends javax.swing.JFrame {
         btnFiltroDocumento = new javax.swing.JButton();
         btnAplicarFiltro = new javax.swing.JButton();
         btnLimpiarFiltro = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         lblBuscarPor = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Seleccione el titular");
         setResizable(false);
-        setType(java.awt.Window.Type.POPUP);
-
-        pnlTitulares.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione el Titular", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), null)); // NOI18N
+        setType(java.awt.Window.Type.UTILITY);
 
         tableTitulares.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -124,34 +173,48 @@ public class UserSeleccionarTitularPopUp extends javax.swing.JFrame {
             }
         });
 
+        btnGuardar.setFont(btnGuardar.getFont().deriveFont(btnGuardar.getFont().getSize()+2f));
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/save.png"))); // NOI18N
+        btnGuardar.setText("Seleccionar");
+        btnGuardar.setToolTipText("Guarde los datos del titular actual");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
         lblBuscarPor.setForeground(java.awt.Color.gray);
-        lblBuscarPor.setText("Buscar por...");
+        lblBuscarPor.setText("Buscar titulares por...");
 
         javax.swing.GroupLayout pnlTitularesLayout = new javax.swing.GroupLayout(pnlTitulares);
         pnlTitulares.setLayout(pnlTitularesLayout);
         pnlTitularesLayout.setHorizontalGroup(
             pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTitularesLayout.createSequentialGroup()
+            .addGroup(pnlTitularesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlTitularesLayout.createSequentialGroup()
+                .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlTitularesLayout.createSequentialGroup()
                         .addComponent(txtFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAplicarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlTitularesLayout.createSequentialGroup()
-                        .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblBuscarPor, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlTitularesLayout.createSequentialGroup()
+                    .addGroup(pnlTitularesLayout.createSequentialGroup()
+                        .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblBuscarPor)
+                            .addGroup(pnlTitularesLayout.createSequentialGroup()
                                 .addComponent(btnFiltroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnFiltroApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFiltroDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnFiltroDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(pnlTitularesLayout.createSequentialGroup()
+                .addGap(199, 199, 199)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlTitularesLayout.setVerticalGroup(
             pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,29 +231,31 @@ public class UserSeleccionarTitularPopUp extends javax.swing.JFrame {
                     .addComponent(btnAplicarFiltro)
                     .addComponent(btnLimpiarFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnGuardar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 540, Short.MAX_VALUE)
+            .addGap(0, 586, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(pnlTitulares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(16, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 486, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(pnlTitulares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 435, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(pnlTitulares, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
 
         pack();
@@ -259,6 +324,19 @@ public class UserSeleccionarTitularPopUp extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLimpiarFiltroActionPerformed
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+
+        try{
+            Titular t=titulares.get(tableTitulares.getSelectedRow());
+            this.invoker.setTitularRecibido(t);
+            ((JFrame)invoker).setEnabled(true);
+            this.dispose();
+        }catch (NullPointerException npe){
+            npe.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -296,9 +374,13 @@ public class UserSeleccionarTitularPopUp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAplicarFiltro;
+    private javax.swing.JButton btnEmitirLicencia;
+    private javax.swing.JButton btnEmitirLicencia1;
+    private javax.swing.JButton btnEmitirLicencia2;
     private javax.swing.JButton btnFiltroApellido;
     private javax.swing.JButton btnFiltroDocumento;
     private javax.swing.JButton btnFiltroNombre;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiarFiltro;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBuscarPor;
