@@ -62,6 +62,7 @@ public class TitularController {
         titular.setApellido(contribuyente.getApellido());
         titular.setNombre(contribuyente.getNombre());
         titular.setCodigoDocumento(contribuyente.getCodigoDocumento());
+        titular.setTipoDocumento(contribuyente.getTipoDocumento());
         
         Integer tam = TitularDAO.getInstance().find(titular).size();
 

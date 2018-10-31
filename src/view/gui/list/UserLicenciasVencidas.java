@@ -5,11 +5,19 @@
  */
 package view.gui.list;
 
+import controller.LicenciaController;
 import java.awt.Image;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import model.ClaseLicenciaEnum;
+import model.Licencia;
 import model.Titular;
 import util.TitularReceiver;
+import view.gui.menus.UserMenu;
 
 /**
  *
@@ -18,6 +26,7 @@ import util.TitularReceiver;
 public class UserLicenciasVencidas extends javax.swing.JFrame implements TitularReceiver {
 
     private Titular titular=null;
+    private ClaseLicenciaEnum claseLicenciaEnum=null;
     
     /**
      * Creates new form UserLicenciasVencidas
@@ -28,6 +37,11 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
         this.setIconImage(icon);
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        Date today = new Date();
+        
+        dateInicio.setMaxSelectableDate(today);
+        dateFinal.setMaxSelectableDate(today);
         
         tableLicencia.setRowSelectionAllowed(true);
         tableLicencia.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -50,18 +64,20 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbClases = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         txtTitular = new javax.swing.JTextField();
         btnAplicarFiltro = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        dateInicio = new com.toedter.calendar.JDateChooser();
+        dateFinal = new com.toedter.calendar.JDateChooser();
+        btnLimpiarFiltro = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableLicencia = new javax.swing.JTable();
         btnVolver = new javax.swing.JButton();
+        btnImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GLC - SFC");
@@ -101,10 +117,10 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
 
         jLabel3.setText("Fecha de vencimiento hasta:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "A", "B", "C", "D", "E", "F", "G" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbClases.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "A", "B", "C", "D", "E", "F", "G" }));
+        cbClases.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbClasesActionPerformed(evt);
             }
         });
 
@@ -127,10 +143,16 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
         });
 
         btnAplicarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/search_mini.png"))); // NOI18N
-        btnAplicarFiltro.setEnabled(false);
         btnAplicarFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAplicarFiltroActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/cancel_mini.png"))); // NOI18N
+        btnLimpiarFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarFiltroActionPerformed(evt);
             }
         });
 
@@ -145,19 +167,21 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(dateInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                    .addComponent(dateFinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbClases, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(btnAplicarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -171,18 +195,19 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbClases, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel2))
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dateInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dateFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5)
                                 .addComponent(jButton1)
                                 .addComponent(txtTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3)))
+                                .addComponent(jLabel3))
+                            .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -203,6 +228,7 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
                 return canEdit [columnIndex];
             }
         });
+        tableLicencia.setRowHeight(20);
         jScrollPane1.setViewportView(tableLicencia);
 
         btnVolver.setFont(btnVolver.getFont().deriveFont(btnVolver.getFont().getSize()+2f));
@@ -214,14 +240,24 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
             }
         });
 
+        btnImprimir.setFont(btnImprimir.getFont().deriveFont(btnImprimir.getFont().getSize()+2f));
+        btnImprimir.setText("Imprimir");
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(348, 348, 348)
+                .addContainerGap()
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(218, 218, 218)
+                .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -229,7 +265,10 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVolver))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnImprimir)
+                    .addComponent(btnVolver))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -269,18 +308,64 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTitularActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void cbClasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbClasesActionPerformed
+
+        switch(cbClases.getSelectedIndex()){
+            case -1: break;
+            case 0: claseLicenciaEnum=null; break;
+            case 1: claseLicenciaEnum=ClaseLicenciaEnum.A; break;
+            case 2: claseLicenciaEnum=ClaseLicenciaEnum.B; break;
+            case 3: claseLicenciaEnum=ClaseLicenciaEnum.C; break;
+            case 4: claseLicenciaEnum=ClaseLicenciaEnum.D; break;
+            case 5: claseLicenciaEnum=ClaseLicenciaEnum.E; break;
+            case 6: claseLicenciaEnum=ClaseLicenciaEnum.F; break;
+            case 7: claseLicenciaEnum=ClaseLicenciaEnum.G; break;
+        }
+
+        
+    }//GEN-LAST:event_cbClasesActionPerformed
 
     private void btnAplicarFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarFiltroActionPerformed
 
+        ArrayList<Licencia> licencias;
+        
+        licencias = (ArrayList)LicenciaController.getInstance().licenciasVencidas(dateInicio.getDate(), dateFinal.getDate(), claseLicenciaEnum, titular);
+        
+        DefaultTableModel model = (DefaultTableModel)tableLicencia.getModel();
+        model.setRowCount(0);
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        for(int i=0;i<licencias.size();i++){
+            Licencia licencia = licencias.get(i);
+            Titular titularDeLicencia = licencia.getTitular();
+            Object[] fila = {titularDeLicencia.getTipoDocumento().toString()+" "+titularDeLicencia.getCodigoDocumento(),
+                            titularDeLicencia.getApellido()+", "+titularDeLicencia.getNombre(),
+                            licencia.getClaseLicenciaEnum().toString(),
+                            sdf.format(licencia.getFechaEmision()),
+                            sdf.format(licencia.getFechaVencimiento())};
+            model.addRow(fila);
+        }
 
     }//GEN-LAST:event_btnAplicarFiltroActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        // TODO add your handling code here:
+        new UserMenu().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnLimpiarFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarFiltroActionPerformed
+    
+        if(titular != null){
+            titular=null;
+            txtTitular.setText("");
+        }
+        
+    }//GEN-LAST:event_btnLimpiarFiltroActionPerformed
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnImprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,11 +404,13 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAplicarFiltro;
+    private javax.swing.JButton btnImprimir;
+    private javax.swing.JButton btnLimpiarFiltro;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JComboBox<String> cbClases;
+    private com.toedter.calendar.JDateChooser dateFinal;
+    private com.toedter.calendar.JDateChooser dateInicio;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
