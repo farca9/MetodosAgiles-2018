@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import view.gui.abm.*;
 import view.gui.list.UserLicenciasVencidas;
 import view.gui.login.MainMenu;
+import view.gui.prints.UserPrintCarnet;
 
 /**
  *
@@ -53,6 +54,7 @@ public class UserMenu extends javax.swing.JFrame {
         btnCambiarLicencias = new javax.swing.JButton();
         btnLicenciasVigentes = new javax.swing.JButton();
         btnEmitirLicencia = new javax.swing.JButton();
+        btnCambiarLicencias1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GLC - SFC");
@@ -141,26 +143,38 @@ public class UserMenu extends javax.swing.JFrame {
             }
         });
 
+        btnCambiarLicencias1.setFont(btnCambiarLicencias1.getFont().deriveFont(btnCambiarLicencias1.getFont().getSize()+3f));
+        btnCambiarLicencias1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/print.png"))); // NOI18N
+        btnCambiarLicencias1.setText("Imprimir Carnets de Conducir");
+        btnCambiarLicencias1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCambiarLicencias1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnCambiarLicencias1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCambiarLicencias1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarLicencias1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSantaFe, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(lblSantaFe, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEmitirLicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRenovarLicencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLicenciasVencidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCambiarLicencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAgregarTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLicenciasVencidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLicenciasVigentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAgregarTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCambiarLicencias1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -175,6 +189,8 @@ public class UserMenu extends javax.swing.JFrame {
                 .addComponent(btnRenovarLicencias)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCambiarLicencias)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCambiarLicencias1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLicenciasVigentes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -219,6 +235,11 @@ public class UserMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnEmitirLicenciaActionPerformed
 
+    private void btnCambiarLicencias1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarLicencias1ActionPerformed
+        new UserPrintCarnet().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCambiarLicencias1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -258,6 +279,7 @@ public class UserMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarTitular;
     private javax.swing.JButton btnCambiarLicencias;
+    private javax.swing.JButton btnCambiarLicencias1;
     private javax.swing.JButton btnEmitirLicencia;
     private javax.swing.JButton btnLicenciasVencidas;
     private javax.swing.JButton btnLicenciasVigentes;
