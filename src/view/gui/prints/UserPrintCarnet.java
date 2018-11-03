@@ -7,10 +7,12 @@ package view.gui.prints;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.ClaseLicenciaEnum;
+import model.Licencia;
 import model.Titular;
 import util.TitularReceiver;
 import view.gui.list.UserSeleccionarTitularPopUp;
@@ -25,13 +27,14 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
     private Titular titular = null;
     private ClaseLicenciaEnum claseLicenciaEnum = null;
     private List<ClaseLicenciaEnum> clases = new ArrayList<ClaseLicenciaEnum>();
+    private Collection<Licencia> licencias = new ArrayList<Licencia>();
     /**
      * Creates new form UserPrintCarnet
      */
     public UserPrintCarnet() {
-        //ImageIcon logo = new ImageIcon("src/res/drawable/sfc_logo.jpg");
-        //Image icon = logo.getImage();
-        //this.setIconImage(icon);
+        ImageIcon logo = new ImageIcon("src/res/drawable/sfc_logo.jpg");
+        Image icon = logo.getImage();
+        this.setIconImage(icon);
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -178,9 +181,6 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
         btnCancelar.setFont(btnCancelar.getFont().deriveFont(btnCancelar.getFont().getSize()+2f));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/cancel.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
-        btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCancelar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        btnCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -188,10 +188,13 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
         });
 
         btnImprimir.setFont(btnImprimir.getFont().deriveFont(btnImprimir.getFont().getSize()+2f));
-        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/printer.png"))); // NOI18N
-        btnImprimir.setText("Imprimir");
-        btnImprimir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnImprimir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/preview_carnet.png"))); // NOI18N
+        btnImprimir.setText("Previsualizar");
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -245,8 +248,8 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
                         .addComponent(pnlClases, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -261,7 +264,24 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
 
         if(titular != null){
             titular = null;
+            clases = null;
+            licencias = null;
             txtTitular.setText("");
+            this.chkA.setSelected(false);
+            this.chkB.setSelected(false);
+            this.chkC.setSelected(false);
+            this.chkD.setSelected(false);
+            this.chkE.setSelected(false);
+            this.chkF.setSelected(false);
+            this.chkG.setSelected(false);
+            this.chkA.setEnabled(false);
+            this.chkB.setEnabled(false);
+            this.chkC.setEnabled(false);
+            this.chkD.setEnabled(false);
+            this.chkE.setEnabled(false);
+            this.chkF.setEnabled(false);
+            this.chkG.setEnabled(false);
+            
         }
 
     }//GEN-LAST:event_btnLimpiarBusquedaActionPerformed
@@ -292,6 +312,25 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
                 this.dispose();
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        List<Licencia> licSeleccionadas = new ArrayList<Licencia>();
+        for(Licencia lic : licencias){
+                if(lic.isActiva()){
+                    switch(lic.getClaseLicenciaEnum()){
+                        case A: if(chkA.isSelected()) { licSeleccionadas.add(lic); }; break;
+                        case B: if(chkB.isSelected()) { licSeleccionadas.add(lic); }; break;
+                        case C: if(chkC.isSelected()) { licSeleccionadas.add(lic); }; break;
+                        case D: if(chkD.isSelected()) { licSeleccionadas.add(lic); }; break;
+                        case E: if(chkE.isSelected()) { licSeleccionadas.add(lic); }; break;
+                        case F: if(chkF.isSelected()) { licSeleccionadas.add(lic); }; break;
+                        case G: if(chkG.isSelected()) { licSeleccionadas.add(lic); }; break;
+                    }
+                }
+            }
+        
+        new UserPreviewCarnetPopUp(titular, licSeleccionadas).setVisible(true);
+    }//GEN-LAST:event_btnImprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,6 +371,7 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
     public void setTitularRecibido(Titular titular) {
         this.titular = titular;
         this.clases = titular.getClases();
+        this.licencias = titular.getLicencias();
         this.txtTitular.setText(titular.getApellido()+", "+titular.getNombre());
         
         if(clases.isEmpty()){
@@ -339,14 +379,19 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
             this.txtTitular.setText("");
         }
         else{
-            for(ClaseLicenciaEnum clase : clases){
-                if(clase == ClaseLicenciaEnum.A) chkA.setEnabled(true);
-                if(clase == ClaseLicenciaEnum.B) chkB.setEnabled(true);
-                if(clase == ClaseLicenciaEnum.C) chkC.setEnabled(true);
-                if(clase == ClaseLicenciaEnum.D) chkD.setEnabled(true);
-                if(clase == ClaseLicenciaEnum.E) chkE.setEnabled(true);
-                if(clase == ClaseLicenciaEnum.F) chkF.setEnabled(true);
-                if(clase == ClaseLicenciaEnum.G) chkG.setEnabled(true);
+            
+            for(Licencia lic : licencias){
+                if(lic.isActiva()){
+                    switch(lic.getClaseLicenciaEnum()){
+                        case A: chkA.setEnabled(true); break;
+                        case B: chkB.setEnabled(true); break;
+                        case C: chkC.setEnabled(true); break;
+                        case D: chkD.setEnabled(true); break;
+                        case E: chkE.setEnabled(true); break;
+                        case F: chkF.setEnabled(true); break;
+                        case G: chkG.setEnabled(true); break;
+                    }
+                }
             }
         }
     }
