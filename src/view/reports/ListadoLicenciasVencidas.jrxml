@@ -87,7 +87,7 @@
 			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="103" height="79" uuid="83c3ad7e-812b-46c9-bda0-17d57aea474b"/>
-				<imageExpression><![CDATA["C:\\Git\\MetodosAgiles-2018\\src\\res\\drawable\\sfc_logo.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\lau_9\\Documents\\Repos\\MetodosAgiles-2018\\src\\res\\drawable\\sfc_logo.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>

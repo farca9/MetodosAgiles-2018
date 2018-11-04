@@ -8,9 +8,19 @@ package view.gui.prints;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import model.ClaseLicenciaEnum;
 import model.Licencia;
 import model.Titular;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import view.reports.LicenciaReportModel;
 
 /**
  *
@@ -82,9 +92,6 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
         toolbarOperaciones = new javax.swing.JToolBar();
         btnAnterior = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
-        lblEspacio = new javax.swing.JLabel();
-        btnImprimirActual = new javax.swing.JButton();
-        btnImprimirTodas = new javax.swing.JButton();
         pnlCarnet = new javax.swing.JPanel();
         lblFotoTitular = new javax.swing.JLabel();
         lblGobierno = new javax.swing.JLabel();
@@ -112,6 +119,8 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
         lblTFactor = new javax.swing.JLabel();
         lblFactor = new javax.swing.JLabel();
         lblObservaciones = new javax.swing.JLabel();
+        jToolBar1 = new javax.swing.JToolBar();
+        btnImprimirActual = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(243, 207, 165));
@@ -119,11 +128,12 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
 
         toolbarOperaciones.setRollover(true);
 
-        btnAnterior.setFont(btnAnterior.getFont().deriveFont(btnAnterior.getFont().getStyle() & ~java.awt.Font.BOLD, btnAnterior.getFont().getSize()+2));
+        btnAnterior.setFont(btnAnterior.getFont().deriveFont(btnAnterior.getFont().getStyle() & ~java.awt.Font.BOLD));
+        btnAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/previous_mini.png"))); // NOI18N
         btnAnterior.setText("Anterior");
         btnAnterior.setFocusable(false);
-        btnAnterior.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAnterior.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAnterior.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAnterior.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnteriorActionPerformed(evt);
@@ -131,35 +141,18 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
         });
         toolbarOperaciones.add(btnAnterior);
 
-        btnSiguiente.setFont(btnSiguiente.getFont().deriveFont(btnSiguiente.getFont().getStyle() & ~java.awt.Font.BOLD, btnSiguiente.getFont().getSize()+2));
+        btnSiguiente.setFont(btnSiguiente.getFont().deriveFont(btnSiguiente.getFont().getStyle() & ~java.awt.Font.BOLD));
+        btnSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/next_mini.png"))); // NOI18N
         btnSiguiente.setText("Siguiente");
         btnSiguiente.setFocusable(false);
-        btnSiguiente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnSiguiente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSiguiente.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnSiguiente.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
             }
         });
         toolbarOperaciones.add(btnSiguiente);
-
-        lblEspacio.setText("                                                                ");
-        lblEspacio.setToolTipText("");
-        toolbarOperaciones.add(lblEspacio);
-
-        btnImprimirActual.setFont(btnImprimirActual.getFont().deriveFont(btnImprimirActual.getFont().getStyle() & ~java.awt.Font.BOLD, btnImprimirActual.getFont().getSize()+2));
-        btnImprimirActual.setText("Imprimir Actual");
-        btnImprimirActual.setFocusable(false);
-        btnImprimirActual.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnImprimirActual.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        toolbarOperaciones.add(btnImprimirActual);
-
-        btnImprimirTodas.setFont(btnImprimirTodas.getFont().deriveFont(btnImprimirTodas.getFont().getStyle() & ~java.awt.Font.BOLD, btnImprimirTodas.getFont().getSize()+2));
-        btnImprimirTodas.setText("Imprimir Todas");
-        btnImprimirTodas.setFocusable(false);
-        btnImprimirTodas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnImprimirTodas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        toolbarOperaciones.add(btnImprimirTodas);
 
         lblFotoTitular.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFotoTitular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/drawable/user.png"))); // NOI18N
@@ -353,7 +346,7 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlDatosLicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
             .addComponent(lblGobierno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlCarnetLayout.setVerticalGroup(
@@ -368,19 +361,40 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
                 .addComponent(lblGobierno, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jToolBar1.setRollover(true);
+
+        btnImprimirActual.setFont(btnImprimirActual.getFont().deriveFont(btnImprimirActual.getFont().getStyle() & ~java.awt.Font.BOLD));
+        btnImprimirActual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/printer_mini.png"))); // NOI18N
+        btnImprimirActual.setText("Imprimir");
+        btnImprimirActual.setToolTipText("");
+        btnImprimirActual.setFocusable(false);
+        btnImprimirActual.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnImprimirActual.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnImprimirActual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActualActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnImprimirActual);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(toolbarOperaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
             .addComponent(pnlCarnet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(toolbarOperaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(toolbarOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(toolbarOperaciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -408,6 +422,57 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
         this.completarCarnet(titular,recorrido,++posicion);
 
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void btnImprimirActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActualActionPerformed
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try{
+            
+           JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile("src/view/reports/Carnet.jasper");
+           
+           //Pasaje del parametros del reporte
+           HashMap<String,Object> parameters = new HashMap();
+           if(this.titular != null) {
+               parameters.put("codigoDocumento", titular.getCodigoDocumento());
+               parameters.put("apellido", titular.getApellido());
+               parameters.put("nombre", titular.getNombre());
+               parameters.put("fechaNac", sdf.format(titular.getFechaNacimiento()));
+               parameters.put("domicilio", titular.getDomicilio());
+               parameters.put("grupoSanguineo", titular.getGrupoSanguineo().name());
+               if(titular.isFactor()){
+                   parameters.put("factor", "+");
+               } else {
+                   parameters.put("factor", "-");
+               }
+               
+               parameters.put("emision", sdf.format(recorrido.get(posicion).getFechaEmision()));
+               parameters.put("vencimiento", sdf.format(recorrido.get(posicion).getFechaVencimiento()));
+               parameters.put("clase", recorrido.get(posicion).getClaseLicenciaEnum().name());
+               parameters.put("observaciones", recorrido.get(posicion).getObservacion());
+               
+           }
+           else System.out.println("SE ROMPIOOOO");
+
+            //Poblacion del dataset con la lista de licencias, usando el modelo LicenciaReportModel
+            LinkedList<LicenciaReportModel> licenciaReportModels = new LinkedList();
+//            if(licencias != null){
+//                for(int i=0;i<licencias.size();i++){
+//                    licenciaReportModels.add(new LicenciaReportModel(licencias.get(i)));
+//                }
+//            }
+            //Se genera el datasource que contiene la lista de licencias para el reporte
+            JRBeanCollectionDataSource items = new JRBeanCollectionDataSource(licenciaReportModels);
+            
+
+            JasperPrint jp = JasperFillManager.fillReport(jr, parameters, items);
+            JasperViewer jv = new JasperViewer(jp,false);
+            jv.show();
+
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnImprimirActualActionPerformed
 
     /**
      * @param args the command line arguments
@@ -447,12 +512,11 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnImprimirActual;
-    private javax.swing.JButton btnImprimirTodas;
     private javax.swing.JButton btnSiguiente;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblClase;
     private javax.swing.JLabel lblDomicilio;
-    private javax.swing.JLabel lblEspacio;
     private javax.swing.JLabel lblFactor;
     private javax.swing.JLabel lblFechaNac;
     private javax.swing.JLabel lblFotoTitular;
