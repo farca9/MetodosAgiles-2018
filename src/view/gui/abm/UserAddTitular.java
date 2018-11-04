@@ -309,10 +309,11 @@ public class UserAddTitular extends javax.swing.JFrame {
             }
         });
 
-        lblNuevoTitular.setFont(lblNuevoTitular.getFont().deriveFont(lblNuevoTitular.getFont().getSize()+13f));
+        lblNuevoTitular.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
         lblNuevoTitular.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNuevoTitular.setText("NUEVO TITULAR");
 
+        lblAContinuacion.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         lblAContinuacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAContinuacion.setText("A continuación, seleccione un contribuyente e ingrese sus datos.");
         lblAContinuacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -348,11 +349,11 @@ public class UserAddTitular extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblSantaFe, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(18, 18, 18)
                 .addComponent(lblNuevoTitular)
-                .addGap(7, 7, 7)
-                .addComponent(lblAContinuacion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblAContinuacion)
+                .addGap(18, 18, 18)
                 .addComponent(pnlDatosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlDatosMedicos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

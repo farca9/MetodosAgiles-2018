@@ -71,7 +71,7 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
         setTitle("GLC - SFC - Imprimir Carnets");
         setResizable(false);
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel5.setText("Nombre del Titular");
 
         txtTitular.setEditable(false);
@@ -83,6 +83,7 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
         });
 
         btnLimpiarBusqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/cancel_mini.png"))); // NOI18N
+        btnLimpiarBusqueda.setToolTipText("Limpie el titular seleccionado");
         btnLimpiarBusqueda.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnLimpiarBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +92,7 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
         });
 
         btnBuscarTitular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/search_mini.png"))); // NOI18N
+        btnBuscarTitular.setToolTipText("Busque el titular para el cual quiere imprimir la licencia");
         btnBuscarTitular.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnBuscarTitular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,32 +110,39 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
 
         pnlClases.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clases Disponibles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
 
-        chkA.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        chkA.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         chkA.setText("A");
+        chkA.setToolTipText("Ciclomotores, motocicletas y triciclos motorizados");
         chkA.setEnabled(false);
 
-        chkB.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        chkB.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         chkB.setText("B");
+        chkB.setToolTipText("Automóviles y camionetas con acoplado");
         chkB.setEnabled(false);
 
-        chkC.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        chkC.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         chkC.setText("C");
+        chkC.setToolTipText("Camiones sin acoplado y los comprendidos en la clase B");
         chkC.setEnabled(false);
 
-        chkD.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        chkD.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         chkD.setText("D");
+        chkD.setToolTipText("Servicio de transporte de pasajeros, emergencia, seguridad y los comprendidos en la clase B o C, según el caso");
         chkD.setEnabled(false);
 
-        chkE.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        chkE.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         chkE.setText("E");
+        chkE.setToolTipText("Camiones articulados o con acoplado, maquinaria especial no agrícola y los comprendidos en la clase B y C");
         chkE.setEnabled(false);
 
-        chkF.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        chkF.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         chkF.setText("F");
+        chkF.setToolTipText("Automotores especialmente adaptados para discapacitados");
         chkF.setEnabled(false);
 
-        chkG.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        chkG.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         chkG.setText("G");
+        chkG.setToolTipText("Tractores agrícolas y maquinaria especial agrícola");
         chkG.setEnabled(false);
 
         javax.swing.GroupLayout pnlClasesLayout = new javax.swing.GroupLayout(pnlClases);
@@ -155,7 +164,7 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
         pnlClasesLayout.setVerticalGroup(
             pnlClasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlClasesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(chkA)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkB)
@@ -168,7 +177,8 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkF)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chkG))
+                .addComponent(chkG)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lblFotoTitular.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -181,6 +191,7 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
         btnCancelar.setFont(btnCancelar.getFont().deriveFont(btnCancelar.getFont().getSize()+2f));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/cancel.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.setToolTipText("Cancelar la operación y volver al menu");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -190,6 +201,7 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
         btnImprimir.setFont(btnImprimir.getFont().deriveFont(btnImprimir.getFont().getSize()+2f));
         btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/preview_carnet.png"))); // NOI18N
         btnImprimir.setText("Previsualizar");
+        btnImprimir.setToolTipText("Ver la vista previa de las licencias seleccionadas");
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImprimirActionPerformed(evt);
@@ -208,10 +220,10 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtTitular)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscarTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLimpiarBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -219,34 +231,34 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
                             .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFotoTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnSeleccionarFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnImprimir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnImprimir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lblFotoTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblSantaFe, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lblEmitirLicencia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnBuscarTitular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(txtTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnLimpiarBusqueda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(lblFotoTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblFotoTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSeleccionarFoto))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnlClases, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(pnlClases, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -306,7 +318,7 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
     }//GEN-LAST:event_btnBuscarTitularActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        Integer respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea cancelar el registro? Se perderán los datos no guardados y volverá al Menu.", "Cancelar",  JOptionPane.YES_NO_OPTION);
+        Integer respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea volver al Menu?", "Cancelar",  JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
                 new UserMenu().setVisible(true);
                 this.dispose();
@@ -329,7 +341,12 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
                 }
             }
         
-        new UserPreviewCarnetPopUp(titular, licSeleccionadas).setVisible(true);
+        if(!licSeleccionadas.isEmpty()){
+            new UserPreviewCarnetPopUp(titular, licSeleccionadas).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar alguna clase.", "Atención", JOptionPane.WARNING_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     /**
@@ -375,7 +392,7 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
         this.txtTitular.setText(titular.getApellido()+", "+titular.getNombre());
         
         if(clases.isEmpty()){
-            JOptionPane.showMessageDialog(this, "El titular no posee licencias registradas.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El titular seleccionado no posee licencias registradas.", "Error", JOptionPane.ERROR_MESSAGE);
             this.txtTitular.setText("");
         }
         else{

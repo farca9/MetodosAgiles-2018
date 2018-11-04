@@ -33,10 +33,10 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtTitular" min="-2" pref="153" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txtTitular" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnBuscarTitular" min="-2" pref="29" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnLimpiarBusqueda" min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -46,9 +46,12 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblFotoTitular" max="32767" attributes="0"/>
                           <Component id="btnSeleccionarFoto" max="32767" attributes="0"/>
                           <Component id="btnImprimir" alignment="1" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="lblFotoTitular" min="-2" pref="256" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -60,9 +63,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Component id="lblSantaFe" min="-2" pref="159" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Component id="lblEmitirLicencia" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="btnBuscarTitular" alignment="0" max="32767" attributes="0"/>
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
@@ -71,19 +74,16 @@
                   </Group>
                   <Component id="btnLimpiarBusqueda" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                      <Component id="lblFotoTitular" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="lblFotoTitular" min="-2" pref="256" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSeleccionarFoto" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="pnlClases" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="pnlClases" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnCancelar" max="32767" attributes="0"/>
                   <Component id="btnImprimir" pref="0" max="32767" attributes="0"/>
@@ -97,7 +97,7 @@
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="14" style="0"/>
+          <Font name="Dialog" size="16" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Nombre del Titular"/>
       </Properties>
@@ -118,6 +118,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/res/icons/cancel_mini.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Limpie el titular seleccionado"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
             <BevelBorder/>
@@ -133,6 +134,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/res/icons/search_mini.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Busque el titular para el cual quiere imprimir la licencia"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
             <BevelBorder/>
@@ -193,7 +195,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="chkA" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="chkB" min="-2" max="-2" attributes="0"/>
@@ -207,6 +209,7 @@
                   <Component id="chkF" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="chkG" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -215,63 +218,70 @@
         <Component class="javax.swing.JCheckBox" name="chkA">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="18" style="1"/>
+              <Font name="Dialog" size="22" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="A"/>
+            <Property name="toolTipText" type="java.lang.String" value="Ciclomotores, motocicletas y triciclos motorizados"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkB">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="18" style="1"/>
+              <Font name="Dialog" size="22" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="B"/>
+            <Property name="toolTipText" type="java.lang.String" value="Autom&#xf3;viles y camionetas con acoplado"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkC">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="18" style="1"/>
+              <Font name="Dialog" size="22" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="C"/>
+            <Property name="toolTipText" type="java.lang.String" value="Camiones sin acoplado y los comprendidos en la clase B"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkD">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="18" style="1"/>
+              <Font name="Dialog" size="22" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="D"/>
+            <Property name="toolTipText" type="java.lang.String" value="Servicio de transporte de pasajeros, emergencia, seguridad y los comprendidos en la clase B o C, seg&#xfa;n el caso"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkE">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="18" style="1"/>
+              <Font name="Dialog" size="22" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="E"/>
+            <Property name="toolTipText" type="java.lang.String" value="Camiones articulados o con acoplado, maquinaria especial no agr&#xed;cola y los comprendidos en la clase B y C"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkF">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="18" style="1"/>
+              <Font name="Dialog" size="22" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="F"/>
+            <Property name="toolTipText" type="java.lang.String" value="Automotores especialmente adaptados para discapacitados"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkG">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="18" style="1"/>
+              <Font name="Dialog" size="22" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="G"/>
+            <Property name="toolTipText" type="java.lang.String" value="Tractores agr&#xed;colas y maquinaria especial agr&#xed;cola"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
@@ -307,6 +317,7 @@
           <Image iconType="3" name="/res/icons/cancel.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Cancelar la operaci&#xf3;n y volver al menu"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
@@ -323,6 +334,7 @@
           <Image iconType="3" name="/res/icons/preview_carnet.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Previsualizar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Ver la vista previa de las licencias seleccionadas"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImprimirActionPerformed"/>

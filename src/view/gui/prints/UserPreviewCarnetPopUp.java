@@ -6,6 +6,7 @@
 
 package view.gui.prints;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import model.Licencia;
@@ -27,6 +28,8 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
 
     public UserPreviewCarnetPopUp(Titular titular, List<Licencia> licencias) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setTitle("Vista previa: "+ titular.getApellido() +", " + titular.getNombre());
         this.titular = titular;
         this.recorrido = licencias;
         this.posicion = 0;
@@ -38,6 +41,8 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
         pnlCarnet.setBackground(new java.awt.Color(255, 206, 123));
         pnlDatosLicencia.setOpaque(true);
         pnlDatosLicencia.setBackground(new java.awt.Color(255, 206, 123));
+        lblTitulo.setOpaque(true);
+        lblTitulo.setBackground(new java.awt.Color(255, 162, 5));
         lblGobierno.setOpaque(true);
         lblGobierno.setBackground(new java.awt.Color(255, 162, 5));
     
@@ -45,13 +50,14 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
     }    
     
     public void completarCarnet(Titular titular, List<Licencia> recorridoLicencias, int pos){    
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         lblLicencia.setText(titular.getCodigoDocumento());
         lblApellido.setText(titular.getApellido());
         lblNombre.setText(titular.getNombre());
-        lblFechaNac.setText(titular.getFechaNacimiento().toString().substring(0,11));
+        lblFechaNac.setText(simpleDateFormat.format(titular.getFechaNacimiento()));
         lblDomicilio.setText(titular.getDomicilio());
-        lblOtorgamiento.setText(recorridoLicencias.get(pos).getFechaEmision().toString().substring(0,11));
-        lblVencimiento.setText(recorridoLicencias.get(pos).getFechaVencimiento().toString().substring(0,11));
+        lblOtorgamiento.setText(simpleDateFormat.format(recorridoLicencias.get(pos).getFechaEmision()));
+        lblVencimiento.setText(simpleDateFormat.format(recorridoLicencias.get(pos).getFechaVencimiento()));
         lblClase.setText(recorridoLicencias.get(pos).getClaseLicenciaEnum().name());
         lblGrupo.setText(titular.getGrupoSanguineo().name());
         String factor;
@@ -73,12 +79,12 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToolBar1 = new javax.swing.JToolBar();
+        toolbarOperaciones = new javax.swing.JToolBar();
         btnAnterior = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        lblEspacio = new javax.swing.JLabel();
+        btnImprimirActual = new javax.swing.JButton();
+        btnImprimirTodas = new javax.swing.JButton();
         pnlCarnet = new javax.swing.JPanel();
         lblFotoTitular = new javax.swing.JLabel();
         lblGobierno = new javax.swing.JLabel();
@@ -101,17 +107,17 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
         lblTGrupo = new javax.swing.JLabel();
         lblGrupo = new javax.swing.JLabel();
         lblTObservaciones = new javax.swing.JLabel();
-        lblObservaciones = new javax.swing.JLabel();
         lblTVencimiento = new javax.swing.JLabel();
         lblVencimiento = new javax.swing.JLabel();
         lblTFactor = new javax.swing.JLabel();
         lblFactor = new javax.swing.JLabel();
+        lblObservaciones = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(243, 207, 165));
         setType(java.awt.Window.Type.UTILITY);
 
-        jToolBar1.setRollover(true);
+        toolbarOperaciones.setRollover(true);
 
         btnAnterior.setFont(btnAnterior.getFont().deriveFont(btnAnterior.getFont().getStyle() & ~java.awt.Font.BOLD, btnAnterior.getFont().getSize()+2));
         btnAnterior.setText("Anterior");
@@ -123,7 +129,7 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
                 btnAnteriorActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnAnterior);
+        toolbarOperaciones.add(btnAnterior);
 
         btnSiguiente.setFont(btnSiguiente.getFont().deriveFont(btnSiguiente.getFont().getStyle() & ~java.awt.Font.BOLD, btnSiguiente.getFont().getSize()+2));
         btnSiguiente.setText("Siguiente");
@@ -135,29 +141,30 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnSiguiente);
+        toolbarOperaciones.add(btnSiguiente);
 
-        jLabel1.setText("                                                                ");
-        jLabel1.setToolTipText("");
-        jToolBar1.add(jLabel1);
+        lblEspacio.setText("                                                                ");
+        lblEspacio.setToolTipText("");
+        toolbarOperaciones.add(lblEspacio);
 
-        jButton3.setFont(jButton3.getFont().deriveFont(jButton3.getFont().getStyle() & ~java.awt.Font.BOLD, jButton3.getFont().getSize()+2));
-        jButton3.setText("Imprimir Actual");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
+        btnImprimirActual.setFont(btnImprimirActual.getFont().deriveFont(btnImprimirActual.getFont().getStyle() & ~java.awt.Font.BOLD, btnImprimirActual.getFont().getSize()+2));
+        btnImprimirActual.setText("Imprimir Actual");
+        btnImprimirActual.setFocusable(false);
+        btnImprimirActual.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnImprimirActual.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolbarOperaciones.add(btnImprimirActual);
 
-        jButton4.setFont(jButton4.getFont().deriveFont(jButton4.getFont().getStyle() & ~java.awt.Font.BOLD, jButton4.getFont().getSize()+2));
-        jButton4.setText("Imprimir Todas");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
+        btnImprimirTodas.setFont(btnImprimirTodas.getFont().deriveFont(btnImprimirTodas.getFont().getStyle() & ~java.awt.Font.BOLD, btnImprimirTodas.getFont().getSize()+2));
+        btnImprimirTodas.setText("Imprimir Todas");
+        btnImprimirTodas.setFocusable(false);
+        btnImprimirTodas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnImprimirTodas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolbarOperaciones.add(btnImprimirTodas);
 
         lblFotoTitular.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblFotoTitular.setText("[FOTO DEL TITULAR]");
-        lblFotoTitular.setBorder(new javax.swing.border.MatteBorder(null));
+        lblFotoTitular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/drawable/user.png"))); // NOI18N
+        lblFotoTitular.setToolTipText("");
+        lblFotoTitular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblGobierno.setBackground(new java.awt.Color(255, 162, 5));
         lblGobierno.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -170,27 +177,34 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
         lblTitulo.setText("Licencia Municipal de Conducir - SFC");
 
         lblTLicencia.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTLicencia.setForeground(new java.awt.Color(0, 0, 0));
         lblTLicencia.setText("LICENCIA N°:");
 
         lblTApellido.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTApellido.setForeground(new java.awt.Color(0, 0, 0));
         lblTApellido.setText("APELLIDO:");
 
         lblTNombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTNombre.setForeground(new java.awt.Color(0, 0, 0));
         lblTNombre.setText("NOMBRE:");
 
         lblTFechaNac.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTFechaNac.setForeground(new java.awt.Color(0, 0, 0));
         lblTFechaNac.setText("FECHA DE NAC.:");
 
         lblTDomicilio.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTDomicilio.setForeground(new java.awt.Color(0, 0, 0));
         lblTDomicilio.setText("DOMICILIO:");
 
         lblTOtorgamiento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTOtorgamiento.setForeground(new java.awt.Color(0, 0, 0));
         lblTOtorgamiento.setText("OTORGAMIENTO:");
 
         lblTClase.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTClase.setForeground(new java.awt.Color(0, 0, 0));
         lblTClase.setText("CLASE:");
 
-        lblLicencia.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblLicencia.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         lblApellido.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
@@ -202,79 +216,78 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
 
         lblOtorgamiento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        lblClase.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblClase.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         lblTGrupo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTGrupo.setForeground(new java.awt.Color(0, 0, 0));
         lblTGrupo.setText("GRUPO SANGUINEO:");
 
         lblGrupo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         lblTObservaciones.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTObservaciones.setForeground(new java.awt.Color(0, 0, 0));
         lblTObservaciones.setText("OBSERVACIONES:");
 
-        lblObservaciones.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblObservaciones.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
         lblTVencimiento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTVencimiento.setForeground(new java.awt.Color(0, 0, 0));
         lblTVencimiento.setText("VENCIMIENTO:");
 
-        lblVencimiento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblVencimiento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         lblTFactor.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTFactor.setForeground(new java.awt.Color(0, 0, 0));
         lblTFactor.setText("FACTOR:");
 
         lblFactor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        lblObservaciones.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblObservaciones.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout pnlDatosLicenciaLayout = new javax.swing.GroupLayout(pnlDatosLicencia);
         pnlDatosLicencia.setLayout(pnlDatosLicenciaLayout);
         pnlDatosLicenciaLayout.setHorizontalGroup(
             pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
-                .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTApellido, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTFechaNac, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTDomicilio, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTOtorgamiento, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTClase, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTLicencia, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblLicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
-                                .addComponent(lblClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(74, 74, 74))))
-                    .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(lblOtorgamiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
-                        .addContainerGap()
+                .addContainerGap()
+                .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTObservaciones, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTApellido, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTFechaNac, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTDomicilio, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTLicencia, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
+                            .addGap(23, 23, 23)
+                            .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblTOtorgamiento)
+                                .addComponent(lblTVencimiento)
+                                .addComponent(lblTClase)))
                         .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTObservaciones)
-                            .addComponent(lblTGrupo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblGrupo)))
+                            .addComponent(lblTGrupo)
+                            .addComponent(lblTFactor))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
-                        .addComponent(lblTVencimiento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblVencimiento))
-                    .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
-                        .addComponent(lblTFactor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblFactor)))
-                .addContainerGap(74, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDatosLicenciaLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblLicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(6, 6, 6))
+                    .addComponent(lblOtorgamiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDatosLicenciaLayout.createSequentialGroup()
+                        .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblVencimiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblClase, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblGrupo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblFactor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
+            .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(lblObservaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlDatosLicenciaLayout.setVerticalGroup(
             pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,31 +315,31 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
-                        .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTOtorgamiento)
-                            .addComponent(lblOtorgamiento))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTClase)
-                            .addComponent(lblClase))
+                        .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
+                                .addComponent(lblTOtorgamiento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblTVencimiento)
+                                    .addComponent(lblVencimiento)))
+                            .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblTClase)
+                                    .addComponent(lblClase))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTGrupo)
-                            .addComponent(lblGrupo)))
-                    .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
-                        .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTVencimiento)
-                            .addComponent(lblVencimiento))
-                        .addGap(29, 29, 29)
+                            .addComponent(lblGrupo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTFactor)
-                            .addComponent(lblFactor))))
+                            .addComponent(lblFactor)))
+                    .addComponent(lblOtorgamiento))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDatosLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDatosLicenciaLayout.createSequentialGroup()
-                        .addComponent(lblTObservaciones)
-                        .addGap(0, 23, Short.MAX_VALUE))
-                    .addComponent(lblObservaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblTObservaciones)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblObservaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -334,27 +347,24 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
         pnlCarnet.setLayout(pnlCarnetLayout);
         pnlCarnetLayout.setHorizontalGroup(
             pnlCarnetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblGobierno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlCarnetLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlCarnetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlCarnetLayout.createSequentialGroup()
-                        .addComponent(lblFotoTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlDatosLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addComponent(lblFotoTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlDatosLicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblGobierno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlCarnetLayout.setVerticalGroup(
             pnlCarnetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCarnetLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlCarnetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFotoTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlDatosLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlCarnetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(pnlDatosLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFotoTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblGobierno, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -362,7 +372,7 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(toolbarOperaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
             .addComponent(pnlCarnet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -370,7 +380,7 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(pnlCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(toolbarOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -436,14 +446,13 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
+    private javax.swing.JButton btnImprimirActual;
+    private javax.swing.JButton btnImprimirTodas;
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblClase;
     private javax.swing.JLabel lblDomicilio;
+    private javax.swing.JLabel lblEspacio;
     private javax.swing.JLabel lblFactor;
     private javax.swing.JLabel lblFechaNac;
     private javax.swing.JLabel lblFotoTitular;
@@ -468,6 +477,7 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
     private javax.swing.JLabel lblVencimiento;
     private javax.swing.JPanel pnlCarnet;
     private javax.swing.JPanel pnlDatosLicencia;
+    private javax.swing.JToolBar toolbarOperaciones;
     // End of variables declaration//GEN-END:variables
 
 }
