@@ -1,0 +1,97 @@
+ 
+ //licenciaController
+ 
+ public Double calcularCosto (Titular titular, ClaseLicenciaEnum target){
+        
+        int edad = (-1)*this.calcularEdad(this.calcularVigencia(titular, target));
+        System.out.println("Años de vigencia:  "+edad);
+        Double costo = 0.0;
+        
+        switch(target){
+            case A:
+                if(edad==5){
+                    costo = 40.0;
+                }else if(edad==4){
+                    costo = 30.0;
+                }else if(edad==3){
+                    costo = 25.0;
+                }else if(edad==1){
+                    costo = 20.0;
+                }
+                break;
+            case B:
+                if(edad==5){
+                    costo = 40.0;
+                }else if(edad==4){
+                    costo = 30.0;
+                }else if(edad==3){
+                    costo = 25.0;
+                }else if(edad==1){
+                    costo = 20.0;
+                }
+                break;
+            case C:
+                if(edad==5){
+                    costo = 47.0;
+                }else if(edad==4){
+                    costo = 35.0;
+                }else if(edad==3){
+                    costo = 30.0;
+                }else if(edad==1){
+                    costo = 23.0;
+                }
+                break;
+            case D:
+                 if(edad==5){
+                    costo = 59.0;
+                }else if(edad==4){
+                    costo = 44.0;
+                }else if(edad==3){
+                    costo = 39.0;
+                }else if(edad==1){
+                    costo = 29.0;
+                }
+                break;
+            case E:
+                if(edad==5){
+                    costo = 59.0;
+                }else if(edad==4){
+                    costo = 44.0;
+                }else if(edad==3){
+                    costo = 39.0;
+                }else if(edad==1){
+                    costo = 29.0;
+                }
+                break;
+            case F:
+                if(edad==5){
+                    costo = 40.0;
+                }else if(edad==4){
+                    costo = 30.0;
+                }else if(edad==3){
+                    costo = 25.0;
+                }else if(edad==1){
+                    costo = 20.0;
+                }
+                break;
+            case G:
+                if(edad==5){
+                    costo = 40.0;
+                }else if(edad==4){
+                    costo = 30.0;
+                }else if(edad==3){
+                    costo = 25.0;
+                }else if(edad==1){
+                    costo = 20.0;
+                }
+                break;     
+        }
+        return costo;
+    }
+
+//UserEmitir licencia - En todos los radibooton cambiar costo=50 por:
+
+costo=LicenciaController.getInstance().calcularCosto(titular, claseSeleccionada);
+
+
+
