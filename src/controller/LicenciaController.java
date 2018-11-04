@@ -34,6 +34,53 @@ public class LicenciaController {
         return instance;
     }
     
+     public Double calcularCosto (Date fechaVencimiento, ClaseLicenciaEnum target){
+        
+        int edad = (-1)*this.calcularEdad(fechaVencimiento);
+        Double costo = 0.0;
+        
+        switch(target){
+            case A:
+            case F:
+            case G:
+            case B:
+                if(edad==5){
+                    costo = 40.0;
+                }else if(edad==4){
+                    costo = 30.0;
+                }else if(edad==3){
+                    costo = 25.0;
+                }else if(edad==1){
+                    costo = 20.0;
+                }
+                break;
+            case C:
+                if(edad==5){
+                    costo = 47.0;
+                }else if(edad==4){
+                    costo = 35.0;
+                }else if(edad==3){
+                    costo = 30.0;
+                }else if(edad==1){
+                    costo = 23.0;
+                }
+                break;
+            case D:
+            case E:
+                if(edad==5){
+                    costo = 59.0;
+                }else if(edad==4){
+                    costo = 44.0;
+                }else if(edad==3){
+                    costo = 39.0;
+                }else if(edad==1){
+                    costo = 29.0;
+                }
+                break;   
+        }
+        return costo;
+    }
+    
     public List<Licencia> licenciasVencidas (Date fechaInicio, Date fechaFin, ClaseLicenciaEnum claseLicenciaEnum, Titular titular){
         
         ArrayList<Licencia> resultado = new ArrayList();

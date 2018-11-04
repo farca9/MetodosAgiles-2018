@@ -712,8 +712,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         lblDescripcionClase.setText("Ciclomotores, motocicletas y triciclos motorizados.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
-        Double costo;//TBD
-        costo=50.0;//TBD
+        Double costo = LicenciaController.getInstance().calcularCosto(fechaVencimiento, claseSeleccionada);
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.A);
         
         String mensaje="";
@@ -747,8 +746,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         lblDescripcionClase.setText("Transporte de pasajeros, emergencias, o seguridad, y clases B o C.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
-        Double costo;//TBD
-        costo=50.0;//TBD
+        Double costo = LicenciaController.getInstance().calcularCosto(fechaVencimiento, claseSeleccionada);
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.D);
         boolean tieneBValida = LicenciaController.getInstance().tieneBValida(titular);
         
@@ -813,8 +811,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         lblDescripcionClase.setText("Automóviles y camionetas con acoplado.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
-        Double costo;//TBD
-        costo=50.0;//TBD
+        Double costo = LicenciaController.getInstance().calcularCosto(fechaVencimiento, claseSeleccionada);
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.B);
         
         String mensaje="";
@@ -847,8 +844,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         lblDescripcionClase.setText("Automotores adaptados para discapacitados.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
-        Double costo;//TBD
-        costo=50.0;//TBD
+        Double costo = LicenciaController.getInstance().calcularCosto(fechaVencimiento, claseSeleccionada);
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.F);
         
         String mensaje="";
@@ -881,8 +877,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         lblDescripcionClase.setText("Tractores y maquinaria especial agrícola.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
-        Double costo;//TBD
-        costo=50.0;//TBD
+        Double costo = LicenciaController.getInstance().calcularCosto(fechaVencimiento, claseSeleccionada);
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.G);
         
         String mensaje="";
@@ -915,8 +910,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         lblDescripcionClase.setText("Camiones sin acoplado y comprendidos en clase B.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
-        Double costo;//TBD
-        costo=50.0;//TBD
+        Double costo = LicenciaController.getInstance().calcularCosto(fechaVencimiento, claseSeleccionada);
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.C);
         boolean tieneBValida = LicenciaController.getInstance().tieneBValida(titular);
         
@@ -964,8 +958,7 @@ public class UserEmitirLicencia extends javax.swing.JFrame {
         lblDescripcionClase.setText("Camiones con acoplado, maquinaria  no agrícola, y clases B y C.");
         int edad = LicenciaController.getInstance().calcularEdad(titular.getFechaNacimiento());
         Date fechaVencimiento = LicenciaController.getInstance().calcularVigencia(titular, claseSeleccionada);
-        Double costo;//TBD
-        costo=50.0;//TBD
+        Double costo = LicenciaController.getInstance().calcularCosto(fechaVencimiento, claseSeleccionada);
         boolean yaEmitida = LicenciaController.getInstance().yaEmitida(titular, ClaseLicenciaEnum.E);
         boolean tieneBValida = LicenciaController.getInstance().tieneBValida(titular);
         

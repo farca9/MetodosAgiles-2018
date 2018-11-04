@@ -10,14 +10,23 @@ import java.awt.Image;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
 import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.ClaseLicenciaEnum;
 import model.Licencia;
 import model.Titular;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import util.TitularReceiver;
 import view.gui.menus.UserMenu;
+import view.reports.LicenciaReportModel;
 
 /**
  *
@@ -27,6 +36,7 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
 
     private Titular titular=null;
     private ClaseLicenciaEnum claseLicenciaEnum=null;
+    private ArrayList<Licencia> licencias=null;
     
     /**
      * Creates new form UserLicenciasVencidas
@@ -37,6 +47,8 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
         this.setIconImage(icon);
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        this.btnImprimir.setEnabled(false);
         
         Date today = new Date();
         
@@ -327,7 +339,6 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
 
     private void btnAplicarFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarFiltroActionPerformed
 
-        ArrayList<Licencia> licencias;
         
         licencias = (ArrayList)LicenciaController.getInstance().licenciasVencidas(dateInicio.getDate(), dateFinal.getDate(), claseLicenciaEnum, titular);
         
@@ -346,6 +357,8 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
                             sdf.format(licencia.getFechaVencimiento())};
             model.addRow(fila);
         }
+        
+        this.btnImprimir.setEnabled(true);
 
     }//GEN-LAST:event_btnAplicarFiltroActionPerformed
 
@@ -364,7 +377,58 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
     }//GEN-LAST:event_btnLimpiarFiltroActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        // TODO add your handling code here:
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try{
+            
+           JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile("src/view/reports/ListadoLicenciasVencidas.jasper");
+           
+           //Pasaje del parametros del reporte
+           HashMap<String,Object> parameters = new HashMap();
+           if(this.titular != null) parameters.put("titular", titular.getApellido()+", "+titular.getNombre());
+           else parameters.put("titular", "N/A");
+           
+            switch(cbClases.getSelectedIndex()){
+                case 0: parameters.put("clase", "Todas"); break;
+                case 1: parameters.put("clase", ClaseLicenciaEnum.A.toString()); break;
+                case 2: parameters.put("clase", ClaseLicenciaEnum.B.toString()); break;
+                case 3: parameters.put("clase", ClaseLicenciaEnum.C.toString()); break;
+                case 4: parameters.put("clase", ClaseLicenciaEnum.D.toString()); break;
+                case 5: parameters.put("clase", ClaseLicenciaEnum.E.toString()); break;
+                case 6: parameters.put("clase", ClaseLicenciaEnum.F.toString()); break;
+                case 7: parameters.put("clase", ClaseLicenciaEnum.G.toString()); break;
+                default: parameters.put("clase", "N/A"); break;
+            }
+           
+            if(this.dateInicio.getDate()!=null) parameters.put("vencimientoDesde", sdf.format(dateInicio.getDate()));
+            else parameters.put("vencimientoDesde", "N/A");
+
+            if(this.dateFinal.getDate()!=null) parameters.put("vencimientoHasta", sdf.format(dateFinal.getDate()));
+            else parameters.put("vencimientoHasta", "N/A");
+
+            //Poblacion del dataset con la lista de licencias, usando el modelo LicenciaReportModel
+            LinkedList<LicenciaReportModel> licenciaReportModels = new LinkedList();
+            for(int i=0;i<licencias.size();i++){
+                licenciaReportModels.add(new LicenciaReportModel(licencias.get(i)));
+            }
+            
+            System.out.println(licencias.size());
+            System.out.println(licenciaReportModels);
+            
+            JRBeanCollectionDataSource items = new JRBeanCollectionDataSource(licenciaReportModels);
+            
+
+            JasperPrint jp = JasperFillManager.fillReport(jr, parameters, items);
+            JasperViewer jv = new JasperViewer(jp,false);
+            jv.show();
+
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        this.btnImprimir.setEnabled(false);
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     /**
