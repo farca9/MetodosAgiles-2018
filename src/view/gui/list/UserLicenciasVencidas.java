@@ -358,7 +358,8 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
             model.addRow(fila);
         }
         
-        this.btnImprimir.setEnabled(true);
+        if(licencias.isEmpty() || licencias==null) this.btnImprimir.setEnabled(false); else btnImprimir.setEnabled(true);
+        
 
     }//GEN-LAST:event_btnAplicarFiltroActionPerformed
 
@@ -409,13 +410,12 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
 
             //Poblacion del dataset con la lista de licencias, usando el modelo LicenciaReportModel
             LinkedList<LicenciaReportModel> licenciaReportModels = new LinkedList();
-            for(int i=0;i<licencias.size();i++){
-                licenciaReportModels.add(new LicenciaReportModel(licencias.get(i)));
+            if(licencias != null){
+                for(int i=0;i<licencias.size();i++){
+                    licenciaReportModels.add(new LicenciaReportModel(licencias.get(i)));
+                }
             }
-            
-            System.out.println(licencias.size());
-            System.out.println(licenciaReportModels);
-            
+            //Se genera el datasource que contiene la lista de licencias para el reporte
             JRBeanCollectionDataSource items = new JRBeanCollectionDataSource(licenciaReportModels);
             
 
@@ -428,7 +428,6 @@ public class UserLicenciasVencidas extends javax.swing.JFrame implements Titular
             e.printStackTrace();
         }
         
-        this.btnImprimir.setEnabled(false);
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     /**
