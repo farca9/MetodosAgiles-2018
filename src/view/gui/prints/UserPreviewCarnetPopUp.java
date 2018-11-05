@@ -7,20 +7,16 @@
 package view.gui.prints;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import model.ClaseLicenciaEnum;
 import model.Licencia;
 import model.Titular;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import view.reports.LicenciaReportModel;
 
 /**
  *
@@ -432,41 +428,26 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
            
            //Pasaje del parametros del reporte
            HashMap<String,Object> parameters = new HashMap();
-           if(this.titular != null) {
-               parameters.put("codigoDocumento", titular.getCodigoDocumento());
-               parameters.put("apellido", titular.getApellido());
-               parameters.put("nombre", titular.getNombre());
-               parameters.put("fechaNac", sdf.format(titular.getFechaNacimiento()));
-               parameters.put("domicilio", titular.getDomicilio());
-               parameters.put("grupoSanguineo", titular.getGrupoSanguineo().name());
-               if(titular.isFactor()){
-                   parameters.put("factor", "+");
-               } else {
-                   parameters.put("factor", "-");
-               }
-               
-               parameters.put("emision", sdf.format(recorrido.get(posicion).getFechaEmision()));
-               parameters.put("vencimiento", sdf.format(recorrido.get(posicion).getFechaVencimiento()));
-               parameters.put("clase", recorrido.get(posicion).getClaseLicenciaEnum().name());
-               parameters.put("observaciones", recorrido.get(posicion).getObservacion());
-               
+           parameters.put("codigoDocumento", titular.getCodigoDocumento());
+           parameters.put("apellido", titular.getApellido());
+           parameters.put("nombre", titular.getNombre());
+           parameters.put("fechaNac", sdf.format(titular.getFechaNacimiento()));
+           parameters.put("domicilio", titular.getDomicilio());
+           parameters.put("grupoSanguineo", titular.getGrupoSanguineo().name());
+           if(titular.isFactor()){
+               parameters.put("factor", "+");
+           } else {
+               parameters.put("factor", "-");
            }
-           else System.out.println("SE ROMPIOOOO");
-
-            //Poblacion del dataset con la lista de licencias, usando el modelo LicenciaReportModel
-            LinkedList<LicenciaReportModel> licenciaReportModels = new LinkedList();
-//            if(licencias != null){
-//                for(int i=0;i<licencias.size();i++){
-//                    licenciaReportModels.add(new LicenciaReportModel(licencias.get(i)));
-//                }
-//            }
-            //Se genera el datasource que contiene la lista de licencias para el reporte
-            JRBeanCollectionDataSource items = new JRBeanCollectionDataSource(licenciaReportModels);
-            
-
-            JasperPrint jp = JasperFillManager.fillReport(jr, parameters, items);
-            JasperViewer jv = new JasperViewer(jp,false);
-            jv.show();
+               
+           parameters.put("emision", sdf.format(recorrido.get(posicion).getFechaEmision()));
+           parameters.put("vencimiento", sdf.format(recorrido.get(posicion).getFechaVencimiento()));
+           parameters.put("clase", recorrido.get(posicion).getClaseLicenciaEnum().name());
+           parameters.put("observaciones", recorrido.get(posicion).getObservacion());
+               
+           JasperPrint jp = JasperFillManager.fillReport(jr, parameters, new JREmptyDataSource());
+           JasperViewer jv = new JasperViewer(jp,false);
+           jv.show();
 
             
         }catch(Exception e){
