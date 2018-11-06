@@ -5,10 +5,10 @@
  */
 package main;
 
+import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
 import hibernate.Hibernator;
 import java.awt.Font;
 import javax.swing.UIManager;
-import util.ContribuyentePopulator;
 import view.gui.login.MainMenu;
 
 /**
@@ -26,11 +26,16 @@ public class main {
             ex.printStackTrace();
         }
      
-        ContribuyentePopulator.populate(500);// -> Puebla la tabla de contribuyentes con datos aleatorios
+        //ContribuyentePopulator.populate(500);// -> Puebla la tabla de contribuyentes con datos aleatorios
         
+        
+        try{
+            UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
+        }catch (Exception e){
+            
+        }
         setUIFont(new javax.swing.plaf.FontUIResource("Segoe UI",Font.PLAIN,15));
         new MainMenu().setVisible(true);
-        
     }
     
     private static void setUIFont (javax.swing.plaf.FontUIResource f){

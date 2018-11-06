@@ -7,6 +7,7 @@ package dao;
 
 import hibernate.Hibernator;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.Licencia;
 import org.hibernate.Criteria;
@@ -37,7 +38,7 @@ public class LicenciaDAO{
             Session ses = Hibernator.getInstance().getSession();
             ses.beginTransaction();
             
-            Criteria crit = null;
+            Criteria crit = ses.createCriteria(Licencia.class);
             
             Conjunction conj = Restrictions.conjunction();
             
@@ -61,6 +62,57 @@ public class LicenciaDAO{
         }
         
         return resultado;
+    }
+    
+    public List<Licencia> find (Licencia licencia, Date fechaInicio, Date fechaFin){
+        
+        ArrayList<Licencia> resultado;
+        
+        try{
+            Session ses = Hibernator.getInstance().getSession();
+            ses.beginTransaction();
+            
+            Criteria crit = ses.createCriteria(Licencia.class);
+            
+            Conjunction conj = Restrictions.conjunction();
+            
+            if(licencia.getTitular() != null){
+                conj.add(Restrictions.eq("titular", licencia.getTitular()));
+            }
+            
+            if(licencia.getClaseLicenciaEnum()!=null){
+                conj.add(Restrictions.eq("claseLicenciaEnum", licencia.getClaseLicenciaEnum()));
+            }
+            
+            if(fechaInicio != null){
+                conj.add(Restrictions.gt("fechaVencimiento", fechaInicio));
+            }
+            
+            if(fechaFin != null){
+                conj.add(Restrictions.lt("fechaVencimiento", fechaFin));
+            }
+            
+            Date today = new Date();
+            today.setHours(0);
+            today.setMinutes(0);
+            today.setSeconds(0);
+            
+            conj.add(Restrictions.lt("fechaVencimiento", today)); //Validar que en efecto este vencida
+            
+            crit.add(conj);
+            
+            resultado = (ArrayList<Licencia>)crit.list();
+            
+            ses.getTransaction().commit();
+            
+        }
+        catch(Exception ex){
+            resultado = new ArrayList();
+            ex.printStackTrace();
+        }
+        
+        return resultado;
+        
     }
     
     public boolean insert (Licencia licencia){

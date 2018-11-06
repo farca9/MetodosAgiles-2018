@@ -56,8 +56,9 @@ public class TitularDAO {
             Conjunction conj = Restrictions.conjunction();
             
             if(titular.getApellido() != null ) conj.add(Restrictions.ilike("apellido", titular.getApellido(), MatchMode.ANYWHERE));
-            else if (titular.getNombre() != null) conj.add(Restrictions.ilike("nombre",titular.getNombre(), MatchMode.ANYWHERE));
-            else if (titular.getCodigoDocumento() != null) conj.add(Restrictions.eq("codigoDocumento", titular.getCodigoDocumento()));
+            if (titular.getNombre() != null) conj.add(Restrictions.ilike("nombre",titular.getNombre(), MatchMode.ANYWHERE));
+            if (titular.getCodigoDocumento() != null) conj.add(Restrictions.eq("codigoDocumento", titular.getCodigoDocumento()));
+            if (titular.getTipoDocumento() != null) conj.add(Restrictions.eq("tipoDocumento",titular.getTipoDocumento()));
             
             crit.add(conj);
             

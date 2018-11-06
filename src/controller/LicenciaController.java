@@ -11,8 +11,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import model.ClaseLicenciaEnum;
 import model.Licencia;
 import model.Titular;
@@ -30,6 +32,65 @@ public class LicenciaController {
     public static LicenciaController getInstance(){
         if (instance == null) instance = new LicenciaController();
         return instance;
+    }
+    
+     public Double calcularCosto (Date fechaVencimiento, ClaseLicenciaEnum target){
+        
+        int edad = (-1)*this.calcularEdad(fechaVencimiento);
+        Double costo = 0.0;
+        
+        switch(target){
+            case A:
+            case F:
+            case G:
+            case B:
+                if(edad==5){
+                    costo = 40.0;
+                }else if(edad==4){
+                    costo = 30.0;
+                }else if(edad==3){
+                    costo = 25.0;
+                }else if(edad==1){
+                    costo = 20.0;
+                }
+                break;
+            case C:
+                if(edad==5){
+                    costo = 47.0;
+                }else if(edad==4){
+                    costo = 35.0;
+                }else if(edad==3){
+                    costo = 30.0;
+                }else if(edad==1){
+                    costo = 23.0;
+                }
+                break;
+            case D:
+            case E:
+                if(edad==5){
+                    costo = 59.0;
+                }else if(edad==4){
+                    costo = 44.0;
+                }else if(edad==3){
+                    costo = 39.0;
+                }else if(edad==1){
+                    costo = 29.0;
+                }
+                break;   
+        }
+        return costo+8.0; //Gastos administrativos
+    }
+    
+    public List<Licencia> licenciasVencidas (Date fechaInicio, Date fechaFin, ClaseLicenciaEnum claseLicenciaEnum, Titular titular){
+        
+        ArrayList<Licencia> resultado = new ArrayList();
+        
+        Licencia licencia = new Licencia();
+        licencia.setClaseLicenciaEnum(claseLicenciaEnum);
+        licencia.setTitular(titular);
+        resultado = (ArrayList)LicenciaDAO.getInstance().find(licencia, fechaInicio, fechaFin);
+        
+        return resultado;
     }
     
     public Date calcularVigencia(Titular t1, ClaseLicenciaEnum c1){
@@ -57,8 +118,8 @@ public class LicenciaController {
         int string_nacimiento = Integer.parseInt(formatter.format(t1.getFechaNacimiento()));                            
         int string_actual = Integer.parseInt(formatter.format(actual));  
         
-        int edad = (string_actual - string_nacimiento) / 10000;   
-        
+        int edad = (string_actual - string_nacimiento) / 10000;
+
         
         
         if(edad<17){
@@ -176,7 +237,7 @@ public class LicenciaController {
                         c.add(Calendar.YEAR, 3);
                         c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
                         vencimiento = c.getTime();
-                        ;
+                        
                         return vencimiento;
                         //vencimiento = actual + vigencia + diferencia
                     }else{
@@ -218,21 +279,17 @@ public class LicenciaController {
            return vencimiento;
     }
 
-    public boolean crearLicencia(Titular titular, ClaseLicenciaEnum claseLicenciaEnum, String observaciones){
+    public boolean crearLicencia(Titular titular, ClaseLicenciaEnum claseLicenciaEnum){
         
         Licencia licencia = new Licencia();
         licencia.setTitular(titular);
         licencia.setActiva(true);
         licencia.setClaseLicenciaEnum(claseLicenciaEnum);
         licencia.setFechaEmision(new Date());
-        Date fakeVencimiento = new Date();
-        fakeVencimiento.setYear(125);
-        licencia.setFechaVencimiento(fakeVencimiento); //TBD - this.calcularVigencia;
-        licencia.setObservacion(observaciones);
+        licencia.setFechaVencimiento(this.calcularVigencia(titular, claseLicenciaEnum));
         titular.getLicencias().add(licencia);
         
         return LicenciaDAO.getInstance().insert(licencia);
-        
         
     }
     

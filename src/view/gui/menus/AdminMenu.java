@@ -51,7 +51,7 @@ public class AdminMenu extends javax.swing.JFrame {
         lblAdministrador = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("GLC - SFC");
+        setTitle("GLC | SFC - Menu");
         setResizable(false);
 
         btnAddUser.setFont(btnAddUser.getFont().deriveFont(btnAddUser.getFont().getSize()+3f));
@@ -82,6 +82,7 @@ public class AdminMenu extends javax.swing.JFrame {
 
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/logout2.png"))); // NOI18N
         btnLogout.setToolTipText("Cerrar Sesión");
+        btnLogout.setBorderPainted(false);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogoutActionPerformed(evt);

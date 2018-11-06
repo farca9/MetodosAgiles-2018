@@ -60,12 +60,13 @@ public class UserAddTitular extends javax.swing.JFrame {
                 cmbDonante.setEnabled(true);
                 cmbFactor.setEnabled(true);
                 cmbGrupoSanguineo.setEnabled(true);
+                txtAreaObservaciones.setEnabled(true);
                 btnFiltroNombre.setEnabled(false);
                 btnFiltroApellido.setEnabled(false);
                 btnFiltroDocumento.setEnabled(false);
                 btnAplicarFiltro.setEnabled(false);
                 txtFiltro.setEnabled(false);
-                
+
                 contribuyentes.get(tableContribuyentes.getSelectedRow());            
             }
         });
@@ -98,21 +99,23 @@ public class UserAddTitular extends javax.swing.JFrame {
         cmbFactor = new javax.swing.JComboBox<>();
         lblDonante = new javax.swing.JLabel();
         cmbDonante = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtAreaObservaciones = new javax.swing.JTextArea();
+        lblDonante1 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        lblMensaje = new javax.swing.JLabel();
         lblNuevoTitular = new javax.swing.JLabel();
         lblAContinuacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("GLC - SFC");
+        setTitle("GLC | SFC - Nuevo Titular");
         setResizable(false);
 
         lblSantaFe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSantaFe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/drawable/logo-santafe.png"))); // NOI18N
         lblSantaFe.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        pnlDatosPersonales.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Personales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), null)); // NOI18N
+        pnlDatosPersonales.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Personales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
 
         tableContribuyentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -143,6 +146,7 @@ public class UserAddTitular extends javax.swing.JFrame {
         txtFiltro.setFont(txtFiltro.getFont().deriveFont(txtFiltro.getFont().getSize()+4f));
         txtFiltro.setEnabled(false);
 
+        btnFiltroNombre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnFiltroNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/filter_mini.png"))); // NOI18N
         btnFiltroNombre.setText("Nombre");
         btnFiltroNombre.setToolTipText("Filtre a los contribuyentes por su nombre.");
@@ -152,6 +156,7 @@ public class UserAddTitular extends javax.swing.JFrame {
             }
         });
 
+        btnFiltroApellido.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnFiltroApellido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/filter_mini.png"))); // NOI18N
         btnFiltroApellido.setText("Apellido");
         btnFiltroApellido.setToolTipText("Filtre a los contribuyentes por su apellido.");
@@ -161,6 +166,7 @@ public class UserAddTitular extends javax.swing.JFrame {
             }
         });
 
+        btnFiltroDocumento.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnFiltroDocumento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/filter_mini.png"))); // NOI18N
         btnFiltroDocumento.setText("Documento");
         btnFiltroDocumento.setToolTipText("Filtre a los contribuyentes por su N° de documento.");
@@ -171,6 +177,7 @@ public class UserAddTitular extends javax.swing.JFrame {
         });
 
         btnAplicarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/search_mini.png"))); // NOI18N
+        btnAplicarFiltro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAplicarFiltro.setEnabled(false);
         btnAplicarFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,6 +186,7 @@ public class UserAddTitular extends javax.swing.JFrame {
         });
 
         btnLimpiarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/cancel_mini.png"))); // NOI18N
+        btnLimpiarFiltro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnLimpiarFiltro.setEnabled(false);
         btnLimpiarFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,15 +212,14 @@ public class UserAddTitular extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlDatosPersonalesLayout.createSequentialGroup()
-                        .addGroup(pnlDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblBuscar)
-                            .addGroup(pnlDatosPersonalesLayout.createSequentialGroup()
-                                .addComponent(btnFiltroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFiltroApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFiltroDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(lblBuscar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlDatosPersonalesLayout.createSequentialGroup()
+                        .addComponent(btnFiltroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFiltroApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFiltroDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlDatosPersonalesLayout.setVerticalGroup(
@@ -225,16 +232,16 @@ public class UserAddTitular extends javax.swing.JFrame {
                     .addComponent(btnFiltroApellido)
                     .addComponent(btnFiltroDocumento))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAplicarFiltro)
-                    .addComponent(btnLimpiarFiltro))
+                .addGroup(pnlDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtFiltro)
+                    .addComponent(btnAplicarFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        pnlDatosMedicos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Médicos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), null)); // NOI18N
+        pnlDatosMedicos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Médicos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
 
         lblGrupoSanguineo.setText("Grupo Sanguíneo");
 
@@ -245,30 +252,56 @@ public class UserAddTitular extends javax.swing.JFrame {
 
         cmbFactor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "+", "-" }));
         cmbFactor.setEnabled(false);
+        cmbFactor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFactorActionPerformed(evt);
+            }
+        });
 
         lblDonante.setText("Donante de Órganos");
 
         cmbDonante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Si", "No" }));
         cmbDonante.setEnabled(false);
+        cmbDonante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDonanteActionPerformed(evt);
+            }
+        });
+
+        txtAreaObservaciones.setColumns(20);
+        txtAreaObservaciones.setRows(2);
+        txtAreaObservaciones.setEnabled(false);
+        jScrollPane2.setViewportView(txtAreaObservaciones);
+
+        lblDonante1.setText("Observaciones");
 
         javax.swing.GroupLayout pnlDatosMedicosLayout = new javax.swing.GroupLayout(pnlDatosMedicos);
         pnlDatosMedicos.setLayout(pnlDatosMedicosLayout);
         pnlDatosMedicosLayout.setHorizontalGroup(
             pnlDatosMedicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosMedicosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblGrupoSanguineo)
-                .addGap(4, 4, 4)
-                .addComponent(cmbGrupoSanguineo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlDatosMedicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlDatosMedicosLayout.createSequentialGroup()
+                        .addComponent(lblDonante)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbDonante, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlDatosMedicosLayout.createSequentialGroup()
+                        .addGroup(pnlDatosMedicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFactor, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblGrupoSanguineo, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlDatosMedicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbFactor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbGrupoSanguineo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(lblFactor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbFactor, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblDonante)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbDonante, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(pnlDatosMedicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDatosMedicosLayout.createSequentialGroup()
+                        .addComponent(lblDonante1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlDatosMedicosLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())))
         );
         pnlDatosMedicosLayout.setVerticalGroup(
             pnlDatosMedicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,12 +309,21 @@ public class UserAddTitular extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlDatosMedicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblGrupoSanguineo)
-                    .addComponent(lblFactor)
                     .addComponent(cmbGrupoSanguineo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbFactor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDonante)
-                    .addComponent(cmbDonante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(8, Short.MAX_VALUE))
+                    .addComponent(lblDonante1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDatosMedicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDatosMedicosLayout.createSequentialGroup()
+                        .addGroup(pnlDatosMedicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbFactor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFactor))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlDatosMedicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDonante)
+                            .addComponent(cmbDonante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2))
+                .addGap(6, 6, 6))
         );
 
         btnGuardar.setFont(btnGuardar.getFont().deriveFont(btnGuardar.getFont().getSize()+2f));
@@ -305,10 +347,11 @@ public class UserAddTitular extends javax.swing.JFrame {
             }
         });
 
-        lblNuevoTitular.setFont(lblNuevoTitular.getFont().deriveFont(lblNuevoTitular.getFont().getSize()+13f));
+        lblNuevoTitular.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
         lblNuevoTitular.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNuevoTitular.setText("NUEVO TITULAR");
 
+        lblAContinuacion.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         lblAContinuacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAContinuacion.setText("A continuación, seleccione un contribuyente e ingrese sus datos.");
         lblAContinuacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -321,34 +364,25 @@ public class UserAddTitular extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlDatosPersonales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlDatosMedicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlDatosPersonales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnlDatosMedicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(285, 285, 285)
-                        .addComponent(lblMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(6, 6, 6))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblNuevoTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblAContinuacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNuevoTitular, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblAContinuacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblSantaFe, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(18, 18, 18)
                 .addComponent(lblNuevoTitular)
-                .addGap(7, 7, 7)
-                .addComponent(lblAContinuacion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblAContinuacion)
+                .addGap(18, 18, 18)
                 .addComponent(pnlDatosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlDatosMedicos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -356,8 +390,7 @@ public class UserAddTitular extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -378,6 +411,8 @@ public class UserAddTitular extends javax.swing.JFrame {
             cmbDonante.setSelectedItem("");
             cmbFactor.setSelectedItem("");
             cmbGrupoSanguineo.setSelectedItem("");
+            txtAreaObservaciones.setEnabled(false);
+            txtAreaObservaciones.setText("");
             
             btnFiltroNombre.setEnabled(true);
             btnFiltroApellido.setEnabled(true);
@@ -414,6 +449,7 @@ public class UserAddTitular extends javax.swing.JFrame {
         boolean factor = false;
         boolean donante = false;
         GrupoSanguineoEnum grupo = null;
+        String observaciones = txtAreaObservaciones.getText();
         Contribuyente contribuyente = contribuyentes.get(tableContribuyentes.getSelectedRow());
         
         if(cmbFactor.getSelectedItem() == "+") factor = true;
@@ -432,7 +468,7 @@ public class UserAddTitular extends javax.swing.JFrame {
         else{ 
             
             if(TitularController.getInstance().titularRegistrado(contribuyente) &&
-               TitularController.getInstance().crearTitular(contribuyente, grupo, factor, donante)
+               TitularController.getInstance().crearTitular(contribuyente, grupo, factor, donante, observaciones)
                ){
                 JOptionPane.showMessageDialog(null, "Se ha cargado el titular exitosamente.", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
                 new UserMenu().setVisible(true);
@@ -446,8 +482,10 @@ public class UserAddTitular extends javax.swing.JFrame {
                 cmbDonante.setSelectedItem("");
                 cmbFactor.setSelectedItem("");
                 cmbGrupoSanguineo.setSelectedItem("");
+                txtAreaObservaciones.setEnabled(false);
+                txtAreaObservaciones.setText("");
                 btnGuardar.setEnabled(false);
-                btnCancelar.setEnabled(false);
+                btnCancelar.setEnabled(true);
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -480,6 +518,11 @@ public class UserAddTitular extends javax.swing.JFrame {
             model.addRow(fila);
         }
     }//GEN-LAST:event_btnAplicarFiltroActionPerformed
+
+    private void cmbDonanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDonanteActionPerformed
+    }//GEN-LAST:event_cmbDonanteActionPerformed
+    private void cmbFactorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFactorActionPerformed
+    }//GEN-LAST:event_cmbFactorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -530,17 +573,19 @@ public class UserAddTitular extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbFactor;
     private javax.swing.JComboBox<String> cmbGrupoSanguineo;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAContinuacion;
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblDonante;
+    private javax.swing.JLabel lblDonante1;
     private javax.swing.JLabel lblFactor;
     private javax.swing.JLabel lblGrupoSanguineo;
-    private javax.swing.JLabel lblMensaje;
     private javax.swing.JLabel lblNuevoTitular;
     private javax.swing.JLabel lblSantaFe;
     private javax.swing.JPanel pnlDatosMedicos;
     private javax.swing.JPanel pnlDatosPersonales;
     private javax.swing.JTable tableContribuyentes;
+    private javax.swing.JTextArea txtAreaObservaciones;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }
