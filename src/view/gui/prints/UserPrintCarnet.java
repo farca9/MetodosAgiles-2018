@@ -388,6 +388,10 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
         
         // Inicializo la webcam y tomo la foto
 	Webcam webcam = Webcam.getDefault();
+        if(webcam==null) {
+            JOptionPane.showMessageDialog(this, "No se ha podido tomar la foto", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        } 
         webcam.setViewSize(new Dimension(640, 480));
 	webcam.open();
 	BufferedImage imagen = webcam.getImage();
@@ -398,6 +402,7 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
             ImageIO.write(imagen, "PNG", new File("test.png"));
         } catch (IOException ex) {
             Logger.getLogger(UserPrintCarnet.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "No se ha podido tomar la foto", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         // Muestro la foto tomada en la interfaz
@@ -405,6 +410,7 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
             lblFotoTitular.setIcon( new ImageIcon(ImageIO.read(new File("test.png"))));
         } catch (IOException ex) {
             Logger.getLogger(UserPrintCarnet.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "No se ha podido tomar la foto", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
         // Guardo la foto en la resolucion necesitada (256x256 - tamanio del label que la contiene)
@@ -416,6 +422,7 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
             ImageIO.write(img, "JPG", new File("fotoTitular.jpg"));
         } catch (IOException ex) {
             Logger.getLogger(UserPrintCarnet.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "No se ha podido tomar la foto", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnTomarFotoActionPerformed
 

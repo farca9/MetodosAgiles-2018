@@ -13,6 +13,7 @@ import controller.*;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import util.TitularReceiver;
@@ -43,6 +44,10 @@ public class UserSeleccionarTitularPopUp extends javax.swing.JFrame {
         this.invoker=(TitularReceiver)invoker;
         invoker.setEnabled(false);
         this.setLocationRelativeTo(null);
+        
+        tableTitulares.getTableHeader().setReorderingAllowed(false);
+        tableTitulares.setRowSelectionAllowed(true);
+        tableTitulares.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         self=this;
         

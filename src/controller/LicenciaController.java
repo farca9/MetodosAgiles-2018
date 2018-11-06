@@ -78,7 +78,7 @@ public class LicenciaController {
                 }
                 break;   
         }
-        return costo;
+        return costo+8.0; //Gastos administrativos
     }
     
     public List<Licencia> licenciasVencidas (Date fechaInicio, Date fechaFin, ClaseLicenciaEnum claseLicenciaEnum, Titular titular){
