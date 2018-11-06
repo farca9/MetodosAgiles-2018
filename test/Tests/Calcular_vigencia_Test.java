@@ -10,12 +10,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Set;
 import model.ClaseLicenciaEnum;
 import model.GrupoSanguineoEnum;
 import model.Licencia;
@@ -88,13 +84,13 @@ public class Calcular_vigencia_Test {
                
         
         //Init titulares
-        t1 = new Titular("38898095", TipoDocumentoEnum.DU, "Santiago", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, date1);
-        t2 = new Titular("38898095", TipoDocumentoEnum.DU, "Lucas", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, true, date2);
-        t3 = new Titular("38898095", TipoDocumentoEnum.DU, "Martin", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, true, false, date3);
-        t4 = new Titular("38898095", TipoDocumentoEnum.DU, "Jorge", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, true, true, date4);
-        t5 = new Titular("38898095", TipoDocumentoEnum.DU, "Santiago", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, date5);
-        t6 = new Titular("38898095", TipoDocumentoEnum.DU, "Lucas", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, true, date6);
-        t7 = new Titular("38898095", TipoDocumentoEnum.DU, "Martin", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, true, false, date7);
+        t1 = new Titular("38898095", TipoDocumentoEnum.DU, "Santiago", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, date1,"");
+        t2 = new Titular("38898095", TipoDocumentoEnum.DU, "Lucas", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, true, date2,"");
+        t3 = new Titular("38898095", TipoDocumentoEnum.DU, "Martin", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, true, false, date3,"");
+        t4 = new Titular("38898095", TipoDocumentoEnum.DU, "Jorge", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, true, true, date4,"");
+        t5 = new Titular("38898095", TipoDocumentoEnum.DU, "Santiago", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, false, date5,"");
+        t6 = new Titular("38898095", TipoDocumentoEnum.DU, "Lucas", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, false, true, date6,"");
+        t7 = new Titular("38898095", TipoDocumentoEnum.DU, "Martin", "Roa", "San Luis 2820", GrupoSanguineoEnum.O, true, false, date7,"");
         
          //Init lista licencias
         List<Licencia> lista = new ArrayList<Licencia>();        

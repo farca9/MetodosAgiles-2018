@@ -279,7 +279,7 @@ public class LicenciaController {
            return vencimiento;
     }
 
-    public boolean crearLicencia(Titular titular, ClaseLicenciaEnum claseLicenciaEnum, String observaciones){
+    public boolean crearLicencia(Titular titular, ClaseLicenciaEnum claseLicenciaEnum){
         
         Licencia licencia = new Licencia();
         licencia.setTitular(titular);
@@ -287,11 +287,9 @@ public class LicenciaController {
         licencia.setClaseLicenciaEnum(claseLicenciaEnum);
         licencia.setFechaEmision(new Date());
         licencia.setFechaVencimiento(this.calcularVigencia(titular, claseLicenciaEnum));
-        licencia.setObservacion(observaciones);
         titular.getLicencias().add(licencia);
         
         return LicenciaDAO.getInstance().insert(licencia);
-        
         
     }
     

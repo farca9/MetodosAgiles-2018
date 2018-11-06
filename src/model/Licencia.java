@@ -29,13 +29,7 @@ public class Licencia {
     private Date fechaEmision;
     
     private Date fechaVencimiento;
-    
-    private String observacion;
-    
-    /*@OneToOne(cascade=CascadeType.ALL)  
-    @JoinColumn(name="idUsuarioFK")
-    private Usuario usuario;*/
-    
+      
     private boolean activa;
 
     public Integer getId() {
@@ -77,22 +71,6 @@ public class Licencia {
     public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
-
-    public String getObservacion() {
-        return observacion;
-    }
-
-    public void setObservacion(String observacion) {
-        this.observacion = observacion;
-    }
-
-/*    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }*/
 
     public boolean isActiva() {
         return activa;

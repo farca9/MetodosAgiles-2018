@@ -57,11 +57,10 @@ public class UserMenu extends javax.swing.JFrame {
         btnCambiarLicencias1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("GLC - SFC");
+        setTitle("GLC | SFC - Menu");
         setResizable(false);
 
         lblSantaFe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/drawable/logo-santafe.png"))); // NOI18N
-        lblSantaFe.setText("jLabel1");
 
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/logout2.png"))); // NOI18N
         btnLogout.setToolTipText("Cerrar Sesión");

@@ -6,16 +6,9 @@
 package main;
 
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
-import controller.LicenciaController;
 import hibernate.Hibernator;
 import java.awt.Font;
-import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.UIManager;
-import model.ClaseLicenciaEnum;
-import model.Licencia;
-import model.Titular;
-import util.ContribuyentePopulator;
 import view.gui.login.MainMenu;
 
 /**

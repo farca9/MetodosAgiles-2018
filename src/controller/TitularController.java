@@ -39,7 +39,7 @@ public class TitularController {
         return (TitularDAO.getInstance().find(titular));
     }
     
-    public boolean crearTitular(Contribuyente contribuyente, GrupoSanguineoEnum grupoSanguineo, boolean factor, boolean donante){
+    public boolean crearTitular(Contribuyente contribuyente, GrupoSanguineoEnum grupoSanguineo, boolean factor, boolean donante, String observaciones){
         
         Titular titular = new Titular();
         titular.setNombre(contribuyente.getNombre());
@@ -51,6 +51,7 @@ public class TitularController {
         titular.setGrupoSanguineo(grupoSanguineo);
         titular.setFactor(factor);
         titular.setDonanteOrganos(donante);
+        titular.setObservaciones(observaciones);
         titular.setLicencias(new ArrayList());
         
         return TitularDAO.getInstance().insert(titular);

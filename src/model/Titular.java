@@ -7,6 +7,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -44,6 +45,8 @@ public class Titular {
     
     private boolean donanteOrganos;
     
+    private String observaciones;
+    
     @OneToMany(targetEntity = Licencia.class, mappedBy="titular", cascade = CascadeType.PERSIST)
     private Collection<Licencia> licencias;  
     
@@ -52,7 +55,7 @@ public class Titular {
     //Constructores
     public Titular() {}
     
-    public Titular(String codigoDocumento, TipoDocumentoEnum tipoDocumento, String nombre, String apellido, String domicilio, GrupoSanguineoEnum grupoSanguineo, boolean factor, boolean donanteOrganos, Date fechaNacimient) {
+    public Titular(String codigoDocumento, TipoDocumentoEnum tipoDocumento, String nombre, String apellido, String domicilio, GrupoSanguineoEnum grupoSanguineo, boolean factor, boolean donanteOrganos, Date fechaNacimient, String observaciones) {
         this.codigoDocumento = codigoDocumento;
         this.tipoDocumento = tipoDocumento;
         this.nombre = nombre;
@@ -62,7 +65,8 @@ public class Titular {
         this.factor = factor;
         this.donanteOrganos = donanteOrganos;
         this.licencias = new ArrayList();
-        this.fechaNacimiento = fechaNacimient;
+        this.fechaNacimiento = fechaNacimiento;
+        this.observaciones = observaciones;
     }
 
     //Metodos    
@@ -153,6 +157,14 @@ public class Titular {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
     
     public boolean haveLicencia(ClaseLicenciaEnum clase){
         
@@ -175,5 +187,42 @@ public class Titular {
         }
         return clases;
     }
+    
+    public List<Date> getFechasMasProximas(){
+        List<Date> fechas = new ArrayList();
+        List<Date> fechasE = new ArrayList();
+        List<Date> fechasV = new ArrayList();
+        
+        for(Licencia lic : licencias) fechasE.add(lic.getFechaEmision());
+        for(Licencia lic : licencias) fechasV.add(lic.getFechaVencimiento());
+        
+        Collections.sort(fechasE);
+        Collections.sort(fechasV);
+        
+        fechas.add(fechasE.get(0));
+        fechas.add(fechasV.get(0));
+        
+        return fechas;
+    }
+    
+    public Date getVencimientoMasProximo(){
+        List<Date> fechasV = new ArrayList();
+        Date fechaF = new Date();
+        Date fechaA = new Date();
+            
+        for(Licencia lic : licencias) fechasV.add(lic.getFechaVencimiento());
+            
+        Collections.sort(fechasV);
+            
+        for(Date f : fechasV){
+            if(f.after(fechaA)){
+                fechaF = f;
+                break;
+            }
+        }
+        
+        return fechaF;
+    }
+
 
 }
