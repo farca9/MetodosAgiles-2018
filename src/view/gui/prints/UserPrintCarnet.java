@@ -6,6 +6,8 @@
 package view.gui.prints;
 
 import com.github.sarxos.webcam.Webcam;
+import controller.CarnetController;
+import controller.LicenciaController;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -414,7 +416,7 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
         }
         
         // Guardo la foto en la resolucion necesitada (256x256 - tamanio del label que la contiene)
-        BufferedImage img = new BufferedImage(lblFotoTitular.getWidth(), lblFotoTitular.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        BufferedImage img = new BufferedImage(lblFotoTitular.getWidth(), lblFotoTitular.getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = img.createGraphics();
         lblFotoTitular.printAll(g2d);
         g2d.dispose();

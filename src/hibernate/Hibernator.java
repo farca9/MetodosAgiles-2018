@@ -31,13 +31,14 @@ public class Hibernator {
         config.addAnnotatedClass(Contribuyente.class);
         config.addAnnotatedClass(Titular.class);
         config.addAnnotatedClass(Licencia.class);
+        config.addAnnotatedClass(Carnet.class);
                 
         config.configure("hibernate/hibernate.cfg.xml");        
         
         sesFactory=config.buildSessionFactory();
         sesion=sesFactory.openSession(); 
 
-        //new SchemaExport(config).create(true, true);// -> Exporta en el schema nuevas tablas en base a las anotaciones en las clases
+        new SchemaExport(config).create(true, true);// -> Exporta en el schema nuevas tablas en base a las anotaciones en las clases
         
     };
     
