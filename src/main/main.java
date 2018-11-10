@@ -27,7 +27,7 @@ public class main {
             ex.printStackTrace();
         }
      
-        ContribuyentePopulator.populate(500);// -> Puebla la tabla de contribuyentes con datos aleatorios
+        //ContribuyentePopulator.populate(500);// -> Puebla la tabla de contribuyentes con datos aleatorios
         
         
         try{

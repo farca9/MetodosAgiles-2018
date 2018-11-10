@@ -143,6 +143,7 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(243, 207, 165));
+        setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
 
         lblFotoTitular.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

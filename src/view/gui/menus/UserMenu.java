@@ -16,6 +16,7 @@ import view.gui.abm.*;
 import view.gui.list.UserLicenciasVencidas;
 import view.gui.login.MainMenu;
 import view.gui.prints.UserPrintCarnet;
+import view.gui.prints.UserPrintCarnetCopy;
 
 /**
  *
@@ -108,7 +109,7 @@ public class UserMenu extends javax.swing.JFrame {
 
         btnCambiarLicencias.setFont(btnCambiarLicencias.getFont().deriveFont(btnCambiarLicencias.getFont().getSize()+3f));
         btnCambiarLicencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/duplicate_licencia.png"))); // NOI18N
-        btnCambiarLicencias.setText("Copiar Licencias");
+        btnCambiarLicencias.setText("Imprimir Copia de Carnet");
         btnCambiarLicencias.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCambiarLicencias.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnCambiarLicencias.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -144,7 +145,7 @@ public class UserMenu extends javax.swing.JFrame {
 
         btnCambiarLicencias1.setFont(btnCambiarLicencias1.getFont().deriveFont(btnCambiarLicencias1.getFont().getSize()+3f));
         btnCambiarLicencias1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/print.png"))); // NOI18N
-        btnCambiarLicencias1.setText("Imprimir Carnets de Conducir");
+        btnCambiarLicencias1.setText("Imprimir Carnet");
         btnCambiarLicencias1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCambiarLicencias1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnCambiarLicencias1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -168,35 +169,36 @@ public class UserMenu extends javax.swing.JFrame {
                     .addComponent(btnRenovarLicencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCambiarLicencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAgregarTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnLicenciasVencidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLicenciasVigentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCambiarLicencias1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(124, 124, 124)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblSantaFe, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addComponent(lblSantaFe, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAgregarTitular)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEmitirLicencia)
                 .addGap(5, 5, 5)
                 .addComponent(btnRenovarLicencias)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCambiarLicencias)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCambiarLicencias1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCambiarLicencias)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLicenciasVigentes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLicenciasVencidas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogout)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -222,7 +224,8 @@ public class UserMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRenovarLicenciasActionPerformed
 
     private void btnCambiarLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarLicenciasActionPerformed
-        JOptionPane.showMessageDialog(null, "Funcionalidad en desarrollo.", "Atencion", JOptionPane.INFORMATION_MESSAGE);
+        new UserPrintCarnetCopy().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCambiarLicenciasActionPerformed
 
     private void btnLicenciasVigentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasVigentesActionPerformed
