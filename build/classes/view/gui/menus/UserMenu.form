@@ -39,6 +39,7 @@
                   <Component id="btnLicenciasVencidas" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnLicenciasVigentes" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnCambiarLicencias1" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnAgregarTitular1" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -55,7 +56,9 @@
               <Component id="lblSantaFe" min="-2" pref="155" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnAgregarTitular" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnAgregarTitular1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="btnEmitirLicencia" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Component id="btnRenovarLicencias" min="-2" max="-2" attributes="0"/>
@@ -67,7 +70,11 @@
               <Component id="btnLicenciasVigentes" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnLicenciasVencidas" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
               <EmptySpace max="32767" attributes="0"/>
+=======
+              <EmptySpace max="-2" attributes="0"/>
+>>>>>>> Modificartitular
               <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -224,6 +231,25 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCambiarLicencias1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAgregarTitular1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+          <FontInfo relative="true">
+            <Font component="btnAgregarTitular1" property="font" relativeSize="true" size="3"/>
+          </FontInfo>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/res/icons/edit_titular.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Modificar Titulares"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalAlignment" type="int" value="1"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarTitular1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

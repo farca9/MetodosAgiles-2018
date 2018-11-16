@@ -3,11 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Git/MetodosAgiles-2018/src/view/gui/prints/UserPrintCarnet.java</file>
             <file>file:/C:/Git/MetodosAgiles-2018/src/view/gui/menus/UserMenu.java</file>
             <file>file:/C:/Git/MetodosAgiles-2018/src/view/gui/prints/UserPrintCarnetCopy.java</file>
             <file>file:/C:/Git/MetodosAgiles-2018/src/dao/CarnetDAO.java</file>
             <file>file:/C:/Git/MetodosAgiles-2018/src/view/gui/renew/UserRenovarPopUp.java</file>
+||||||| Tasks 5.1, 5.2 y 5.3 finalizados
+            <file>file:/C:/Users/lau_9/Documents/Repos/MetodosAgiles-2018/src/controller/LicenciaController.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/lau_9/Documents/Repos/MetodosAgiles-2018/src/controller/LicenciaController.java</file>
+=======
+            <file>file:/C:/Users/Santo/Documents/GitHub/Repos/Metodos%20Agiles/MetodosAgiles-2018/src/view/gui/abm/UserModificarTitular.java</file>
+            <file>file:/C:/Users/Santo/Documents/GitHub/Repos/Metodos%20Agiles/MetodosAgiles-2018/src/controller/TitularController.java</file>
+            <file>file:/C:/Users/Santo/Documents/GitHub/Repos/Metodos%20Agiles/MetodosAgiles-2018/src/view/gui/abm/UserAddTitular.java</file>
+>>>>>>> Modificartitular
+>>>>>>> develop
         </group>
     </open-files>
 </project-private>
