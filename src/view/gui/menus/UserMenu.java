@@ -57,6 +57,7 @@ public class UserMenu extends javax.swing.JFrame {
         btnLicenciasVigentes = new javax.swing.JButton();
         btnEmitirLicencia = new javax.swing.JButton();
         btnCambiarLicencias1 = new javax.swing.JButton();
+        btnAgregarTitular1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GLC | SFC - Menu");
@@ -156,6 +157,18 @@ public class UserMenu extends javax.swing.JFrame {
             }
         });
 
+        btnAgregarTitular1.setFont(btnAgregarTitular1.getFont().deriveFont(btnAgregarTitular1.getFont().getSize()+3f));
+        btnAgregarTitular1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/edit_titular.png"))); // NOI18N
+        btnAgregarTitular1.setText("Modificar Titulares");
+        btnAgregarTitular1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAgregarTitular1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnAgregarTitular1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAgregarTitular1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarTitular1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,7 +185,8 @@ public class UserMenu extends javax.swing.JFrame {
                     .addComponent(btnAgregarTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLicenciasVencidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLicenciasVigentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCambiarLicencias1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCambiarLicencias1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAgregarTitular1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(124, 124, 124)
@@ -185,7 +199,9 @@ public class UserMenu extends javax.swing.JFrame {
                 .addComponent(lblSantaFe, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAgregarTitular)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAgregarTitular1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnEmitirLicencia)
                 .addGap(5, 5, 5)
                 .addComponent(btnRenovarLicencias)
@@ -243,6 +259,11 @@ public class UserMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCambiarLicencias1ActionPerformed
 
+    private void btnAgregarTitular1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTitular1ActionPerformed
+        new UserModificarTitular().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAgregarTitular1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -281,6 +302,7 @@ public class UserMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarTitular;
+    private javax.swing.JButton btnAgregarTitular1;
     private javax.swing.JButton btnCambiarLicencias;
     private javax.swing.JButton btnCambiarLicencias1;
     private javax.swing.JButton btnEmitirLicencia;
