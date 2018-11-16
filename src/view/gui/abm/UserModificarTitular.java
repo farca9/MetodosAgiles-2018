@@ -5,9 +5,13 @@
  */
 package view.gui.abm;
 
+import controller.TitularController;
+import javax.swing.JOptionPane;
+import model.GrupoSanguineoEnum;
 import model.Titular;
 import util.TitularReceiver;
 import view.gui.list.UserSeleccionarTitularPopUp;
+import view.gui.menus.UserMenu;
 
 /**
  *
@@ -216,7 +220,13 @@ public class UserModificarTitular extends javax.swing.JFrame implements TitularR
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-          
+          if(TitularController.getInstance().modificarTitular(titular, (GrupoSanguineoEnum) cmbGrupoSanguineo.getSelectedItem(), (Boolean)cmbFactor.getSelectedItem(), (Boolean) cmbDonante.getSelectedItem())){
+              JOptionPane.showMessageDialog(null, "Se ha cargado el titular exitosamente.", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                new UserMenu().setVisible(true);
+                this.dispose();
+          }else{
+              JOptionPane.showMessageDialog(null, "Algo salio mal, intente nuevamente mas tarde", "Error", JOptionPane.ERROR_MESSAGE);
+          }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**

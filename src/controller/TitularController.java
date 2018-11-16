@@ -73,4 +73,14 @@ public class TitularController {
         }
     }
     
+    public boolean modificarTitular(Titular t1,GrupoSanguineoEnum grupoSanguineo, boolean factor, boolean donante ){
+        t1.setGrupoSanguineo(grupoSanguineo);
+        t1.setFactor(factor);
+        t1.setDonanteOrganos(donante);
+        
+        return TitularDAO.getInstance().update(t1);
+        
+        
+    }
+    
 }
