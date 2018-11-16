@@ -223,6 +223,13 @@ public class Titular {
         
         return fechaF;
     }*/
-
+    
+    public void setearLicenciasInactivas(ClaseLicenciaEnum clase){
+        
+        for(Licencia lic : licencias){
+            if(lic.getClaseLicenciaEnum().equals(clase)) lic.setActiva(false);
+        }
+               
+    }
 
 }

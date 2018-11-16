@@ -17,6 +17,7 @@ import view.gui.list.UserLicenciasVencidas;
 import view.gui.login.MainMenu;
 import view.gui.prints.UserPrintCarnet;
 import view.gui.prints.UserPrintCarnetCopy;
+import view.gui.renew.UserRenovarPopUp;
 
 /**
  *
@@ -220,7 +221,7 @@ public class UserMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarTitularActionPerformed
 
     private void btnRenovarLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenovarLicenciasActionPerformed
-        JOptionPane.showMessageDialog(null, "Funcionalidad en desarrollo.", "Atencion", JOptionPane.INFORMATION_MESSAGE);
+        new UserRenovarPopUp().setVisible(true);
     }//GEN-LAST:event_btnRenovarLicenciasActionPerformed
 
     private void btnCambiarLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarLicenciasActionPerformed

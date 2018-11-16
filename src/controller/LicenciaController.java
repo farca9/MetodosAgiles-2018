@@ -342,4 +342,9 @@ public class LicenciaController {
         
         return primerVencimiento;
     }
+    
+    public void inhabilitarLicencia(Licencia licencia){
+        LicenciaDAO.getInstance().update(licencia);
+    }
+    
 }

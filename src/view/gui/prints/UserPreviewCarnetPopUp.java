@@ -387,7 +387,7 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
 
         btnImprimirActual.setFont(btnImprimirActual.getFont().deriveFont(btnImprimirActual.getFont().getStyle() | java.awt.Font.BOLD, btnImprimirActual.getFont().getSize()+2));
         btnImprimirActual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/printer_mini.png"))); // NOI18N
-        btnImprimirActual.setText("Imprimir y guardar");
+        btnImprimirActual.setText("Imprimir y Guardar");
         btnImprimirActual.setToolTipText("");
         btnImprimirActual.setFocusable(false);
         btnImprimirActual.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
