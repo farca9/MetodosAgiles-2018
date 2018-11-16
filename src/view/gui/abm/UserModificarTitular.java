@@ -20,6 +20,7 @@ import view.gui.menus.UserMenu;
 public class UserModificarTitular extends javax.swing.JFrame implements TitularReceiver {
 
     private Titular titular = null;
+    
 
     /**
      * Creates new form UserModificarTitular
@@ -216,7 +217,11 @@ public class UserModificarTitular extends javax.swing.JFrame implements TitularR
     }//GEN-LAST:event_btnseleccionarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
+            Integer respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea salir? Se perderán los datos no guardados y volverá al Menu.", "Cancelar",  JOptionPane.YES_NO_OPTION);
+        if (respuesta == JOptionPane.YES_OPTION) {
+                new UserMenu().setVisible(true);
+                this.dispose();
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
