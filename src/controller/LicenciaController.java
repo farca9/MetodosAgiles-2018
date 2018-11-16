@@ -34,7 +34,7 @@ public class LicenciaController {
         return instance;
     }
     
-     public Double calcularCosto (Date fechaVencimiento, ClaseLicenciaEnum target){
+    public Double calcularCosto (Date fechaVencimiento, ClaseLicenciaEnum target){
         
         int edad = (-1)*this.calcularEdad(fechaVencimiento);
         Double costo = 0.0;
