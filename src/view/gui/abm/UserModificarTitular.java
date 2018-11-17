@@ -7,6 +7,7 @@ package view.gui.abm;
 
 import controller.TitularController;
 import javax.swing.JOptionPane;
+import model.Contribuyente;
 import model.GrupoSanguineoEnum;
 import model.Titular;
 import util.TitularReceiver;
@@ -20,13 +21,16 @@ import view.gui.menus.UserMenu;
 public class UserModificarTitular extends javax.swing.JFrame implements TitularReceiver {
 
     private Titular titular = null;
-    
 
     /**
      * Creates new form UserModificarTitular
      */
     public UserModificarTitular() {
         initComponents();
+        btnGuardar.setEnabled(true);
+        cmbDonante.setEnabled(true);
+        cmbFactor.setEnabled(true);
+        cmbGrupoSanguineo.setEnabled(true);
     }
 
     /**
@@ -217,21 +221,44 @@ public class UserModificarTitular extends javax.swing.JFrame implements TitularR
     }//GEN-LAST:event_btnseleccionarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-            Integer respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea salir? Se perderán los datos no guardados y volverá al Menu.", "Cancelar",  JOptionPane.YES_NO_OPTION);
+        Integer respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea salir? Se perderán los datos no guardados y volverá al Menu.", "Cancelar", JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
-                new UserMenu().setVisible(true);
-                this.dispose();
+            new UserMenu().setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-          if(TitularController.getInstance().modificarTitular(titular, (GrupoSanguineoEnum) cmbGrupoSanguineo.getSelectedItem(), (Boolean)cmbFactor.getSelectedItem(), (Boolean) cmbDonante.getSelectedItem())){
-              JOptionPane.showMessageDialog(null, "Se ha cargado el titular exitosamente.", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
-                new UserMenu().setVisible(true);
-                this.dispose();
-          }else{
-              JOptionPane.showMessageDialog(null, "Algo salio mal, intente nuevamente mas tarde", "Error", JOptionPane.ERROR_MESSAGE);
-          }
+        boolean factor = false;
+        boolean donante = false;
+        GrupoSanguineoEnum grupo = null;
+
+        if (cmbFactor.getSelectedItem() == "+") {
+            factor = true;
+        }
+        if (cmbDonante.getSelectedItem() == "Si") {
+            donante = true;
+        }
+        if (cmbGrupoSanguineo.getSelectedItem() == "A") {
+            grupo = GrupoSanguineoEnum.A;
+        }
+        if (cmbGrupoSanguineo.getSelectedItem() == "B") {
+            grupo = GrupoSanguineoEnum.B;
+        }
+        if (cmbGrupoSanguineo.getSelectedItem() == "O") {
+            grupo = GrupoSanguineoEnum.O;
+        }
+        if (cmbGrupoSanguineo.getSelectedItem() == "AB") {
+            grupo = GrupoSanguineoEnum.AB;
+        }
+
+        if (TitularController.getInstance().modificarTitular(titular, grupo, factor, donante)) {
+            JOptionPane.showMessageDialog(null, "Se ha modificado el titular exitosamente.", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+            new UserMenu().setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Algo salio mal, intente nuevamente mas tarde", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
@@ -289,10 +316,31 @@ public class UserModificarTitular extends javax.swing.JFrame implements TitularR
 
     @Override
     public void setTitularRecibido(Titular titular) {
-         this.titular=titular;
-        this.txtTitular.setText(titular.getApellido()+", "+titular.getNombre());
-        cmbGrupoSanguineo.setSelectedItem(titular.getGrupoSanguineo());
-        cmbFactor.setSelectedItem(titular.isFactor());
-        cmbDonante.setSelectedItem(titular.isDonanteOrganos());
+        this.titular = titular;
+        this.txtTitular.setText(titular.getApellido() + ", " + titular.getNombre());
+
+        boolean factor = false;
+        boolean donante = false;
+        GrupoSanguineoEnum grupo = null;
+
+        if (titular.isFactor() == true) {
+            cmbFactor.setSelectedItem("+");
+        }
+        if (titular.isDonanteOrganos() == true) {
+            cmbDonante.setSelectedItem("Si");
+        }
+        if (titular.getGrupoSanguineo() == GrupoSanguineoEnum.A) {
+            cmbGrupoSanguineo.setSelectedItem("A");
+        }
+        if (titular.getGrupoSanguineo() == GrupoSanguineoEnum.B) {
+            cmbGrupoSanguineo.setSelectedItem("B");
+        }
+        if (titular.getGrupoSanguineo() == GrupoSanguineoEnum.O) {
+            cmbGrupoSanguineo.setSelectedItem("O");
+        }
+        if (titular.getGrupoSanguineo() == GrupoSanguineoEnum.AB) {
+            cmbGrupoSanguineo.setSelectedItem("AB");
+        }
+
     }
 }
