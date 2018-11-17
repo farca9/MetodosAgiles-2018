@@ -23,6 +23,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import model.ClaseLicenciaEnum;
@@ -50,6 +51,7 @@ public class UserRenovarPopUp extends javax.swing.JFrame {
         
         initComponents();
         this.setLocationRelativeTo(null);
+        lblAviso.setHorizontalAlignment(SwingConstants.CENTER);
         
         tableTitulares.getTableHeader().setReorderingAllowed(false);
         tableTitulares.setRowSelectionAllowed(true);
@@ -107,18 +109,17 @@ public class UserRenovarPopUp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlTitulares = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        btnFiltroDocumento = new javax.swing.JButton();
+        btnAplicarFiltro = new javax.swing.JButton();
+        btnLimpiarFiltro = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTitulares = new javax.swing.JTable();
         txtFiltro = new javax.swing.JTextField();
-        btnFiltroNombre = new javax.swing.JButton();
         btnFiltroApellido = new javax.swing.JButton();
-        btnAplicarFiltro = new javax.swing.JButton();
-        btnLimpiarFiltro = new javax.swing.JButton();
-        lblBuscarPor = new javax.swing.JLabel();
-        btnFiltroDocumento = new javax.swing.JButton();
-        cmbClases = new javax.swing.JComboBox<>();
+        btnFiltroNombre = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        cmbClases = new javax.swing.JComboBox<>();
         lblAviso = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
 
@@ -126,6 +127,36 @@ public class UserRenovarPopUp extends javax.swing.JFrame {
         setTitle("Renovar una licencia");
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar titular", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
+
+        btnFiltroDocumento.setFont(btnFiltroDocumento.getFont().deriveFont(btnFiltroDocumento.getFont().getSize()+2f));
+        btnFiltroDocumento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/filter_mini.png"))); // NOI18N
+        btnFiltroDocumento.setText("Documento");
+        btnFiltroDocumento.setToolTipText("Filtre a los contribuyentes por su N° de documento.");
+        btnFiltroDocumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltroDocumentoActionPerformed(evt);
+            }
+        });
+
+        btnAplicarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/search_mini.png"))); // NOI18N
+        btnAplicarFiltro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAplicarFiltro.setEnabled(false);
+        btnAplicarFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAplicarFiltroActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/cancel_mini.png"))); // NOI18N
+        btnLimpiarFiltro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnLimpiarFiltro.setEnabled(false);
+        btnLimpiarFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarFiltroActionPerformed(evt);
+            }
+        });
 
         tableTitulares.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -156,16 +187,6 @@ public class UserRenovarPopUp extends javax.swing.JFrame {
         txtFiltro.setFont(txtFiltro.getFont().deriveFont(txtFiltro.getFont().getSize()+4f));
         txtFiltro.setEnabled(false);
 
-        btnFiltroNombre.setFont(btnFiltroNombre.getFont().deriveFont(btnFiltroNombre.getFont().getSize()+2f));
-        btnFiltroNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/filter_mini.png"))); // NOI18N
-        btnFiltroNombre.setText("Nombre");
-        btnFiltroNombre.setToolTipText("Filtre a los contribuyentes por su nombre.");
-        btnFiltroNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFiltroNombreActionPerformed(evt);
-            }
-        });
-
         btnFiltroApellido.setFont(btnFiltroApellido.getFont().deriveFont(btnFiltroApellido.getFont().getSize()+2f));
         btnFiltroApellido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/filter_mini.png"))); // NOI18N
         btnFiltroApellido.setText("Apellido");
@@ -176,37 +197,18 @@ public class UserRenovarPopUp extends javax.swing.JFrame {
             }
         });
 
-        btnAplicarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/search_mini.png"))); // NOI18N
-        btnAplicarFiltro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnAplicarFiltro.setEnabled(false);
-        btnAplicarFiltro.addActionListener(new java.awt.event.ActionListener() {
+        btnFiltroNombre.setFont(btnFiltroNombre.getFont().deriveFont(btnFiltroNombre.getFont().getSize()+2f));
+        btnFiltroNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/filter_mini.png"))); // NOI18N
+        btnFiltroNombre.setText("Nombre");
+        btnFiltroNombre.setToolTipText("Filtre a los contribuyentes por su nombre.");
+        btnFiltroNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAplicarFiltroActionPerformed(evt);
+                btnFiltroNombreActionPerformed(evt);
             }
         });
 
-        btnLimpiarFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/cancel_mini.png"))); // NOI18N
-        btnLimpiarFiltro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnLimpiarFiltro.setEnabled(false);
-        btnLimpiarFiltro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarFiltroActionPerformed(evt);
-            }
-        });
-
-        lblBuscarPor.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        lblBuscarPor.setForeground(java.awt.Color.black);
-        lblBuscarPor.setText("Buscar titulares por...");
-
-        btnFiltroDocumento.setFont(btnFiltroDocumento.getFont().deriveFont(btnFiltroDocumento.getFont().getSize()+2f));
-        btnFiltroDocumento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/filter_mini.png"))); // NOI18N
-        btnFiltroDocumento.setText("Documento");
-        btnFiltroDocumento.setToolTipText("Filtre a los contribuyentes por su N° de documento.");
-        btnFiltroDocumento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFiltroDocumentoActionPerformed(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel1.setText("Clase a renovar");
 
         cmbClases.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         cmbClases.setEnabled(false);
@@ -216,10 +218,61 @@ public class UserRenovarPopUp extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel1.setText("Clases");
-
         lblAviso.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtFiltro)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAplicarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnFiltroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnFiltroApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnFiltroDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 90, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbClases, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(lblAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFiltroNombre)
+                    .addComponent(btnFiltroApellido)
+                    .addComponent(btnFiltroDocumento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtFiltro)
+                    .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAplicarFiltro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cmbClases, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAviso, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         btnGuardar.setFont(btnGuardar.getFont().deriveFont(btnGuardar.getFont().getSize()+2f));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/save.png"))); // NOI18N
@@ -231,89 +284,26 @@ public class UserRenovarPopUp extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout pnlTitularesLayout = new javax.swing.GroupLayout(pnlTitulares);
-        pnlTitulares.setLayout(pnlTitularesLayout);
-        pnlTitularesLayout.setHorizontalGroup(
-            pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTitularesLayout.createSequentialGroup()
-                .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTitularesLayout.createSequentialGroup()
-                        .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlTitularesLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblBuscarPor))
-                            .addGroup(pnlTitularesLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlTitularesLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlTitularesLayout.createSequentialGroup()
-                                .addComponent(btnFiltroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(55, 55, 55)
-                                .addComponent(btnFiltroApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnFiltroDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlTitularesLayout.createSequentialGroup()
-                                .addComponent(txtFiltro)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAplicarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlTitularesLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbClases, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap())
-            .addGroup(pnlTitularesLayout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlTitularesLayout.setVerticalGroup(
-            pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTitularesLayout.createSequentialGroup()
-                .addComponent(lblBuscarPor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlTitularesLayout.createSequentialGroup()
-                        .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnFiltroNombre)
-                            .addComponent(btnFiltroApellido)
-                            .addComponent(btnFiltroDocumento))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtFiltro)
-                            .addComponent(btnAplicarFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTitularesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbClases, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addComponent(lblAviso, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGuardar))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlTitulares, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(213, 213, 213))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnlTitulares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGuardar)
                 .addContainerGap())
         );
 
@@ -485,10 +475,9 @@ public class UserRenovarPopUp extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiarFiltro;
     private javax.swing.JComboBox<String> cmbClases;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAviso;
-    private javax.swing.JLabel lblBuscarPor;
-    private javax.swing.JPanel pnlTitulares;
     private javax.swing.JTable tableTitulares;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables

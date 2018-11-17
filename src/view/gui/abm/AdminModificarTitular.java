@@ -10,25 +10,24 @@ import java.awt.Image;
 import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import model.Contribuyente;
 import model.GrupoSanguineoEnum;
 import model.Titular;
 import util.TitularReceiver;
 import view.gui.list.UserSeleccionarTitularPopUp;
-import view.gui.menus.UserMenu;
+import view.gui.menus.AdminMenu;
 
 /**
  *
  * @author Santo
  */
-public class UserModificarTitular extends javax.swing.JFrame implements TitularReceiver {
+public class AdminModificarTitular extends javax.swing.JFrame implements TitularReceiver {
 
     private Titular titular = null;
 
     /**
      * Creates new form UserModificarTitular
      */
-    public UserModificarTitular() {
+    public AdminModificarTitular() {
         ImageIcon logo = new ImageIcon("src/res/drawable/sfc_logo.jpg");
         Image icon = logo.getImage();
         this.setIconImage(icon);
@@ -74,6 +73,7 @@ public class UserModificarTitular extends javax.swing.JFrame implements TitularR
         btnGuardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("GLC | SFC - Modificar Titular");
 
         lblEmitirLicencia.setFont(lblEmitirLicencia.getFont().deriveFont(lblEmitirLicencia.getFont().getSize()+13f));
         lblEmitirLicencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -324,7 +324,7 @@ public class UserModificarTitular extends javax.swing.JFrame implements TitularR
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         Integer respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea salir? Se perderán los datos no guardados y volverá al Menu.", "Cancelar", JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
-            new UserMenu().setVisible(true);
+            new AdminMenu().setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -358,7 +358,7 @@ public class UserModificarTitular extends javax.swing.JFrame implements TitularR
 
         if (TitularController.getInstance().modificarTitular(titular, grupo, factor, donante, txtObservaciones.getText())) {
             JOptionPane.showMessageDialog(null, "Se ha modificado el titular exitosamente.", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
-            new UserMenu().setVisible(true);
+            new AdminMenu().setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Algo salio mal, intente nuevamente mas tarde", "Error", JOptionPane.ERROR_MESSAGE);
@@ -382,20 +382,21 @@ public class UserModificarTitular extends javax.swing.JFrame implements TitularR
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserModificarTitular.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminModificarTitular.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserModificarTitular.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminModificarTitular.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserModificarTitular.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminModificarTitular.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserModificarTitular.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminModificarTitular.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserModificarTitular().setVisible(true);
+                new AdminModificarTitular().setVisible(true);
             }
         });
     }

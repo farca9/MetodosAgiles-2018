@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
+import view.gui.abm.AdminModificarTitular;
 import view.gui.login.MainMenu;
 
 /**
@@ -57,6 +58,7 @@ public class AdminMenu extends javax.swing.JFrame {
         btnAddUser.setFont(btnAddUser.getFont().deriveFont(btnAddUser.getFont().getSize()+3f));
         btnAddUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/add_user.png"))); // NOI18N
         btnAddUser.setText("Agregar Usuarios");
+        btnAddUser.setEnabled(false);
         btnAddUser.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAddUser.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnAddUser.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -69,6 +71,7 @@ public class AdminMenu extends javax.swing.JFrame {
         btnEditUser.setFont(btnEditUser.getFont().deriveFont(btnEditUser.getFont().getSize()+3f));
         btnEditUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/edit_user.png"))); // NOI18N
         btnEditUser.setText("Editar Datos de Usuarios");
+        btnEditUser.setEnabled(false);
         btnEditUser.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEditUser.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnEditUser.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -79,6 +82,11 @@ public class AdminMenu extends javax.swing.JFrame {
         btnEditTitular.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEditTitular.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnEditTitular.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEditTitular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditTitularActionPerformed(evt);
+            }
+        });
 
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/logout2.png"))); // NOI18N
         btnLogout.setToolTipText("Cerrar Sesión");
@@ -140,6 +148,11 @@ public class AdminMenu extends javax.swing.JFrame {
         new MainMenu().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnEditTitularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditTitularActionPerformed
+        new AdminModificarTitular().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnEditTitularActionPerformed
 
     /**
      * @param args the command line arguments

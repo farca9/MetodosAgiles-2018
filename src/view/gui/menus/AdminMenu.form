@@ -73,6 +73,7 @@
           <Image iconType="3" name="/res/icons/add_user.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Agregar Usuarios"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
         <Property name="verticalAlignment" type="int" value="1"/>
         <Property name="verticalTextPosition" type="int" value="3"/>
@@ -92,6 +93,7 @@
           <Image iconType="3" name="/res/icons/edit_user.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Editar Datos de Usuarios"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
         <Property name="verticalAlignment" type="int" value="1"/>
         <Property name="verticalTextPosition" type="int" value="3"/>
@@ -112,6 +114,9 @@
         <Property name="verticalAlignment" type="int" value="1"/>
         <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditTitularActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLogout">
       <Properties>
