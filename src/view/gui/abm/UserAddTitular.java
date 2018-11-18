@@ -115,7 +115,7 @@ public class UserAddTitular extends javax.swing.JFrame {
         lblSantaFe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/drawable/logo-santafe.png"))); // NOI18N
         lblSantaFe.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        pnlDatosPersonales.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Personales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
+        pnlDatosPersonales.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Personales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), null)); // NOI18N
 
         tableContribuyentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -241,13 +241,13 @@ public class UserAddTitular extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlDatosMedicos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Médicos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.SystemColor.textHighlight)); // NOI18N
+        pnlDatosMedicos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Médicos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), null)); // NOI18N
 
         lblGrupoSanguineo.setText("Grupo Sanguíneo");
 
         lblFactor.setText("Factor");
 
-        cmbGrupoSanguineo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "A", "B", "AB", "O" }));
+        cmbGrupoSanguineo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "AB", "O" }));
         cmbGrupoSanguineo.setEnabled(false);
 
         cmbFactor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "+", "-" }));

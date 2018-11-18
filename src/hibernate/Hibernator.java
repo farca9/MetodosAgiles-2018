@@ -31,6 +31,7 @@ public class Hibernator {
         config.addAnnotatedClass(Contribuyente.class);
         config.addAnnotatedClass(Titular.class);
         config.addAnnotatedClass(Licencia.class);
+        config.addAnnotatedClass(Carnet.class);
                 
         config.configure("hibernate/hibernate.cfg.xml");        
         

@@ -36,39 +36,40 @@
                   <Component id="btnRenovarLicencias" alignment="1" max="32767" attributes="0"/>
                   <Component id="btnCambiarLicencias" alignment="1" max="32767" attributes="0"/>
                   <Component id="btnAgregarTitular" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
-                      <Component id="btnLogout" min="-2" pref="40" max="-2" attributes="0"/>
-                  </Group>
                   <Component id="btnLicenciasVencidas" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnLicenciasVigentes" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnCambiarLicencias1" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
+              <Component id="btnLogout" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="lblSantaFe" min="-2" pref="161" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="lblSantaFe" min="-2" pref="155" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="btnAgregarTitular" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnEmitirLicencia" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Component id="btnRenovarLicencias" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnCambiarLicencias" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Component id="btnCambiarLicencias1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnCambiarLicencias" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnLicenciasVigentes" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnLicenciasVencidas" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -159,7 +160,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/res/icons/duplicate_licencia.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Copiar Licencias"/>
+        <Property name="text" type="java.lang.String" value="Imprimir Copia de Carnet"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
         <Property name="verticalAlignment" type="int" value="1"/>
         <Property name="verticalTextPosition" type="int" value="3"/>
@@ -179,6 +180,7 @@
           <Image iconType="3" name="/res/icons/list_ok.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Listado de Licencias Vigentes"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
         <Property name="verticalAlignment" type="int" value="1"/>
         <Property name="verticalTextPosition" type="int" value="3"/>
@@ -216,7 +218,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/res/icons/print.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Imprimir Carnets de Conducir"/>
+        <Property name="text" type="java.lang.String" value="Imprimir Carnet"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
         <Property name="verticalAlignment" type="int" value="1"/>
         <Property name="verticalTextPosition" type="int" value="3"/>

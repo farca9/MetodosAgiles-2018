@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -39,6 +41,7 @@ public class Titular {
     
     private String domicilio;
     
+    @Enumerated(EnumType.ORDINAL)
     private GrupoSanguineoEnum grupoSanguineo;
    
     private boolean factor; //1 si es '+' -- 0 si es '-'
@@ -188,7 +191,7 @@ public class Titular {
         return clases;
     }
     
-    public List<Date> getFechasMasProximas(){
+    /*public List<Date> getFechasMasProximas(){
         List<Date> fechas = new ArrayList();
         List<Date> fechasE = new ArrayList();
         List<Date> fechasV = new ArrayList();
@@ -203,9 +206,9 @@ public class Titular {
         fechas.add(fechasV.get(0));
         
         return fechas;
-    }
+    }*/
     
-    public Date getVencimientoMasProximo(){
+    /*public Date getVencimientoMasProximo(){
         List<Date> fechasV = new ArrayList();
         Date fechaF = new Date();
         Date fechaA = new Date();
@@ -222,7 +225,14 @@ public class Titular {
         }
         
         return fechaF;
+    }*/
+    
+    public void setearLicenciasInactivas(ClaseLicenciaEnum clase){
+        
+        for(Licencia lic : licencias){
+            if(lic.getClaseLicenciaEnum().equals(clase)) lic.setActiva(false);
+        }
+               
     }
-
 
 }

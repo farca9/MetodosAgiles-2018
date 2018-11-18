@@ -129,4 +129,18 @@ public class LicenciaDAO{
         }
     }
     
+    public boolean update (Licencia lic){
+
+	try{
+            Session s = Hibernator.getInstance().getSession();    //obtener transaccion
+            s.beginTransaction();
+            s.update(lic);
+            s.getTransaction().commit();
+            return true;    // si el update retorna algo, agregarlo.
+        }
+        catch (org.hibernate.exception.GenericJDBCException jbdc){
+            return false;
+        }
+    }
+    
 }

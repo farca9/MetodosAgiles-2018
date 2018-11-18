@@ -9,6 +9,7 @@ import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
 import hibernate.Hibernator;
 import java.awt.Font;
 import javax.swing.UIManager;
+import util.ContribuyentePopulator;
 import view.gui.login.MainMenu;
 
 /**

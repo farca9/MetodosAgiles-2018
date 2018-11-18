@@ -34,7 +34,7 @@ public class LicenciaController {
         return instance;
     }
     
-     public Double calcularCosto (Date fechaVencimiento, ClaseLicenciaEnum target){
+    public Double calcularCosto (Date fechaVencimiento, ClaseLicenciaEnum target){
         
         int edad = (-1)*this.calcularEdad(fechaVencimiento);
         Double costo = 0.0;
@@ -325,6 +325,26 @@ public class LicenciaController {
         }
         
         return yaEmitida;
+    }
+    
+    public Date primerVencimiento(List<Licencia> licencias){
+        
+        if(licencias.isEmpty()) return new Date();
+        Date primerVencimiento=null;
+        for(Licencia lic : licencias){
+            if(primerVencimiento==null) primerVencimiento=lic.getFechaVencimiento();
+            else if (lic.getFechaVencimiento().before(primerVencimiento)) primerVencimiento=lic.getFechaVencimiento();
+            
+        }
+        primerVencimiento.setHours(0);
+        primerVencimiento.setMinutes(0);
+        primerVencimiento.setSeconds(0);
+        
+        return primerVencimiento;
+    }
+    
+    public void inhabilitarLicencia(Licencia licencia){
+        LicenciaDAO.getInstance().update(licencia);
     }
     
 }

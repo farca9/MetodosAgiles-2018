@@ -75,8 +75,16 @@ public class TitularDAO {
     }
     
     public boolean update(Titular titular){
-        // TODO Implementar 'update' (Historia 10)
-        return true;
+          try{
+            Session s=Hibernator.getInstance().getSession();
+            s.beginTransaction();
+            s.update(titular);
+            s.getTransaction().commit();
+            return true;
+        }
+        catch (org.hibernate.exception.GenericJDBCException jbdc){
+            return false;
+        }
     }
     
     public boolean delete(Titular titular){

@@ -6,6 +6,8 @@
 
 package view.gui.prints;
 
+import controller.CarnetController;
+import controller.LicenciaController;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -20,6 +22,7 @@ import javax.swing.JOptionPane;
 import model.Licencia;
 import model.Titular;
 import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -71,7 +74,7 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
         
         // Completo los datos del carnet
         for(Licencia lic : licencias){
-            this.clases = this.clases + lic.getClaseLicenciaEnum().name() + " ";
+            this.clases = this.clases + lic.getClaseLicenciaEnum().name() + " ";            
         }
         
         lblLicencia.setText(titular.getCodigoDocumento());
@@ -80,7 +83,7 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
         lblFechaNac.setText(simpleDateFormat.format(titular.getFechaNacimiento()));
         lblDomicilio.setText(titular.getDomicilio().toUpperCase());
         lblOtorgamiento.setText(simpleDateFormat.format(new Date()));
-        lblVencimiento.setText(simpleDateFormat.format(titular.getVencimientoMasProximo()));
+        lblVencimiento.setText(simpleDateFormat.format(/*modificado*/LicenciaController.getInstance().primerVencimiento(licencias)));
         lblClase.setText(this.clases);
         
         lblGrupo.setText(titular.getGrupoSanguineo().name());
@@ -140,6 +143,7 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(243, 207, 165));
+        setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
 
         lblFotoTitular.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -383,7 +387,7 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
 
         btnImprimirActual.setFont(btnImprimirActual.getFont().deriveFont(btnImprimirActual.getFont().getStyle() | java.awt.Font.BOLD, btnImprimirActual.getFont().getSize()+2));
         btnImprimirActual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icons/printer_mini.png"))); // NOI18N
-        btnImprimirActual.setText("Imprimir");
+        btnImprimirActual.setText("Imprimir y Guardar");
         btnImprimirActual.setToolTipText("");
         btnImprimirActual.setFocusable(false);
         btnImprimirActual.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -416,6 +420,27 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImprimirActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActualActionPerformed
+        String clases="";
+        for(Licencia l:licencias){
+            clases+=l.getClaseLicenciaEnum().toString()+" ";
+        }
+        Date vencimiento = LicenciaController.getInstance().primerVencimiento(licencias);
+        vencimiento.setSeconds(0);
+        vencimiento.setMinutes(0);
+        vencimiento.setHours(0);
+        if(!CarnetController.getInstance().buscarCarnet(titular, vencimiento, clases).isEmpty()){
+            JOptionPane.showMessageDialog(this, "El carnet ya fue emitido. Solicite una copia o renueve la/s licencia/s", "Atención", JOptionPane.WARNING_MESSAGE);
+            this.dispose();
+            return;
+        }
+        
+        Date fechaImpresion = new Date();
+        fechaImpresion.setHours(0);
+        fechaImpresion.setMinutes(0);
+        fechaImpresion.setSeconds(0);
+        CarnetController.getInstance().agregarCarnet(titular, fechaImpresion, LicenciaController.getInstance().primerVencimiento(licencias), clases);
+
+        
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
         try{
@@ -442,18 +467,25 @@ public class UserPreviewCarnetPopUp extends javax.swing.JFrame {
            }
                
            parameters.put("emision", sdf.format(new Date()));
-           parameters.put("vencimiento", sdf.format(titular.getVencimientoMasProximo()));
+           parameters.put("vencimiento", sdf.format(LicenciaController.getInstance().primerVencimiento(licencias)));
            parameters.put("clase", this.clases);
            parameters.put("observaciones", titular.getObservaciones().toUpperCase());
                
            JasperPrint jp = JasperFillManager.fillReport(jr, parameters, new JREmptyDataSource());
            JasperViewer jv = new JasperViewer(jp,false);
            jv.show();
+           
+           String out="";
+           out=(new File(System.getProperty("user.home"),"Desktop")).getPath();
+           out+="/"+titular.getApellido()+","+titular.getNombre()+"_"+clases.replace(" ", "")+"_"+sdf.format(vencimiento).replace("/","-")+".pdf";
+           JasperExportManager.exportReportToPdfFile(jp, out);
 
             
         }catch(Exception e){
             e.printStackTrace();
         }
+        
+        this.dispose();
     }//GEN-LAST:event_btnImprimirActualActionPerformed
 
     /**
