@@ -47,16 +47,36 @@ public class Calcular_costo_Test {
     Date Fecha5 = new Date();
     Date Fecha6 = new Date();
     
+    private static Date today;
+    
      public Calcular_costo_Test() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-        
+        today=new Date();
+        try{
+            String command = "cmd.exe /c start "+"date 08/11/2018";
+            Runtime rt = Runtime.getRuntime();
+            rt.exec(command);
+            Thread.sleep(500);
+            rt.exec("taskkill /IM cmd.exe");
+        }catch (Exception e){
+            e.printStackTrace();
+        }        
     }
     
     @AfterClass
     public static void tearDownClass() {
+                try{
+                    String command = "cmd.exe /c start "+"date "+new SimpleDateFormat("dd/MM/yyyy").format(today);
+            Runtime rt = Runtime.getRuntime();
+            rt.exec(command);
+            Thread.sleep(500);
+            rt.exec("taskkill /IM cmd.exe");
+        }catch(Exception e){
+            e.printStackTrace();
+        }        
     }
     
     @Before
