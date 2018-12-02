@@ -39,7 +39,6 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
 
     private Titular titular = null;
     private ClaseLicenciaEnum claseLicenciaEnum = null;
-    private List<ClaseLicenciaEnum> clases = new ArrayList<ClaseLicenciaEnum>();
     private Collection<Licencia> licencias = new ArrayList<Licencia>();
     
     /**
@@ -302,7 +301,6 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
 
         if(titular != null){
             titular = null;
-            clases = null;
             licencias = null;
             txtTitular.setText("");
             this.chkA.setSelected(false);
@@ -467,11 +465,10 @@ public class UserPrintCarnet extends javax.swing.JFrame implements TitularReceiv
     public void setTitularRecibido(Titular titular) {
         Date fechaActual = new Date();
         this.titular = titular;
-        this.clases = titular.getClases();
         this.licencias = titular.getLicencias();
         this.txtTitular.setText(titular.getApellido()+", "+titular.getNombre());
         
-        if(clases.isEmpty()){
+        if(licencias.isEmpty()){
             JOptionPane.showMessageDialog(this, "El titular seleccionado no posee licencias registradas.", "Error", JOptionPane.ERROR_MESSAGE);
             this.txtTitular.setText("");
         }

@@ -169,27 +169,9 @@ public class Titular {
         this.observaciones = observaciones;
     }
     
-    public boolean haveLicencia(ClaseLicenciaEnum clase){
-        
-        Boolean result = false;
-        
-        
-        for(Licencia l : licencias){
-            if (l.getClaseLicenciaEnum() == clase){
-                result = true;
-            }
-        }        
-        
-        return result;
-    }
+
     
-    public List<ClaseLicenciaEnum> getClases(){
-        List<ClaseLicenciaEnum> clases = new ArrayList<ClaseLicenciaEnum>();
-        for(Licencia lic : licencias){
-            clases.add(lic.getClaseLicenciaEnum());
-        }
-        return clases;
-    }
+
     
     /*public List<Date> getFechasMasProximas(){
         List<Date> fechas = new ArrayList();
@@ -227,12 +209,6 @@ public class Titular {
         return fechaF;
     }*/
     
-    public void setearLicenciasInactivas(ClaseLicenciaEnum clase){
-        
-        for(Licencia lic : licencias){
-            if(lic.getClaseLicenciaEnum().equals(clase)) lic.setActiva(false);
-        }
-               
-    }
+
 
 }
