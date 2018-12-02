@@ -86,28 +86,5 @@ public class Licencia {
         this.activa = activa;
     }
     
-    public boolean puedeRenovar(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date act = new Date();
-        
-        sdf.format(act);
-        sdf.format(fechaVencimiento);
-        
-        if(fechaVencimiento.before(act)) {
-            return true;
-        } else {
 
-            LocalDate vencimiento = fechaVencimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate actual = LocalDate.now();
-
-            long p = ChronoUnit.MONTHS.between(actual, vencimiento);
-            
-            if(p >= 3){
-                return false;
-            }
-            else{
-                return true;
-            }
-        }
-    }
 }

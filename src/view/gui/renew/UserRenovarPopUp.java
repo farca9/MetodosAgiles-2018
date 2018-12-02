@@ -412,7 +412,7 @@ public class UserRenovarPopUp extends javax.swing.JFrame {
         
         for(Licencia lic : licencias){
             if(lic.getClaseLicenciaEnum().name().equals(cmbClases.getSelectedItem())){
-                if(lic.puedeRenovar() && lic.isActiva()){
+                if(LicenciaController.getInstance().puedeRenovar(lic) && lic.isActiva()){
                     ok = true;
                     clase = lic.getClaseLicenciaEnum();
                 }

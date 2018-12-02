@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -203,6 +204,31 @@ public class LicenciaController {
     
     public void inhabilitarLicencia(Licencia licencia){
         LicenciaDAO.getInstance().update(licencia);
+    }
+    
+    public boolean puedeRenovar(Licencia licencia){
+        Date act = new Date();
+        act.setHours(0);
+        act.setMinutes(0);
+        act.setSeconds(0);
+        Date fechaVencimiento=licencia.getFechaVencimiento();
+        
+        if(fechaVencimiento.before(act)) {
+            return true;
+        } else {
+
+            LocalDate vencimiento = fechaVencimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate actual = LocalDate.now();
+
+            long p = ChronoUnit.MONTHS.between(actual, vencimiento);
+            
+            if(p >= 3){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
     }
     
 }
