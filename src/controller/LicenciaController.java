@@ -93,190 +93,48 @@ public class LicenciaController {
         return resultado;
     }
     
-    public Date calcularVigencia(Titular t1, ClaseLicenciaEnum c1){
-        DateFormat formatter = new SimpleDateFormat("yyyyMMdd");  
-              
-        Date vencimiento = new Date();
-        Date actual = new Date();
-        actual.setHours(0);
-        actual.setMinutes(0);
-        actual.setSeconds(0);
+    public Date calcularVigencia(Titular titular, ClaseLicenciaEnum claseLicenciaEnum){
         
-        Date nacimiento = t1.getFechaNacimiento();
+        Date today = new Date();
+        today.setHours(0);
+        today.setMinutes(0);
+        today.setSeconds(0);
         
+        int duracionEnAnios=0;
         
-        Calendar c = Calendar.getInstance();
-        Calendar c2 = Calendar.getInstance();
-        c.setTime(actual);
+        Date cumpleanios = new Date();
+        cumpleanios.setDate(titular.getFechaNacimiento().getDate());
+        cumpleanios.setMonth(titular.getFechaNacimiento().getMonth());
+        cumpleanios.setYear(today.getYear());
+        cumpleanios.setHours(0);
+        cumpleanios.setMinutes(0);
+        cumpleanios.setSeconds(0);
         
-        Calendar c3 = Calendar.getInstance();
-        c3.setTime(nacimiento);
-        c3.set(c.get(Calendar.YEAR), c3.get(Calendar.MONTH), c3.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+        if(cumpleanios.before(today)) duracionEnAnios++;
         
-        c2.setTime(nacimiento); 
+        int edad = this.calcularEdad(titular.getFechaNacimiento());
         
-        int string_nacimiento = Integer.parseInt(formatter.format(t1.getFechaNacimiento()));                            
-        int string_actual = Integer.parseInt(formatter.format(actual));  
-        
-        int edad = (string_actual - string_nacimiento) / 10000;
-
-        
-        
-        if(edad<17){
+        if(edad>=21 && edad<46) duracionEnAnios+=5;
+        else if(edad>=46 && edad<60) duracionEnAnios+=4;
+        else if(edad>=60 && edad<70) duracionEnAnios+=3;
+        else if(edad>=70) duracionEnAnios++;
+        else if(edad>=17 && edad<21){
             
-            return actual;
-            //menores de 17 no pueden solicitar ninguna licencia
-        }else{
-            if( (c1==ClaseLicenciaEnum.C || c1==ClaseLicenciaEnum.D || c1==ClaseLicenciaEnum.E) && edad<21){
-                
-                return actual;
-                //menores de 21 no pueden solicitar tipo c,d o e
-            }
-            else{
-                
-                if(edad==17){
-                    
-                    if(actual.before(c3.getTime())){
-                        //Cumpleaños todavia no paso
-                        //Vigencia 1 año
-                        
-                        c.add(Calendar.YEAR, 1);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime();  
-                        
-                        
-                        return vencimiento;
-                    }else{
-                        //cumpleaños ya paso
-                        //vencimiento = actual - diferencia + vigencia
-                        c.add(Calendar.YEAR, 2);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime();  
-                        
-                        return vencimiento;
-                    }
-                }
-                if (edad>17 && edad<21){
-                    if(actual.before(c3.getTime())){
-                        if(!t1.haveLicencia(c1)){
-                        //Cumpleaños todavia no paso, es la primer licencia que saca
-                        //Vigencia 1 años
-                        c.add(Calendar.YEAR, 1);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime(); 
-                        
-                        return vencimiento;
-                        }
-                        else{
-                        c.add(Calendar.YEAR, 3);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime(); 
-                        }
-                        
-                        
-                    }else{
-                        if(!t1.haveLicencia(c1)){
-                        //Cumpleaños ya paso, es la primer licencia que saca
-                        //Vigencia 1 años y lo que falte
-                        c.add(Calendar.YEAR, 2);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime(); 
-                        
-                        return vencimiento;
-                        }else{
-                        c.add(Calendar.YEAR, 4);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime(); 
-                        }
-                    }
-                }
-                if (edad>=21 && edad<=46){
-                    if(actual.before(c3.getTime())){
-                        //Cumpleaños todavia no paso
-                        //Vigencia 5 años
-                        c.add(Calendar.YEAR, 5);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime(); 
-                        
-                        return vencimiento;
-                        
-                    }else{
-                        //cumpleaños ya paso
-                        //vencimiento = actual - diferencia + vigencia
-                        c.add(Calendar.YEAR, 6);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime(); 
-                      
-                        return vencimiento;
-                    }
-                }
-                if(edad>46 && edad<=60){
-                    if(actual.before(c3.getTime())){
-                        //Cumpleaños todavia no paso
-                        //Vigencia 4 años
-                        c.add(Calendar.YEAR, 4);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime(); 
-                        
-                        return vencimiento;
-                        //vencimiento = actual + vigencia + diferencia
-                    }else{
-                        //cumpleaños ya paso
-                        //vencimiento = actual - diferencia + vigencia
-                        c.add(Calendar.YEAR, 5);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime(); 
-                        
-                        return vencimiento;
-                    }
-                }
-                if(edad>60 && edad<=70){
-                    if(actual.before(c3.getTime())){
-                        //Cumpleaños todavia no paso
-                        //Vigencia 3 años
-                        c.add(Calendar.YEAR, 3);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime();
-                        
-                        return vencimiento;
-                        //vencimiento = actual + vigencia + diferencia
-                    }else{
-                        //cumpleaños ya paso
-                        //vencimiento = actual - diferencia + vigencia
-                        c.add(Calendar.YEAR, 4);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime(); 
-                        
-                        return vencimiento;
-                    }
-                }
-                if(edad>70){
-                    if(actual.before(c3.getTime())){
-                        //Cumpleaños todavia no paso
-                        
-                        //Vigencia 1 año
-                        c.add(Calendar.YEAR, 1);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime(); 
-                        
-                        return vencimiento;
-                        //vencimiento = actual + vigencia + diferencia
-                    }else{
-                        //cumpleaños ya paso
-                        //vencimiento = actual - diferencia + vigencia
-                        c.add(Calendar.YEAR, 2);
-                        c.set(c.get(Calendar.YEAR), c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-                        vencimiento = c.getTime(); 
-                        
-                        return vencimiento;
-                    }
-                }
-            }
-        }        
+            if(this.yaEmitida(titular, claseLicenciaEnum)){
+                duracionEnAnios+=3;
+            }else duracionEnAnios++;
+            
+        }else return today;
         
-                
-                
-           return vencimiento;
+        Date fechaVencimiento=new Date();
+        fechaVencimiento.setDate(titular.getFechaNacimiento().getDate());
+        fechaVencimiento.setMonth(titular.getFechaNacimiento().getMonth());
+        fechaVencimiento.setYear(today.getYear()+duracionEnAnios);
+        fechaVencimiento.setHours(0);
+        fechaVencimiento.setMinutes(0);
+        fechaVencimiento.setSeconds(0);        
+        
+        return fechaVencimiento;
     }
 
     public boolean crearLicencia(Titular titular, ClaseLicenciaEnum claseLicenciaEnum){
